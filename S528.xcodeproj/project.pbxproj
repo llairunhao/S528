@@ -1,0 +1,766 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		38A42D1D20A6A4510063F745 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A42D1C20A6A4510063F745 /* LoginViewController.m */; };
+		38A42D2620A6BA7E0063F745 /* EZTNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A42D2520A6BA7E0063F745 /* EZTNavigationViewController.m */; };
+		38A42D2A20A86D790063F745 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A42D2920A86D790063F745 /* SettingViewController.m */; };
+		38A42D2D20A86FBA0063F745 /* EZTSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A42D2C20A86FBA0063F745 /* EZTSetting.m */; };
+		38B514D9209DBFF100CB329A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B514D8209DBFF100CB329A /* AppDelegate.m */; };
+		38B514E1209DBFF400CB329A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B514E0209DBFF400CB329A /* Assets.xcassets */; };
+		38B514E4209DBFF400CB329A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38B514E2209DBFF400CB329A /* LaunchScreen.storyboard */; };
+		38B514E7209DBFF400CB329A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B514E6209DBFF400CB329A /* main.m */; };
+		38B514F9209DC2CD00CB329A /* EZTRootContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B514F8209DC2CD00CB329A /* EZTRootContainer.m */; };
+		38B514FD209DC50300CB329A /* EZTTcpService.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B514FC209DC50300CB329A /* EZTTcpService.m */; };
+		38B51500209DCA1C00CB329A /* EZTNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B514FF209DCA1C00CB329A /* EZTNetService.m */; };
+		38B51508209DD08200CB329A /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B51507209DD08200CB329A /* Config.m */; };
+		38B5150B209DD1B900CB329A /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B5150A209DD1B900CB329A /* Global.m */; };
+		38B5150F209DD87600CB329A /* UIViewController+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B5150E209DD87600CB329A /* UIViewController+Alert.m */; };
+		38B51512209DEA3700CB329A /* EZTTcpProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B51511209DEA3700CB329A /* EZTTcpProcessor.m */; };
+		38B51515209DF7A400CB329A /* EZTTcpPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B51514209DF7A400CB329A /* EZTTcpPacket.m */; };
+		38B5151F209EA86800CB329A /* HomepageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B5151D209EA86800CB329A /* HomepageViewController.m */; };
+		38B51522209EA87D00CB329A /* HomepageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B51521209EA87D00CB329A /* HomepageCell.m */; };
+		38D8B417209ED5CD00F6AF2C /* EZTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D8B416209ED5CD00F6AF2C /* EZTBaseViewController.m */; };
+		38D8B41B209ED65500F6AF2C /* GameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D8B419209ED65500F6AF2C /* GameListViewController.m */; };
+		38D8B421209EDAC400F6AF2C /* GameCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D8B420209EDAC400F6AF2C /* GameCategoryView.m */; };
+		38D8B427209EDBB500F6AF2C /* EZTGameCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D8B426209EDBB500F6AF2C /* EZTGameCategory.m */; };
+		38D8B42A209EDC4D00F6AF2C /* EZTGameResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D8B429209EDC4D00F6AF2C /* EZTGameResource.m */; };
+		38D8B42D209EE65F00F6AF2C /* GameResourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D8B42C209EE65F00F6AF2C /* GameResourceCell.m */; };
+		38D8B431209F2F2200F6AF2C /* GameSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D8B430209F2F2200F6AF2C /* GameSettingViewController.m */; };
+		38D8B434209F2F5800F6AF2C /* GameSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D8B433209F2F5800F6AF2C /* GameSettingCell.m */; };
+		6E1FF7194B0A39DA81EDCD65 /* libPods-S528.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAD562E009242A271B0ED3A /* libPods-S528.a */; };
+		A501F5DD20A29B11000FC563 /* EZTCardDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F5DA20A29B11000FC563 /* EZTCardDetail.m */; };
+		A501F5DE20A29B11000FC563 /* EZTGameSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F5DC20A29B11000FC563 /* EZTGameSetting.m */; };
+		A501F5E120A29C60000FC563 /* EZTCardSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F5E020A29C60000FC563 /* EZTCardSetting.m */; };
+		A501F5E720A2A148000FC563 /* EZTDealCardRuleDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F5E620A2A148000FC563 /* EZTDealCardRuleDetail.m */; };
+		A501F5EA20A2A207000FC563 /* EZTDealCardRule.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F5E920A2A207000FC563 /* EZTDealCardRule.m */; };
+		A501F5ED20A2A429000FC563 /* EZTHuaSeDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F5EC20A2A429000FC563 /* EZTHuaSeDetail.m */; };
+		A501F5F020A2A47F000FC563 /* EZTHuaSeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F5EF20A2A47F000FC563 /* EZTHuaSeSetting.m */; };
+		A501F5F720A2C6B0000FC563 /* AlertSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F5F620A2C6B0000FC563 /* AlertSelectionViewController.m */; };
+		A501F5FA20A2C7AD000FC563 /* AlertSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F5F920A2C7AD000FC563 /* AlertSelectionCell.m */; };
+		A501F5FD20A2D35E000FC563 /* PlaySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F5FC20A2D35E000FC563 /* PlaySettingViewController.m */; };
+		A501F60020A2D3E9000FC563 /* PlayRuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F5FF20A2D3E9000FC563 /* PlayRuleCell.m */; };
+		A501F60920A2E9BC000FC563 /* CardSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F60820A2E9BC000FC563 /* CardSettingViewController.m */; };
+		A501F60C20A2F1C5000FC563 /* CardSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F60B20A2F1C5000FC563 /* CardSettingCell.m */; };
+		A501F61520A2F200000FC563 /* EZTLineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F61420A2F200000FC563 /* EZTLineTableViewCell.m */; };
+		A501F61820A31D7F000FC563 /* DealCardRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F61720A31D7F000FC563 /* DealCardRuleViewController.m */; };
+		A501F61B20A320D6000FC563 /* GameAlertTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F61A20A320D6000FC563 /* GameAlertTextController.m */; };
+		A501F61E20A32370000FC563 /* DealCardRuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F61D20A32370000FC563 /* DealCardRuleCell.m */; };
+		A501F62120A3271A000FC563 /* DealCardRuleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F62020A3271A000FC563 /* DealCardRuleHeaderView.m */; };
+		A501F62520A3F9DD000FC563 /* GammingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F62420A3F9DD000FC563 /* GammingViewController.m */; };
+		A501F6FF20A92B06000FC563 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F6FE20A92B06000FC563 /* AlertViewController.m */; };
+		A501F70220A92E09000FC563 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F70020A92E09000FC563 /* UIView+AutoLayout.m */; };
+		A501F70520A9374A000FC563 /* AlertTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F70420A9374A000FC563 /* AlertTextViewController.m */; };
+		A501F70820A93CAD000FC563 /* AlertInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F70720A93CAD000FC563 /* AlertInputViewController.m */; };
+		A501F70B20A96E7B000FC563 /* NSString+Valid.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F70A20A96E7B000FC563 /* NSString+Valid.m */; };
+		A501F70E20A98383000FC563 /* GameXYSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F70D20A98383000FC563 /* GameXYSettingViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		38A42D1B20A6A4510063F745 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		38A42D1C20A6A4510063F745 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		38A42D2420A6BA7E0063F745 /* EZTNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTNavigationViewController.h; sourceTree = "<group>"; };
+		38A42D2520A6BA7E0063F745 /* EZTNavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTNavigationViewController.m; sourceTree = "<group>"; };
+		38A42D2820A86D790063F745 /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		38A42D2920A86D790063F745 /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		38A42D2B20A86FBA0063F745 /* EZTSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTSetting.h; sourceTree = "<group>"; };
+		38A42D2C20A86FBA0063F745 /* EZTSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTSetting.m; sourceTree = "<group>"; };
+		38B514D4209DBFF100CB329A /* S528.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = S528.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		38B514D7209DBFF100CB329A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		38B514D8209DBFF100CB329A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		38B514E0209DBFF400CB329A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		38B514E3209DBFF400CB329A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		38B514E5209DBFF400CB329A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38B514E6209DBFF400CB329A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		38B514EE209DC04600CB329A /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		38B514F7209DC2CD00CB329A /* EZTRootContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTRootContainer.h; sourceTree = "<group>"; };
+		38B514F8209DC2CD00CB329A /* EZTRootContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTRootContainer.m; sourceTree = "<group>"; };
+		38B514FB209DC50300CB329A /* EZTTcpService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTTcpService.h; sourceTree = "<group>"; };
+		38B514FC209DC50300CB329A /* EZTTcpService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTTcpService.m; sourceTree = "<group>"; };
+		38B514FE209DCA1C00CB329A /* EZTNetService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTNetService.h; sourceTree = "<group>"; };
+		38B514FF209DCA1C00CB329A /* EZTNetService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTNetService.m; sourceTree = "<group>"; };
+		38B51506209DD08200CB329A /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		38B51507209DD08200CB329A /* Config.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
+		38B51509209DD1B900CB329A /* Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		38B5150A209DD1B900CB329A /* Global.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Global.m; sourceTree = "<group>"; };
+		38B5150D209DD87600CB329A /* UIViewController+Alert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alert.h"; sourceTree = "<group>"; };
+		38B5150E209DD87600CB329A /* UIViewController+Alert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alert.m"; sourceTree = "<group>"; };
+		38B51510209DEA3700CB329A /* EZTTcpProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTTcpProcessor.h; sourceTree = "<group>"; };
+		38B51511209DEA3700CB329A /* EZTTcpProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTTcpProcessor.m; sourceTree = "<group>"; };
+		38B51513209DF7A400CB329A /* EZTTcpPacket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTTcpPacket.h; sourceTree = "<group>"; };
+		38B51514209DF7A400CB329A /* EZTTcpPacket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTTcpPacket.m; sourceTree = "<group>"; };
+		38B5151D209EA86800CB329A /* HomepageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageViewController.m; sourceTree = "<group>"; };
+		38B5151E209EA86800CB329A /* HomepageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageViewController.h; sourceTree = "<group>"; };
+		38B51520209EA87D00CB329A /* HomepageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomepageCell.h; sourceTree = "<group>"; };
+		38B51521209EA87D00CB329A /* HomepageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomepageCell.m; sourceTree = "<group>"; };
+		38D8B415209ED5CD00F6AF2C /* EZTBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTBaseViewController.h; sourceTree = "<group>"; };
+		38D8B416209ED5CD00F6AF2C /* EZTBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTBaseViewController.m; sourceTree = "<group>"; };
+		38D8B419209ED65500F6AF2C /* GameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameListViewController.m; sourceTree = "<group>"; };
+		38D8B41A209ED65500F6AF2C /* GameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameListViewController.h; sourceTree = "<group>"; };
+		38D8B41F209EDAC400F6AF2C /* GameCategoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameCategoryView.h; sourceTree = "<group>"; };
+		38D8B420209EDAC400F6AF2C /* GameCategoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameCategoryView.m; sourceTree = "<group>"; };
+		38D8B425209EDBB500F6AF2C /* EZTGameCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTGameCategory.h; sourceTree = "<group>"; };
+		38D8B426209EDBB500F6AF2C /* EZTGameCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTGameCategory.m; sourceTree = "<group>"; };
+		38D8B428209EDC4D00F6AF2C /* EZTGameResource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTGameResource.h; sourceTree = "<group>"; };
+		38D8B429209EDC4D00F6AF2C /* EZTGameResource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTGameResource.m; sourceTree = "<group>"; };
+		38D8B42B209EE65F00F6AF2C /* GameResourceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameResourceCell.h; sourceTree = "<group>"; };
+		38D8B42C209EE65F00F6AF2C /* GameResourceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameResourceCell.m; sourceTree = "<group>"; };
+		38D8B42F209F2F2200F6AF2C /* GameSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameSettingViewController.h; sourceTree = "<group>"; };
+		38D8B430209F2F2200F6AF2C /* GameSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameSettingViewController.m; sourceTree = "<group>"; };
+		38D8B432209F2F5800F6AF2C /* GameSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameSettingCell.h; sourceTree = "<group>"; };
+		38D8B433209F2F5800F6AF2C /* GameSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameSettingCell.m; sourceTree = "<group>"; };
+		3BAD562E009242A271B0ED3A /* libPods-S528.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-S528.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A3408FFEA6D04F6DD7B4780 /* Pods-S528.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S528.debug.xcconfig"; path = "Pods/Target Support Files/Pods-S528/Pods-S528.debug.xcconfig"; sourceTree = "<group>"; };
+		A501F5D920A29B11000FC563 /* EZTCardDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZTCardDetail.h; sourceTree = "<group>"; };
+		A501F5DA20A29B11000FC563 /* EZTCardDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZTCardDetail.m; sourceTree = "<group>"; };
+		A501F5DB20A29B11000FC563 /* EZTGameSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZTGameSetting.h; sourceTree = "<group>"; };
+		A501F5DC20A29B11000FC563 /* EZTGameSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZTGameSetting.m; sourceTree = "<group>"; };
+		A501F5DF20A29C60000FC563 /* EZTCardSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTCardSetting.h; sourceTree = "<group>"; };
+		A501F5E020A29C60000FC563 /* EZTCardSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTCardSetting.m; sourceTree = "<group>"; };
+		A501F5E520A2A148000FC563 /* EZTDealCardRuleDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTDealCardRuleDetail.h; sourceTree = "<group>"; };
+		A501F5E620A2A148000FC563 /* EZTDealCardRuleDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTDealCardRuleDetail.m; sourceTree = "<group>"; };
+		A501F5E820A2A207000FC563 /* EZTDealCardRule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTDealCardRule.h; sourceTree = "<group>"; };
+		A501F5E920A2A207000FC563 /* EZTDealCardRule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTDealCardRule.m; sourceTree = "<group>"; };
+		A501F5EB20A2A429000FC563 /* EZTHuaSeDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTHuaSeDetail.h; sourceTree = "<group>"; };
+		A501F5EC20A2A429000FC563 /* EZTHuaSeDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTHuaSeDetail.m; sourceTree = "<group>"; };
+		A501F5EE20A2A47F000FC563 /* EZTHuaSeSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTHuaSeSetting.h; sourceTree = "<group>"; };
+		A501F5EF20A2A47F000FC563 /* EZTHuaSeSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTHuaSeSetting.m; sourceTree = "<group>"; };
+		A501F5F520A2C6B0000FC563 /* AlertSelectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertSelectionViewController.h; sourceTree = "<group>"; };
+		A501F5F620A2C6B0000FC563 /* AlertSelectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertSelectionViewController.m; sourceTree = "<group>"; };
+		A501F5F820A2C7AD000FC563 /* AlertSelectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertSelectionCell.h; sourceTree = "<group>"; };
+		A501F5F920A2C7AD000FC563 /* AlertSelectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertSelectionCell.m; sourceTree = "<group>"; };
+		A501F5FB20A2D35E000FC563 /* PlaySettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaySettingViewController.h; sourceTree = "<group>"; };
+		A501F5FC20A2D35E000FC563 /* PlaySettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaySettingViewController.m; sourceTree = "<group>"; };
+		A501F5FE20A2D3E9000FC563 /* PlayRuleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayRuleCell.h; sourceTree = "<group>"; };
+		A501F5FF20A2D3E9000FC563 /* PlayRuleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayRuleCell.m; sourceTree = "<group>"; };
+		A501F60720A2E9BC000FC563 /* CardSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardSettingViewController.h; sourceTree = "<group>"; };
+		A501F60820A2E9BC000FC563 /* CardSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardSettingViewController.m; sourceTree = "<group>"; };
+		A501F60A20A2F1C5000FC563 /* CardSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardSettingCell.h; sourceTree = "<group>"; };
+		A501F60B20A2F1C5000FC563 /* CardSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardSettingCell.m; sourceTree = "<group>"; };
+		A501F61320A2F200000FC563 /* EZTLineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTLineTableViewCell.h; sourceTree = "<group>"; };
+		A501F61420A2F200000FC563 /* EZTLineTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTLineTableViewCell.m; sourceTree = "<group>"; };
+		A501F61620A31D7F000FC563 /* DealCardRuleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DealCardRuleViewController.h; sourceTree = "<group>"; };
+		A501F61720A31D7F000FC563 /* DealCardRuleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DealCardRuleViewController.m; sourceTree = "<group>"; };
+		A501F61920A320D6000FC563 /* GameAlertTextController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameAlertTextController.h; sourceTree = "<group>"; };
+		A501F61A20A320D6000FC563 /* GameAlertTextController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameAlertTextController.m; sourceTree = "<group>"; };
+		A501F61C20A32370000FC563 /* DealCardRuleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DealCardRuleCell.h; sourceTree = "<group>"; };
+		A501F61D20A32370000FC563 /* DealCardRuleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DealCardRuleCell.m; sourceTree = "<group>"; };
+		A501F61F20A3271A000FC563 /* DealCardRuleHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DealCardRuleHeaderView.h; sourceTree = "<group>"; };
+		A501F62020A3271A000FC563 /* DealCardRuleHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DealCardRuleHeaderView.m; sourceTree = "<group>"; };
+		A501F62320A3F9DD000FC563 /* GammingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GammingViewController.h; sourceTree = "<group>"; };
+		A501F62420A3F9DD000FC563 /* GammingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GammingViewController.m; sourceTree = "<group>"; };
+		A501F6FD20A92B06000FC563 /* AlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
+		A501F6FE20A92B06000FC563 /* AlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
+		A501F70020A92E09000FC563 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		A501F70120A92E09000FC563 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		A501F70320A9374A000FC563 /* AlertTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertTextViewController.h; sourceTree = "<group>"; };
+		A501F70420A9374A000FC563 /* AlertTextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertTextViewController.m; sourceTree = "<group>"; };
+		A501F70620A93CAD000FC563 /* AlertInputViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertInputViewController.h; sourceTree = "<group>"; };
+		A501F70720A93CAD000FC563 /* AlertInputViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertInputViewController.m; sourceTree = "<group>"; };
+		A501F70920A96E7B000FC563 /* NSString+Valid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Valid.h"; sourceTree = "<group>"; };
+		A501F70A20A96E7B000FC563 /* NSString+Valid.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Valid.m"; sourceTree = "<group>"; };
+		A501F70C20A98383000FC563 /* GameXYSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameXYSettingViewController.h; sourceTree = "<group>"; };
+		A501F70D20A98383000FC563 /* GameXYSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameXYSettingViewController.m; sourceTree = "<group>"; };
+		BB7C84009C99CD557133315F /* Pods-S528.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S528.release.xcconfig"; path = "Pods/Target Support Files/Pods-S528/Pods-S528.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		38B514D1209DBFF100CB329A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E1FF7194B0A39DA81EDCD65 /* libPods-S528.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		38A42D1A20A6A42E0063F745 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				38A42D1B20A6A4510063F745 /* LoginViewController.h */,
+				38A42D1C20A6A4510063F745 /* LoginViewController.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		38A42D2720A86D650063F745 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				38A42D2820A86D790063F745 /* SettingViewController.h */,
+				38A42D2920A86D790063F745 /* SettingViewController.m */,
+				38A42D2B20A86FBA0063F745 /* EZTSetting.h */,
+				38A42D2C20A86FBA0063F745 /* EZTSetting.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		38B514CB209DBFF100CB329A = {
+			isa = PBXGroup;
+			children = (
+				38B514D6209DBFF100CB329A /* S528 */,
+				38B514D5209DBFF100CB329A /* Products */,
+				49CBFE70AE9E3A1CA475E390 /* Pods */,
+				DA5879412D52E88F5A1A6A89 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		38B514D5209DBFF100CB329A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				38B514D4209DBFF100CB329A /* S528.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		38B514D6209DBFF100CB329A /* S528 */ = {
+			isa = PBXGroup;
+			children = (
+				38B5150C209DD84100CB329A /* Extension */,
+				38B51505209DD07500CB329A /* Config */,
+				38B514FA209DC4B100CB329A /* Service */,
+				38B514F2209DC1E400CB329A /* ViewController */,
+				38B514D7209DBFF100CB329A /* AppDelegate.h */,
+				38B514D8209DBFF100CB329A /* AppDelegate.m */,
+				38B514E0209DBFF400CB329A /* Assets.xcassets */,
+				38B514E2209DBFF400CB329A /* LaunchScreen.storyboard */,
+				38B514E5209DBFF400CB329A /* Info.plist */,
+				38B514E6209DBFF400CB329A /* main.m */,
+				38B514EE209DC04600CB329A /* PrefixHeader.pch */,
+			);
+			path = S528;
+			sourceTree = "<group>";
+		};
+		38B514F2209DC1E400CB329A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				38A42D2720A86D650063F745 /* Setting */,
+				38A42D1A20A6A42E0063F745 /* Login */,
+				A501F62220A3F9BC000FC563 /* Gamming */,
+				A501F5F120A2C682000FC563 /* Alert */,
+				38D8B42E209F2F1000F6AF2C /* GameSetting */,
+				38D8B418209ED65500F6AF2C /* Game */,
+				38B5151C209EA84B00CB329A /* Homepage */,
+				38B514F3209DC1E400CB329A /* Root */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		38B514F3209DC1E400CB329A /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				38B514F7209DC2CD00CB329A /* EZTRootContainer.h */,
+				38B514F8209DC2CD00CB329A /* EZTRootContainer.m */,
+				38D8B415209ED5CD00F6AF2C /* EZTBaseViewController.h */,
+				38D8B416209ED5CD00F6AF2C /* EZTBaseViewController.m */,
+				A501F61320A2F200000FC563 /* EZTLineTableViewCell.h */,
+				A501F61420A2F200000FC563 /* EZTLineTableViewCell.m */,
+				38A42D2420A6BA7E0063F745 /* EZTNavigationViewController.h */,
+				38A42D2520A6BA7E0063F745 /* EZTNavigationViewController.m */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		38B514FA209DC4B100CB329A /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				38B514FB209DC50300CB329A /* EZTTcpService.h */,
+				38B514FC209DC50300CB329A /* EZTTcpService.m */,
+				38B51510209DEA3700CB329A /* EZTTcpProcessor.h */,
+				38B51511209DEA3700CB329A /* EZTTcpProcessor.m */,
+				38B51513209DF7A400CB329A /* EZTTcpPacket.h */,
+				38B51514209DF7A400CB329A /* EZTTcpPacket.m */,
+				38B514FE209DCA1C00CB329A /* EZTNetService.h */,
+				38B514FF209DCA1C00CB329A /* EZTNetService.m */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		38B51505209DD07500CB329A /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				38B51506209DD08200CB329A /* Config.h */,
+				38B51507209DD08200CB329A /* Config.m */,
+				38B51509209DD1B900CB329A /* Global.h */,
+				38B5150A209DD1B900CB329A /* Global.m */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		38B5150C209DD84100CB329A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				38B5150D209DD87600CB329A /* UIViewController+Alert.h */,
+				38B5150E209DD87600CB329A /* UIViewController+Alert.m */,
+				A501F70120A92E09000FC563 /* UIView+AutoLayout.h */,
+				A501F70020A92E09000FC563 /* UIView+AutoLayout.m */,
+				A501F70920A96E7B000FC563 /* NSString+Valid.h */,
+				A501F70A20A96E7B000FC563 /* NSString+Valid.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		38B5151C209EA84B00CB329A /* Homepage */ = {
+			isa = PBXGroup;
+			children = (
+				38B51520209EA87D00CB329A /* HomepageCell.h */,
+				38B51521209EA87D00CB329A /* HomepageCell.m */,
+				38B5151E209EA86800CB329A /* HomepageViewController.h */,
+				38B5151D209EA86800CB329A /* HomepageViewController.m */,
+			);
+			path = Homepage;
+			sourceTree = "<group>";
+		};
+		38D8B418209ED65500F6AF2C /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				38D8B41A209ED65500F6AF2C /* GameListViewController.h */,
+				38D8B419209ED65500F6AF2C /* GameListViewController.m */,
+				38D8B42B209EE65F00F6AF2C /* GameResourceCell.h */,
+				38D8B42C209EE65F00F6AF2C /* GameResourceCell.m */,
+				38D8B41F209EDAC400F6AF2C /* GameCategoryView.h */,
+				38D8B420209EDAC400F6AF2C /* GameCategoryView.m */,
+				38D8B425209EDBB500F6AF2C /* EZTGameCategory.h */,
+				38D8B426209EDBB500F6AF2C /* EZTGameCategory.m */,
+				38D8B428209EDC4D00F6AF2C /* EZTGameResource.h */,
+				38D8B429209EDC4D00F6AF2C /* EZTGameResource.m */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		38D8B42E209F2F1000F6AF2C /* GameSetting */ = {
+			isa = PBXGroup;
+			children = (
+				A501F5D820A29B11000FC563 /* Model */,
+				38D8B42F209F2F2200F6AF2C /* GameSettingViewController.h */,
+				38D8B430209F2F2200F6AF2C /* GameSettingViewController.m */,
+				38D8B432209F2F5800F6AF2C /* GameSettingCell.h */,
+				38D8B433209F2F5800F6AF2C /* GameSettingCell.m */,
+				A501F5FB20A2D35E000FC563 /* PlaySettingViewController.h */,
+				A501F5FC20A2D35E000FC563 /* PlaySettingViewController.m */,
+				A501F5FE20A2D3E9000FC563 /* PlayRuleCell.h */,
+				A501F5FF20A2D3E9000FC563 /* PlayRuleCell.m */,
+				A501F60720A2E9BC000FC563 /* CardSettingViewController.h */,
+				A501F60820A2E9BC000FC563 /* CardSettingViewController.m */,
+				A501F60A20A2F1C5000FC563 /* CardSettingCell.h */,
+				A501F60B20A2F1C5000FC563 /* CardSettingCell.m */,
+				A501F61620A31D7F000FC563 /* DealCardRuleViewController.h */,
+				A501F61720A31D7F000FC563 /* DealCardRuleViewController.m */,
+				A501F61C20A32370000FC563 /* DealCardRuleCell.h */,
+				A501F61D20A32370000FC563 /* DealCardRuleCell.m */,
+				A501F61F20A3271A000FC563 /* DealCardRuleHeaderView.h */,
+				A501F62020A3271A000FC563 /* DealCardRuleHeaderView.m */,
+				A501F61920A320D6000FC563 /* GameAlertTextController.h */,
+				A501F61A20A320D6000FC563 /* GameAlertTextController.m */,
+				A501F70C20A98383000FC563 /* GameXYSettingViewController.h */,
+				A501F70D20A98383000FC563 /* GameXYSettingViewController.m */,
+			);
+			path = GameSetting;
+			sourceTree = "<group>";
+		};
+		49CBFE70AE9E3A1CA475E390 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9A3408FFEA6D04F6DD7B4780 /* Pods-S528.debug.xcconfig */,
+				BB7C84009C99CD557133315F /* Pods-S528.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A501F5D820A29B11000FC563 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A501F5DB20A29B11000FC563 /* EZTGameSetting.h */,
+				A501F5DC20A29B11000FC563 /* EZTGameSetting.m */,
+				A501F5D920A29B11000FC563 /* EZTCardDetail.h */,
+				A501F5DA20A29B11000FC563 /* EZTCardDetail.m */,
+				A501F5DF20A29C60000FC563 /* EZTCardSetting.h */,
+				A501F5E020A29C60000FC563 /* EZTCardSetting.m */,
+				A501F5E520A2A148000FC563 /* EZTDealCardRuleDetail.h */,
+				A501F5E620A2A148000FC563 /* EZTDealCardRuleDetail.m */,
+				A501F5E820A2A207000FC563 /* EZTDealCardRule.h */,
+				A501F5E920A2A207000FC563 /* EZTDealCardRule.m */,
+				A501F5EB20A2A429000FC563 /* EZTHuaSeDetail.h */,
+				A501F5EC20A2A429000FC563 /* EZTHuaSeDetail.m */,
+				A501F5EE20A2A47F000FC563 /* EZTHuaSeSetting.h */,
+				A501F5EF20A2A47F000FC563 /* EZTHuaSeSetting.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A501F5F120A2C682000FC563 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				A501F5F520A2C6B0000FC563 /* AlertSelectionViewController.h */,
+				A501F5F620A2C6B0000FC563 /* AlertSelectionViewController.m */,
+				A501F5F820A2C7AD000FC563 /* AlertSelectionCell.h */,
+				A501F5F920A2C7AD000FC563 /* AlertSelectionCell.m */,
+				A501F6FD20A92B06000FC563 /* AlertViewController.h */,
+				A501F6FE20A92B06000FC563 /* AlertViewController.m */,
+				A501F70320A9374A000FC563 /* AlertTextViewController.h */,
+				A501F70420A9374A000FC563 /* AlertTextViewController.m */,
+				A501F70620A93CAD000FC563 /* AlertInputViewController.h */,
+				A501F70720A93CAD000FC563 /* AlertInputViewController.m */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		A501F62220A3F9BC000FC563 /* Gamming */ = {
+			isa = PBXGroup;
+			children = (
+				A501F62320A3F9DD000FC563 /* GammingViewController.h */,
+				A501F62420A3F9DD000FC563 /* GammingViewController.m */,
+			);
+			path = Gamming;
+			sourceTree = "<group>";
+		};
+		DA5879412D52E88F5A1A6A89 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3BAD562E009242A271B0ED3A /* libPods-S528.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		38B514D3209DBFF100CB329A /* S528 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38B514EA209DBFF400CB329A /* Build configuration list for PBXNativeTarget "S528" */;
+			buildPhases = (
+				2FC7B96AC96C8BBD545124AF /* [CP] Check Pods Manifest.lock */,
+				38B514D0209DBFF100CB329A /* Sources */,
+				38B514D1209DBFF100CB329A /* Frameworks */,
+				38B514D2209DBFF100CB329A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = S528;
+			productName = S528;
+			productReference = 38B514D4209DBFF100CB329A /* S528.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		38B514CC209DBFF100CB329A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = RunHao;
+				TargetAttributes = {
+					38B514D3209DBFF100CB329A = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = 38B514CF209DBFF100CB329A /* Build configuration list for PBXProject "S528" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 38B514CB209DBFF100CB329A;
+			productRefGroup = 38B514D5209DBFF100CB329A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				38B514D3209DBFF100CB329A /* S528 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		38B514D2209DBFF100CB329A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38B514E4209DBFF400CB329A /* LaunchScreen.storyboard in Resources */,
+				38B514E1209DBFF400CB329A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2FC7B96AC96C8BBD545124AF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-S528-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		38B514D0209DBFF100CB329A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A501F70520A9374A000FC563 /* AlertTextViewController.m in Sources */,
+				A501F5F020A2A47F000FC563 /* EZTHuaSeSetting.m in Sources */,
+				A501F60920A2E9BC000FC563 /* CardSettingViewController.m in Sources */,
+				38B5151F209EA86800CB329A /* HomepageViewController.m in Sources */,
+				A501F6FF20A92B06000FC563 /* AlertViewController.m in Sources */,
+				A501F5F720A2C6B0000FC563 /* AlertSelectionViewController.m in Sources */,
+				A501F62520A3F9DD000FC563 /* GammingViewController.m in Sources */,
+				A501F70220A92E09000FC563 /* UIView+AutoLayout.m in Sources */,
+				38B514E7209DBFF400CB329A /* main.m in Sources */,
+				38B51508209DD08200CB329A /* Config.m in Sources */,
+				38B514FD209DC50300CB329A /* EZTTcpService.m in Sources */,
+				38B5150F209DD87600CB329A /* UIViewController+Alert.m in Sources */,
+				38D8B431209F2F2200F6AF2C /* GameSettingViewController.m in Sources */,
+				38B51512209DEA3700CB329A /* EZTTcpProcessor.m in Sources */,
+				38A42D2620A6BA7E0063F745 /* EZTNavigationViewController.m in Sources */,
+				38D8B41B209ED65500F6AF2C /* GameListViewController.m in Sources */,
+				A501F5E720A2A148000FC563 /* EZTDealCardRuleDetail.m in Sources */,
+				38D8B421209EDAC400F6AF2C /* GameCategoryView.m in Sources */,
+				A501F62120A3271A000FC563 /* DealCardRuleHeaderView.m in Sources */,
+				38D8B427209EDBB500F6AF2C /* EZTGameCategory.m in Sources */,
+				38B5150B209DD1B900CB329A /* Global.m in Sources */,
+				A501F61B20A320D6000FC563 /* GameAlertTextController.m in Sources */,
+				38B514F9209DC2CD00CB329A /* EZTRootContainer.m in Sources */,
+				A501F60020A2D3E9000FC563 /* PlayRuleCell.m in Sources */,
+				38D8B434209F2F5800F6AF2C /* GameSettingCell.m in Sources */,
+				38D8B42A209EDC4D00F6AF2C /* EZTGameResource.m in Sources */,
+				A501F5FD20A2D35E000FC563 /* PlaySettingViewController.m in Sources */,
+				38D8B417209ED5CD00F6AF2C /* EZTBaseViewController.m in Sources */,
+				38A42D1D20A6A4510063F745 /* LoginViewController.m in Sources */,
+				A501F5DE20A29B11000FC563 /* EZTGameSetting.m in Sources */,
+				A501F5ED20A2A429000FC563 /* EZTHuaSeDetail.m in Sources */,
+				A501F61520A2F200000FC563 /* EZTLineTableViewCell.m in Sources */,
+				A501F60C20A2F1C5000FC563 /* CardSettingCell.m in Sources */,
+				A501F61E20A32370000FC563 /* DealCardRuleCell.m in Sources */,
+				38A42D2A20A86D790063F745 /* SettingViewController.m in Sources */,
+				38D8B42D209EE65F00F6AF2C /* GameResourceCell.m in Sources */,
+				A501F70820A93CAD000FC563 /* AlertInputViewController.m in Sources */,
+				38B51500209DCA1C00CB329A /* EZTNetService.m in Sources */,
+				38B514D9209DBFF100CB329A /* AppDelegate.m in Sources */,
+				38B51515209DF7A400CB329A /* EZTTcpPacket.m in Sources */,
+				A501F61820A31D7F000FC563 /* DealCardRuleViewController.m in Sources */,
+				A501F5DD20A29B11000FC563 /* EZTCardDetail.m in Sources */,
+				38A42D2D20A86FBA0063F745 /* EZTSetting.m in Sources */,
+				38B51522209EA87D00CB329A /* HomepageCell.m in Sources */,
+				A501F70E20A98383000FC563 /* GameXYSettingViewController.m in Sources */,
+				A501F5EA20A2A207000FC563 /* EZTDealCardRule.m in Sources */,
+				A501F5E120A29C60000FC563 /* EZTCardSetting.m in Sources */,
+				A501F70B20A96E7B000FC563 /* NSString+Valid.m in Sources */,
+				A501F5FA20A2C7AD000FC563 /* AlertSelectionCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		38B514E2209DBFF400CB329A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38B514E3209DBFF400CB329A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		38B514E8209DBFF400CB329A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/S528/PrefixHeader.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		38B514E9209DBFF400CB329A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/S528/PrefixHeader.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		38B514EB209DBFF400CB329A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A3408FFEA6D04F6DD7B4780 /* Pods-S528.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75523PZANB;
+				INFOPLIST_FILE = S528/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.easiest.S528;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		38B514EC209DBFF400CB329A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB7C84009C99CD557133315F /* Pods-S528.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75523PZANB;
+				INFOPLIST_FILE = S528/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.easiest.S528;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		38B514CF209DBFF100CB329A /* Build configuration list for PBXProject "S528" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38B514E8209DBFF400CB329A /* Debug */,
+				38B514E9209DBFF400CB329A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		38B514EA209DBFF400CB329A /* Build configuration list for PBXNativeTarget "S528" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38B514EB209DBFF400CB329A /* Debug */,
+				38B514EC209DBFF400CB329A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 38B514CC209DBFF100CB329A /* Project object */;
+}

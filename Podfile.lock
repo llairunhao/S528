@@ -1,0 +1,26 @@
+PODS:
+  - CocoaAsyncSocket (7.6.0)
+  - FMDB (2.7.2):
+    - FMDB/standard (= 2.7.2)
+  - FMDB/standard (2.7.2)
+  - MBProgressHUD (1.0.0)
+
+DEPENDENCIES:
+  - CocoaAsyncSocket
+  - FMDB
+  - MBProgressHUD
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - CocoaAsyncSocket
+    - FMDB
+    - MBProgressHUD
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: b9d5589f07baf9de8f34cc25abd4fcba28f13805
+  FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+
+PODFILE CHECKSUM: ca3006dffada1620bcc675f2eb3f541622284e87
+
+COCOAPODS: 1.5.0

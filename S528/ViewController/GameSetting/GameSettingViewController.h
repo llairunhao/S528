@@ -11,5 +11,6 @@
 @interface GameSettingViewController : EZTBaseViewController
 
 @property (nonatomic, assign) NSUInteger playId;
+@property (nonatomic, assign) BOOL retry;
 
 @end

@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
+    [self reloadData];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -108,6 +108,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
                 }else {
                     GammingViewController *controller = [[GammingViewController alloc] init];
                     controller.setting = self.setting;
+                    controller.retry = self.retry;
                     [self.navigationController pushViewController:controller animated:true];
                 }
                 [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
@@ -123,6 +124,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:9];
     if ([self canSetXyValue]) {
         array =[@[@(GameSettingTypePlayerCount),
+                  @(GameSettingTypeBeatColor),
                   @(GameSettingTypeCardSetting),
                   @(GameSettingTypeXY),
                   @(GameSettingTypeNumberOfCard),
@@ -439,11 +441,11 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
     switch (type) {
         case GameSettingTypePlayerCount:
             left = @"人数设置";
-            right = [NSString stringWithFormat:@"%@",@(self.setting.numberOfPalyer)];
+            right = [NSString stringWithFormat:@"%@",@(self.setting.numberOfPalyer + EZTMinNumberOfPlyaers)];
             break;
         case GameSettingTypeBeatColor:
             left = @"打色设置";
-            right = _setting.playDescription;
+            right = _setting.beatColorRule;
             break;
         case GameSettingTypeCardSetting:
             left = @"色点设置";
@@ -570,11 +572,11 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
             }
             AlertSelectionViewController *controller = [[AlertSelectionViewController alloc] init];
             AlertSelectHandler handler = ^(NSInteger index) {
-                unsafeSelf.setting.numberOfPalyer = index - EZTMinNumberOfPlyaers;
+                unsafeSelf.setting.numberOfPalyer = index;
                 [unsafeSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             };
             [controller alertWithSource:array
-                               selected:_setting.numberOfPalyer - EZTMinNumberOfPlyaers
+                               selected:_setting.numberOfPalyer
                          viewController:self
                                 handler:handler];
         }
@@ -583,8 +585,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
         {
             PlaySettingViewController *controller = [[PlaySettingViewController alloc] init];
                 controller.selectedIndex = (_setting.howToPlayCardIndex - 1);
-            controller.source = _setting.playDescriptions;
-
+            controller.source = _setting.beatColorRules;
             controller.selectHandler = ^(NSInteger index) {
                 unsafeSelf.setting.howToPlayCardIndex = index;
                 [unsafeSelf reloadData];

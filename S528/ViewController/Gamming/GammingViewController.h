@@ -13,5 +13,6 @@
 @interface GammingViewController : EZTBaseViewController
 
 @property (nonatomic, strong) EZTGameSetting *setting;
+@property (nonatomic, assign) BOOL retry;
 
 @end

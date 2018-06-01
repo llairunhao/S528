@@ -15,6 +15,9 @@
 #import "EZTTcpService.h"
 
 #import "AlertTextViewController.h"
+#import "Config.h"
+
+#import "GammingCell.h"
 
 @interface GammingViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIImageView *imageView;
@@ -40,13 +43,17 @@
 }
 
 - (void)refreshData {
-    [self showLoadingHUD];
-    EZTTcpPacket *packet = [[EZTTcpPacket alloc] init];
-    [packet writeIntValue:EZTAPIRequestCommandRetry];
-    if (![[EZTTcpService shareInstance] sendData:[packet encode]]) {
-        [self hideHUD];
-        [self toast:@"请先连接服务端"];
+    if (self.retry) {
+        EZTTcpPacket *packet = [[EZTTcpPacket alloc] init];
+        [packet writeIntValue:EZTAPIRequestCommandRetry];
+        if (![[EZTTcpService shareInstance] sendData:[packet encode]]) {
+            [self hideHUD];
+            [self toast:@"请先连接服务端"];
+        }
+    }else {
+        [self startOrStopRecving:false];
     }
+    
 }
 
 - (void)didGetPacket: (NSNotification *)noti {
@@ -148,21 +155,24 @@
     CGFloat imageH = 320;
     CGFloat imageW = 480;
     CGRect rect = self.view.bounds;
+    rect.origin.y = AppTopPad;
     rect.size.height = imageH * CGRectGetWidth(rect) / imageW;
     _imageView = [[UIImageView alloc] initWithFrame:rect];
     _imageView.backgroundColor = [UIColor blackColor];
-
+    [self.view addSubview:_imageView];
+    
     rect = self.view.bounds;
-    rect.origin.y = AppTopPad;
-    rect.size.height -= (AppBottomPad + AppTopPad);
+    rect.origin.y = CGRectGetMaxY(_imageView.frame);
+    rect.size.height -= (AppBottomPad + CGRectGetMaxY(_imageView.frame));
     _tableView = [[UITableView alloc] initWithFrame:rect style: UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = [UIColor blackColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.rowHeight = 50;
-    _tableView.tableHeaderView = _imageView;
+    _tableView.rowHeight = UITableViewAutomaticDimension;
+    _tableView.estimatedRowHeight = 50;
+    
     
     _videoBtn = [self lightGrayButtonWithTitle:@"关闭视频"];
     [_videoBtn setTitle:@"打开视频" forState:UIControlStateSelected];
@@ -183,46 +193,43 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *identifier = indexPath.row == 0 ? @"video" : @"text";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    GammingCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.contentView.backgroundColor = [UIColor blackColor];
+        cell = [[GammingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         if (indexPath.row == 0) {
             [cell.contentView addSubview:_videoBtn];
         }
     }
+    cell.rightLabel.textColor = [UIColor whiteColor];
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = @"视频：";
+            cell.leftLabel.text = @"视频：";
             break;
         case 1:
-            cell.textLabel.text = [NSString stringWithFormat:@"玩法：  %@", @(_setting.playId)];
+            cell.leftLabel.text = @"玩法：";
+            cell.rightLabel.text = [NSString stringWithFormat:@"%@", @(_setting.playId)];
             break;
         case 2:
-            cell.textLabel.text = [NSString stringWithFormat:@"打骰：  %@", _setting.beatColorRule];
+            cell.leftLabel.text = @"打骰：";
+            cell.rightLabel.text = _setting.beatColorRule;
             break;
         case 3:
-            cell.textLabel.text = [NSString stringWithFormat:@"人数：  %@", @(_setting.numberOfPalyer)];
+            cell.leftLabel.text = @"人数：";
+            cell.rightLabel.text = [NSString stringWithFormat:@"%@", @(_setting.numberOfPalyer+EZTMinNumberOfPlyaers)];
             break;
         case 4:
         {
-            static NSAttributedString *title;
 
-            if (!title) {
-                title = [[NSAttributedString alloc] initWithString:@"结果：  "
-                                                        attributes:@{NSFontAttributeName : cell.textLabel.font, NSForegroundColorAttributeName : cell.textLabel.textColor}];
-            }
-            NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithAttributedString:title];
-            NSAttributedString *att2 = [[NSAttributedString alloc] initWithString:_result attributes:@{NSFontAttributeName : cell.textLabel.font, NSForegroundColorAttributeName : [UIColor redColor]}];
-            [att appendAttributedString:att2];
-            cell.textLabel.attributedText = att;
+            cell.leftLabel.text = @"结果：";
+            cell.rightLabel.textColor = [UIColor redColor];
+            cell.rightLabel.text = _result;
         }
             break;
         default:
             break;
     }
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
     return cell;
     
 }

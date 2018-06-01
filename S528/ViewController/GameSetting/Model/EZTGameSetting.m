@@ -19,7 +19,7 @@
         self.whetherThere = [packet readIntValue:nil];
         self.name = [packet readStringValue:nil];
         self.howToPlayCardIndex = [packet readIntValue:nil];
-        self.numberOfPalyer = [packet readIntValue:nil] + EZTMinNumberOfPlyaers;
+        self.numberOfPalyer = [packet readIntValue:nil];
         
         self.cardSettingsSelected = [packet readIntValue:nil];
         self.cardSettingIndex = [packet readIntValue:nil];
@@ -302,7 +302,10 @@
     [packet writeIntValue:_userCustomIndex];
     NSMutableString *userCustomStr = [@"" mutableCopy];
     for (NSString *str in _userCustomRules) {
-        [userCustomStr appendFormat:@"%@", str];
+        [userCustomStr appendFormat:@"%@,", str];
+    }
+    if (userCustomStr.length > 0) {
+        [userCustomStr deleteCharactersInRange:NSMakeRange(userCustomStr.length - 1, 1)];
     }
     [packet writeStringValue:userCustomStr];
     

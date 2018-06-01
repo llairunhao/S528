@@ -229,8 +229,9 @@ typedef NS_ENUM(NSUInteger, SettingType) {
 #pragma mark-
 - (void)didSelectIndexPath: (NSIndexPath *)indexPath {
     __unsafe_unretained typeof(self) unsafeSelf = self;
-    switch (indexPath.row) {
-        case 0:
+    SettingType type = [_types[indexPath.row] unsignedIntegerValue];
+    switch (type) {
+        case SettingTypeCameraSelect:
         {
             AlertSelectionViewController *controller = [[AlertSelectionViewController alloc] init];
             AlertSelectHandler handler = ^(NSInteger index) {
@@ -243,7 +244,7 @@ typedef NS_ENUM(NSUInteger, SettingType) {
                                 handler:handler];
         }
             break;
-        case 1:
+        case SettingTypeRFSelect:
         {
             
             AlertSelectionViewController *controller = [[AlertSelectionViewController alloc] init];
@@ -257,7 +258,7 @@ typedef NS_ENUM(NSUInteger, SettingType) {
                                 handler:handler];
         }
             break;
-        case 2:
+        case SettingTypeSoundMode:
         {
             AlertSelectionViewController *controller = [[AlertSelectionViewController alloc] init];
             AlertSelectHandler handler = ^(NSInteger index) {
@@ -270,7 +271,7 @@ typedef NS_ENUM(NSUInteger, SettingType) {
                                 handler:handler];
         }
             break;
-        case 3:
+        case SettingTypeVolume:
         {
             AlertSelectionViewController *controller = [[AlertSelectionViewController alloc] init];
             NSMutableArray *array = [NSMutableArray arrayWithCapacity:14];
@@ -287,7 +288,7 @@ typedef NS_ENUM(NSUInteger, SettingType) {
                                 handler:handler];
         }
             break;
-        case 4:
+        case SettingTypeSpeed:
         {
             AlertSelectionViewController *controller = [[AlertSelectionViewController alloc] init];
             NSMutableArray *array = [NSMutableArray arrayWithCapacity:11];

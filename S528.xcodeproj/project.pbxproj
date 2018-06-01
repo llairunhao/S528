@@ -59,6 +59,8 @@
 		A501F70820A93CAD000FC563 /* AlertInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F70720A93CAD000FC563 /* AlertInputViewController.m */; };
 		A501F70B20A96E7B000FC563 /* NSString+Valid.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F70A20A96E7B000FC563 /* NSString+Valid.m */; };
 		A501F70E20A98383000FC563 /* GameXYSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F70D20A98383000FC563 /* GameXYSettingViewController.m */; };
+		A50E7C5520C14097008C5E18 /* GameSettingRadioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A50E7C5420C14097008C5E18 /* GameSettingRadioCell.m */; };
+		A50E7C9320C15B79008C5E18 /* GammingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A50E7C9220C15B79008C5E18 /* GammingCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -166,6 +168,10 @@
 		A501F70A20A96E7B000FC563 /* NSString+Valid.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Valid.m"; sourceTree = "<group>"; };
 		A501F70C20A98383000FC563 /* GameXYSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameXYSettingViewController.h; sourceTree = "<group>"; };
 		A501F70D20A98383000FC563 /* GameXYSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameXYSettingViewController.m; sourceTree = "<group>"; };
+		A50E7C5320C14097008C5E18 /* GameSettingRadioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSettingRadioCell.h; sourceTree = "<group>"; };
+		A50E7C5420C14097008C5E18 /* GameSettingRadioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSettingRadioCell.m; sourceTree = "<group>"; };
+		A50E7C9120C15B79008C5E18 /* GammingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GammingCell.h; sourceTree = "<group>"; };
+		A50E7C9220C15B79008C5E18 /* GammingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GammingCell.m; sourceTree = "<group>"; };
 		BB7C84009C99CD557133315F /* Pods-S528.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S528.release.xcconfig"; path = "Pods/Target Support Files/Pods-S528/Pods-S528.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -342,6 +348,8 @@
 				38D8B430209F2F2200F6AF2C /* GameSettingViewController.m */,
 				38D8B432209F2F5800F6AF2C /* GameSettingCell.h */,
 				38D8B433209F2F5800F6AF2C /* GameSettingCell.m */,
+				A50E7C5320C14097008C5E18 /* GameSettingRadioCell.h */,
+				A50E7C5420C14097008C5E18 /* GameSettingRadioCell.m */,
 				A501F5FB20A2D35E000FC563 /* PlaySettingViewController.h */,
 				A501F5FC20A2D35E000FC563 /* PlaySettingViewController.m */,
 				A501F5FE20A2D3E9000FC563 /* PlayRuleCell.h */,
@@ -416,6 +424,8 @@
 			children = (
 				A501F62320A3F9DD000FC563 /* GammingViewController.h */,
 				A501F62420A3F9DD000FC563 /* GammingViewController.m */,
+				A50E7C9120C15B79008C5E18 /* GammingCell.h */,
+				A50E7C9220C15B79008C5E18 /* GammingCell.m */,
 			);
 			path = Gamming;
 			sourceTree = "<group>";
@@ -523,8 +533,10 @@
 				A501F5F020A2A47F000FC563 /* EZTHuaSeSetting.m in Sources */,
 				A501F60920A2E9BC000FC563 /* CardSettingViewController.m in Sources */,
 				38B5151F209EA86800CB329A /* HomepageViewController.m in Sources */,
+				A50E7C9320C15B79008C5E18 /* GammingCell.m in Sources */,
 				A501F6FF20A92B06000FC563 /* AlertViewController.m in Sources */,
 				A501F5F720A2C6B0000FC563 /* AlertSelectionViewController.m in Sources */,
+				A50E7C5520C14097008C5E18 /* GameSettingRadioCell.m in Sources */,
 				A501F62520A3F9DD000FC563 /* GammingViewController.m in Sources */,
 				A501F70220A92E09000FC563 /* UIView+AutoLayout.m in Sources */,
 				38B514E7209DBFF400CB329A /* main.m in Sources */,

@@ -155,14 +155,14 @@
         //没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if (!position) {
             NSString *text = textField.text;
-            NSString *sqlString = [NSString stringWithFormat:@"SELECT id, desc FROM t_dase WHERE desc LIKE \"%@%%\"", text];
+            NSString *sqlString = [NSString stringWithFormat:@"SELECT id, desc FROM t_dase WHERE desc LIKE \"%%%@%%\"", text];
             FMResultSet *result = [self.db executeQuery:sqlString];
             self.results = [NSMutableArray array];
             
             while ([result next]) {
                 [self.results addObject:@{@"id": @([result intForColumn:@"id"]), @"desc" : [result stringForColumn:@"desc"]}];
             }
-            
+            self.tableView.contentOffset = CGPointZero;
             [self.tableView reloadData];
         }
     });

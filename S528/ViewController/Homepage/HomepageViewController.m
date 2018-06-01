@@ -186,7 +186,7 @@
             [unsafeView1 resignFirstResponder];
             [unsafeView2 resignFirstResponder];
             NSString *oldAccount = [[NSUserDefaults standardUserDefaults] stringForKey:@"account"];
-            if ([oldAccount isEqualToString:unsafeView2.text]) {
+            if ([oldAccount isEqualToString:unsafeView1.text]) {
                 [[NSUserDefaults standardUserDefaults] setObject:unsafeView2.text forKey:@"account"];
                 [unsafeSelf toast:@"修改成功"];
                 [unsafeController hide];

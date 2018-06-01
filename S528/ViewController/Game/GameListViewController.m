@@ -191,6 +191,7 @@
 - (void)activeGameResource:(EZTGameResource *)resource {
     GameSettingViewController *controller = [[GameSettingViewController alloc] init];
     controller.playId = [resource.gameId integerValue];
+    controller.retry = false;
     [self.navigationController pushViewController:controller animated:true];
 }
 
@@ -199,7 +200,10 @@
         [self toast:@"游戏已买满，不能试机"];
         return;
     }
-    [self activeGameResource:resource];
+    GameSettingViewController *controller = [[GameSettingViewController alloc] init];
+    controller.playId = [resource.gameId integerValue];
+    controller.retry = false;
+    [self.navigationController pushViewController:controller animated:true];
 }
 
 - (void)buyGameResource:(EZTGameResource *)resource {

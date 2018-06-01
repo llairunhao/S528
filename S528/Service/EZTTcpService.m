@@ -106,9 +106,9 @@
             return;
         }
         _remainLength = [EZTTcpPacket dataToUInt:self.recvData];
-        NSLog(@"完整的包长度：%@", @(_remainLength));
-        NSString *msg = [NSString stringWithFormat:@"错误的包长度%@", @(_remainLength)];
-        NSAssert(_remainLength > EZTTcpPacketHeaderLength + EZTTcpPacketTailLength, msg);
+     //   NSLog(@"完整的包长度：%@", @(_remainLength));
+    //    NSString *msg = [NSString stringWithFormat:@"错误的包长度%@", @(_remainLength)];
+   //     NSAssert(_remainLength > EZTTcpPacketHeaderLength + EZTTcpPacketTailLength, msg);
     }
     if (_remainLength > _recvData.length) {
         return;
@@ -118,7 +118,7 @@
         payload = [_recvData subdataWithRange:NSMakeRange(0, _remainLength)];
         NSData *remain = [_recvData subdataWithRange:NSMakeRange(_remainLength, _recvData.length - _remainLength)];
         _recvData = [remain mutableCopy];
-        NSLog(@"剩余包长度：%@", @(remain.length));
+      //  NSLog(@"剩余包长度：%@", @(remain.length));
     }else {
         payload = [_recvData copy];
         _recvData = [NSMutableData data];
@@ -153,6 +153,10 @@
     _remainLength = 0;
     _recvData = [NSMutableData data];
     [[NSNotificationCenter defaultCenter] postNotificationName:EZTDisconnectFromServer object:nil];
+}
+
+- (BOOL)isConnected {
+    return self.socket.isConnected;
 }
 
 @end

@@ -171,7 +171,7 @@
         textField.tag = 22;
         textField.delegate = self;
         __unsafe_unretained typeof(textField) unsafeView2 = textField;
-        
+        __unsafe_unretained typeof(controller) unsafeController = controller;
         [controller alertWithTitle:@"修改用户名"
                       confrimTitle:@"确认"
                        cancelTitle:nil
@@ -189,6 +189,7 @@
             if ([oldAccount isEqualToString:unsafeView2.text]) {
                 [[NSUserDefaults standardUserDefaults] setObject:unsafeView2.text forKey:@"account"];
                 [unsafeSelf toast:@"修改成功"];
+                [unsafeController hide];
             }else {
                 [unsafeSelf toast:@"原账号错误"];
             }
@@ -219,7 +220,12 @@
     [packet writeStringValue:account];
     [packet writeStringValue:oldPassword];
     [packet writeStringValue:newPassword];
-    [[EZTTcpService shareInstance] sendData:[packet encode]];
+    if (![[EZTTcpService shareInstance] sendData:[packet encode]]) {
+        [self hideHUD];
+        [self toast:@"请先连接服务端"];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
+    }
+ 
 }
 
 - (void)didGetPacket: (NSNotification *)noti {

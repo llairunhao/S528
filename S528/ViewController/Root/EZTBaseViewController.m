@@ -7,6 +7,7 @@
 //
 
 #import "EZTBaseViewController.h"
+#import "UIViewController+Alert.h"
 
 @interface EZTBaseViewController ()
 {
@@ -39,6 +40,24 @@
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:_titleLabel];
+    
+  
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectToServer:) name:EZTConnectToServer object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disconnectFromServer:) name:EZTDisconnectFromServer object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTDisconnectFromServer object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTConnectToServer object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -75,5 +94,17 @@
     return label;
 }
 
+- (void)connectToServer: (NSNotification *)noti {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self toast:@"恢复连接"];
+    });
+}
+
+- (void)disconnectFromServer: (NSNotification *)noti {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self hideHUD];
+        [self toast:@"断开连接"];
+    });
+}
 
 @end

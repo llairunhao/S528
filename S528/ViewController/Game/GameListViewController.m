@@ -24,7 +24,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray <EZTGameCategory *>*gameCategories;
-
+@property (nonatomic, assign) NSInteger buyCount;
 @end
 
 @implementation GameListViewController
@@ -37,7 +37,7 @@
     [self setupSubview];
     [self refreshData];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetData:) name:EZTGetPacketFromServer object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetPacket:) name:EZTGetPacketFromServer object:nil];
 }
 
 - (void)dealloc
@@ -50,13 +50,13 @@
     [packet writeIntValue:EZTAPIRequestCommandGetAllGames];
     NSData *data = [packet encode];
     if (![[EZTTcpService shareInstance] sendData:data]) {
-        [self alertWithTitle:@"设备未连接" message:@"请连接设备后重试"];
+         [self toast:@"请先连接服务端"];
     }else {
         [self showLoadingHUD];
     }
 }
 
-- (void)didGetData: (NSNotification *)noti {
+- (void)didGetPacket: (NSNotification *)noti {
     EZTTcpPacket *packet = noti.object;
     switch (packet.cmd) {
         case EZTAPIResponseCommandGetAllGames:
@@ -64,12 +64,13 @@
             NSArray *jsons = [packet readJsonObject:nil];
             NSMutableArray *array = [NSMutableArray arrayWithCapacity:jsons.count];
             NSInteger i = 1;
+            self.buyCount = 0;
             for (NSDictionary *json in jsons) {
-                 NSLog(@"------>%@<-------",@(i));
+                // NSLog(@"------>%@<-------",@(i));
                 EZTGameCategory *gameCategory = [[EZTGameCategory alloc] initWithJson:json categoryId:i];
                 [array addObject:gameCategory];
                 i += 1;
-              
+                self.buyCount += gameCategory.buyCount;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.gameCategories = [array copy];
@@ -95,6 +96,7 @@
                     case 1:
                     {
                         category.games[offset].buyed = true;
+                        self.buyCount += 1;
                         [self.tableView reloadData];
                     }
                         break;
@@ -106,6 +108,7 @@
                     case 3:
                     {
                         category.games[offset].buyed = true;
+                        self.buyCount += 1;
                         [self.tableView reloadData];
                     }
                         break;
@@ -192,16 +195,47 @@
 }
 
 - (void)tryoutGameResource:(EZTGameResource *)resource {
+    if (self.buyCount == 5) {
+        [self toast:@"游戏已买满，不能试机"];
+        return;
+    }
     [self activeGameResource:resource];
 }
 
 - (void)buyGameResource:(EZTGameResource *)resource {
+    [self showBuyAlert:0 resource:resource];
+}
+
+- (void)confirmToBuyGameResource:(EZTGameResource *)resource {
     [self showLoadingHUD];
     EZTTcpPacket *packet = [[EZTTcpPacket alloc] init];
     [packet writeIntValue:EZTAPIRequestCommandBuyGame];
     [packet writeIntValue:resource.categoryId];
     [packet writeIntValue:[resource.gameId integerValue]];
-    [[EZTTcpService shareInstance] sendData:[packet encode]];
+    if (![[EZTTcpService shareInstance] sendData:[packet encode]]) {
+        [self hideHUD];
+        [self toast:@"请先连接服务端"];
+    }
+}
+
+- (void)showBuyAlert: (NSInteger)tag resource:(EZTGameResource *)resource  {
+    
+    __unsafe_unretained typeof(self) unsafeSelf = self;
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        if (tag == 0) {
+            [unsafeSelf showBuyAlert:1 resource:resource];
+        }else {
+            [unsafeSelf confirmToBuyGameResource:resource];
+        }
+    }];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:resource.name message:tag == 0 ? @"确认购买？" : @"再次确认购买？" preferredStyle:UIAlertControllerStyleAlert];
+    [controller addAction:action2];
+    [controller addAction:action1];
+    [self presentViewController:controller animated:true completion:nil];
 }
 
 @end

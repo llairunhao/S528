@@ -43,7 +43,10 @@
     [self showLoadingHUD];
     EZTTcpPacket *packet = [[EZTTcpPacket alloc] init];
     [packet writeIntValue:EZTAPIRequestCommandRetry];
-    [[EZTTcpService shareInstance] sendData:[packet encode]];
+    if (![[EZTTcpService shareInstance] sendData:[packet encode]]) {
+        [self hideHUD];
+        [self toast:@"请先连接服务端"];
+    }
 }
 
 - (void)didGetPacket: (NSNotification *)noti {
@@ -121,13 +124,19 @@
     NSString *account = [[NSUserDefaults standardUserDefaults] stringForKey:@"account"];
     [packet writeStringValue:account];
     [packet writeIntValue:isStoped ? 1 : 0];
-    [[EZTTcpService shareInstance] sendData:[packet encode]];
+    if (![[EZTTcpService shareInstance] sendData:[packet encode]]){
+        [self hideHUD];
+        [self toast:@"请先连接服务端"];
+    }
     
     packet = [[EZTTcpPacket alloc] init];
     [packet writeIntValue:EZTAPIRequestCommandShouldGetImageRsult];
     [packet writeStringValue:account];
     [packet writeIntValue:isStoped ? 1 : 0];
-    [[EZTTcpService shareInstance] sendData:[packet encode]];
+    if (![[EZTTcpService shareInstance] sendData:[packet encode]]){
+        [self hideHUD];
+        [self toast:@"请先连接服务端"];
+    }
 }
 
 - (void)backToPrevController {
@@ -225,9 +234,12 @@
     [self showLoadingHUD];
     EZTTcpPacket *packet = [[EZTTcpPacket alloc] init];
     [packet writeIntValue:EZTAPIRequestCommandRequestToGetVideo];
-    [packet writeStringValue:@"Admin"];
+    [packet writeStringValue:[[NSUserDefaults standardUserDefaults] stringForKey:@"account"]];
     [packet writeIntValue:button.isSelected ? 1 : 0];
-    [[EZTTcpService shareInstance] sendData:[packet encode]];
+    if (![[EZTTcpService shareInstance] sendData:[packet encode]]){
+        [self hideHUD];
+        [self toast:@"请先连接服务端"];
+    }
 }
 
 

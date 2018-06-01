@@ -13,7 +13,7 @@ typedef void(^GameSettingSelectHandler)(void);
 @interface GameSettingCell : UITableViewCell
 
 @property (nonnull, nonatomic, strong, readonly) UILabel *leftLabel;
-@property (nonnull, nonatomic, strong, readonly) UIButton *rightButton;
+@property (nonnull, nonatomic, strong, readonly) UILabel *rightLabel;
 
 @property (nonatomic, copy, nullable) GameSettingSelectHandler selectHandler;
 

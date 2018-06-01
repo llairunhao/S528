@@ -116,16 +116,64 @@
 - (void)login {
     [_accountTF resignFirstResponder];
     [_passwordTF resignFirstResponder];
-    
+    if (![EZTTcpService shareInstance].isConnected) {
+        [self toast:@"请先连接Wifi"];
+        return;
+    }
+
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didGetLoginResult:)
+                                             selector:@selector(didGetPacket:)
                                                  name:EZTGetPacketFromServer
                                                object:nil];
     EZTTcpPacket *packet = [[EZTTcpPacket alloc] init];
-    [packet writeIntValue:EZTAPIRequestCommandLogin];
+    [packet writeIntValue:EZTAPIRequestCommandRequestLogin];
     [packet writeStringValue:_accountTF.text];
-    [packet writeStringValue:_passwordTF.text];
-    [[EZTTcpService shareInstance] sendData:[packet encode]];
+    if (![[EZTTcpService shareInstance] sendData:[packet encode]]){
+        [self hideHUD];
+        [self toast:@"请先连接服务端"];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
+    }
+}
+
+- (void)didGetPacket:(NSNotification *)noti {
+    EZTTcpPacket *packet = noti.object;
+    
+    switch (packet.cmd) {
+        case EZTAPIResponseCommandRequestToLogin:
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                EZTTcpPacket *packet = [[EZTTcpPacket alloc] init];
+                [packet writeIntValue:EZTAPIRequestCommandLogin];
+                [packet writeStringValue:self.accountTF.text];
+                [packet writeStringValue:self.passwordTF.text];
+                if (![[EZTTcpService shareInstance] sendData:[packet encode]]){
+                    [self hideHUD];
+                    [self toast:@"请先连接服务端"];
+                    [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
+                }
+            });
+            
+        }
+            break;
+        case EZTAPIResponseCommandLogin:
+        {
+            BOOL isSuccess = [packet readIntValue:nil] == 0;
+            if (!isSuccess) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self toast:[packet readStringValue:nil]];
+                });
+            }else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSUserDefaults standardUserDefaults] setObject:self.accountTF.text forKey:@"account"];
+                    [self loginSuccess];
+                });
+            }
+            [[NSNotificationCenter defaultCenter] removeObserver:self];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)didGetLoginResult: (NSNotification *)noti {

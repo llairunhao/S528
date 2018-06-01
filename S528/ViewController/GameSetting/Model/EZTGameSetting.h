@@ -44,10 +44,10 @@
 @property (nonatomic, readonly) NSString *userCustomRule;
 
 @property (nonatomic, assign) NSUInteger howToPlayCardIndex;
-@property (nonatomic, copy) NSArray<NSString *>* playDescriptions;
+@property (nonatomic, copy) NSArray<NSString *>* playDescriptions;          //打色标题
 @property (nonatomic, readonly) NSString *playDescription;
 
-@property (nonatomic, copy) NSArray<NSString *>* beatColorRules;
+@property (nonatomic, copy) NSArray<NSString *>* beatColorRules;            //打色详情
 @property (nonatomic, readonly) NSString *beatColorRule;
 
 @property (nonatomic, strong) NSMutableArray<EZTCardSetting *>* cardSettings;

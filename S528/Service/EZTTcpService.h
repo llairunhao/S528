@@ -12,8 +12,11 @@
 
 + (EZTTcpService *)shareInstance;
 
+@property (nonatomic, readonly) BOOL isConnected;
+
 - (NSError *)connectIfNeed;
 - (void)disconnect;
+
 
 - (BOOL)sendData: (NSData *)data;
 @end

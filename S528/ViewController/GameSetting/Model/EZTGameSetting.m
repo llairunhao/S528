@@ -150,6 +150,10 @@
     return _speakTypes[_speakTypeIndex];
 }
 
+- (NSString *)playDescription {
+    return _playDescriptions[_howToPlayCardIndex - 1];
+}
+
 #pragma mark-
 - (void)setcardSetting:(EZTCardSetting *)cardSetting {
     _cardSettings[_cardSettingIndex] = cardSetting;

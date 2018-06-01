@@ -17,10 +17,21 @@
 
 #import "AlertSelectionViewController.h"
 
+typedef NS_ENUM(NSUInteger, SettingType) {
+    SettingTypeCameraSelect,
+    SettingTypeRFSelect,
+    SettingTypeSoundMode,
+    SettingTypeVolume,
+    SettingTypeSpeed,
+};
+
+
 @interface SettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) EZTSetting *setting;
+@property (nonatomic, strong) NSArray<NSNumber *> *types;
+
 @end
 
 @implementation SettingViewController
@@ -54,7 +65,27 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetPacket:) name:EZTGetPacketFromServer object:nil];
     EZTTcpPacket *packet = [[EZTTcpPacket alloc] init];
     [packet writeIntValue:EZTAPIRequestCommandGetDeviceSetting];
-    [[EZTTcpService shareInstance] sendData:[packet encode]];
+    if (![[EZTTcpService shareInstance] sendData:[packet encode]]) {
+        [self hideHUD];
+        [self toast:@"请先连接服务端"];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
+    }
+}
+
+- (void)reloadData {
+    if (_setting.cameraSelect == EZTServerCameraExternal) {
+        _types = @[@(SettingTypeCameraSelect),
+                   @(SettingTypeRFSelect),
+                   @(SettingTypeSoundMode),
+                   @(SettingTypeVolume),
+                   @(SettingTypeSpeed)];
+    }else {
+        _types = @[@(SettingTypeCameraSelect),
+                   @(SettingTypeSoundMode),
+                   @(SettingTypeVolume),
+                   @(SettingTypeSpeed)];
+    }
+    [_tableView reloadData];
 }
 
 - (void)didGetPacket: (NSNotification *)noti {
@@ -74,7 +105,7 @@
             if (!self.setting.isSuccess) {
                 [self alertWithTitle:@"获取设置信息失败" message:self.setting.message];
             }
-            [self.tableView reloadData];
+            [self reloadData];
         }else {
             BOOL isSuccess = [packet readIntValue:nil] == 0;
             if (!isSuccess) {
@@ -93,7 +124,11 @@
     NSString *account = [[NSUserDefaults standardUserDefaults] stringForKey:@"account"];
     NSAssert(account.length > 0, @"用户名为空");
     NSData *data = [_setting encode:account];
-    [[EZTTcpService shareInstance] sendData:data];
+    if (![[EZTTcpService shareInstance] sendData:data]) {
+        [self hideHUD];
+        [self toast:@"请先连接服务端"];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
+    }
 }
 
 #pragma mark- UITableViewDataSource
@@ -102,7 +137,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return _types.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -111,11 +146,11 @@
     if (!cell) {
         cell = [[GameSettingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    
+    SettingType type = [_types[indexPath.row] unsignedIntegerValue];
     NSString *right= @"";
     NSString *left = @"";
-    switch (indexPath.row) {
-        case 0:
+    switch (type) {
+        case SettingTypeCameraSelect:
         {
             left = @"镜头选择";
             switch (self.setting.cameraSelect) {
@@ -131,7 +166,7 @@
             }
         }
             break;
-        case 1:
+        case SettingTypeRFSelect:
         {
             left = @"频点设置";
             switch (self.setting.rfSelect) {
@@ -147,7 +182,7 @@
             }
         }
             break;
-        case 2:
+        case SettingTypeSoundMode:
         {
             left = @"声音模式";
             switch (self.setting.serverSoundMode) {
@@ -163,13 +198,13 @@
             }
         }
             break;
-        case 3:
+        case SettingTypeVolume:
         {
             left = @"音量大小";
             right = [NSString stringWithFormat:@"%@", @(self.setting.serverVolume)];
         }
             break;
-        case 4:
+        case SettingTypeSpeed:
         {
             left = @"语速大小";
             right = [NSString stringWithFormat:@"%@", @(self.setting.speed)];
@@ -179,11 +214,14 @@
             break;
     }
     cell.leftLabel.text = [NSString stringWithFormat:@"[%@]",left];
-    [cell.rightButton setTitle:right forState: UIControlStateNormal];
+    cell.rightLabel.text = right;
+   
     __unsafe_unretained typeof(self) unsafeSelf = self;
     cell.selectHandler = ^{
         [unsafeSelf didSelectIndexPath: indexPath];
     };
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
     return cell;
 }
 
@@ -197,7 +235,7 @@
             AlertSelectionViewController *controller = [[AlertSelectionViewController alloc] init];
             AlertSelectHandler handler = ^(NSInteger index) {
                 unsafeSelf.setting.cameraSelect = index == 0 ? EZTServerCameraInternal : EZTServerCameraExternal;
-                [unsafeSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                [unsafeSelf reloadData];
             };
             [controller alertWithSource:@[@"内置摄像头", @"外置摄像头"]
                                selected:_setting.cameraSelect == EZTServerCameraInternal ? 0 : 1

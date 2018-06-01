@@ -35,6 +35,7 @@
     if (self.db) {
         [self.db close];
     }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setupSubviews {
@@ -49,8 +50,9 @@
     _textField = [[UITextField alloc] initWithFrame:CGRectMake(46, AppTopPad, width - 24 - 40, 40)];
     _textField.borderStyle = UITextBorderStyleRoundedRect;
     _textField.delegate = self;
+    _textField.returnKeyType = UIReturnKeyDone;
     [self.view addSubview:_textField];
-    [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventValueChanged];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:_textField];
 
     
     CGFloat y = CGRectGetMaxY(_textField.frame) + 6;
@@ -140,24 +142,30 @@
   
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return true;
+}
 
-
-- (void)textFieldDidChange: (UITextField *)textField {
-    UITextRange *selectedRange = [textField markedTextRange];
-    UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
-    //没有高亮选择的字，则对已输入的文字进行字数统计和限制
-    if (!position) {
-        NSString *text = textField.text;
-        NSString *sqlString = [NSString stringWithFormat:@"SELECT id, desc FROM t_dase WHERE desc LIKE \"%%%@%%\"", text];
-        FMResultSet *result = [self.db executeQuery:sqlString];
-        _results = [NSMutableArray array];
-    
-        while ([result next]) {
-            [_results addObject:@{@"id": @([result intForColumn:@"id"]), @"desc" : [result stringForColumn:@"desc"]}];
+- (void)textFieldDidChange: (NSNotification *)noti {
+    UITextField *textField = noti.object;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UITextRange *selectedRange = [textField markedTextRange];
+        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+        //没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position) {
+            NSString *text = textField.text;
+            NSString *sqlString = [NSString stringWithFormat:@"SELECT id, desc FROM t_dase WHERE desc LIKE \"%@%%\"", text];
+            FMResultSet *result = [self.db executeQuery:sqlString];
+            self.results = [NSMutableArray array];
+            
+            while ([result next]) {
+                [self.results addObject:@{@"id": @([result intForColumn:@"id"]), @"desc" : [result stringForColumn:@"desc"]}];
+            }
+            
+            [self.tableView reloadData];
         }
-        
-        [self.tableView reloadData];
-    }
+    });
 }
 
 @end

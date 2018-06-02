@@ -9,6 +9,8 @@
 #import "EZTGameSetting.h"
 #import "EZTTcpPacket.h"
 #import "Config.h"
+#import "EZTBeatColorDB.h"
+#import "EZTBeatColorRule.h"
 
 @implementation EZTGameSetting
 
@@ -61,6 +63,8 @@
         self.userCustomRules = [userCustomStr componentsSeparatedByString:@","];
         
         self.speakTypeIndex = [packet readIntValue:nil];
+      
+         
         NSDictionary *speakTypesDict = [packet readJsonObject:nil];
         self.speakTypes = speakTypesDict[@"speak_types"];
         
@@ -68,6 +72,7 @@
         self.cameraSelect = [packet readIntValue:nil];
         self.rfSelect = [packet readIntValue:nil];
         
+        NSLog(@"%@--%@", @(packet.poi), @(packet.len));
 #pragma mark- 色点
         NSMutableArray *cardSettingTitles = [cardSetting[@"play_card_settings"] mutableCopy];
         self.systemCardSettingCount = cardSettingTitles.count;
@@ -138,12 +143,13 @@
         }
         self.huaSeSettings = cardHuaSeSettings;
        
+           [[EZTBeatColorDB shareInstance] saveListOfBeatColorRules:_beatColorRules];
     }
     return self;
 }
 
-- (NSString *)beatColorRule {
-    return _beatColorRules[_howToPlayCardIndex - 1];
+- (EZTBeatColorRule *)beatColorRule {
+    return [[EZTBeatColorDB shareInstance] getBeatColorRuleById:_howToPlayCardIndex];
 }
 
 - (NSString *)speakType {

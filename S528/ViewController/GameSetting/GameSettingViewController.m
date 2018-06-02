@@ -13,6 +13,8 @@
 #import "EZTTcpPacket.h"
 #import "EZTTcpService.h"
 #import "EZTGameSetting.h"
+#import "EZTBeatColorRule.h"
+#import "EZTBeatColorDB.h"
 
 #import "UIViewController+Alert.h"
 #import "Config.h"
@@ -29,7 +31,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
     GameSettingTypeBeatColor,
     GameSettingTypeCardSetting,
     GameSettingTypeDealCard,
-    GameSettingTypeSpeakType,
+    GameSettingTypeSpeechType,
     GameSettingTypeCameraSelect,
     GameSettingTypeRFSelect,
     GameSettingTypeSoundMode,
@@ -67,6 +69,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
 
 -(void)dealloc
 {
+    [[EZTBeatColorDB shareInstance] close];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -92,7 +95,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.setting = [[EZTGameSetting alloc] initWithPacket:packet];
-                [self reloadData];
+                           [self reloadData];
                 [self hideHUD];
                 [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
             });
@@ -128,7 +131,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
                   @(GameSettingTypeCardSetting),
                   @(GameSettingTypeXY),
                   @(GameSettingTypeNumberOfCard),
-                  @(GameSettingTypeSpeakType),
+                  @(GameSettingTypeSpeechType),
                   @(GameSettingTypeCameraSelect)] mutableCopy];
     } else {
         array =[@[@(GameSettingTypePlayerCount),
@@ -136,7 +139,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
                   @(GameSettingTypeCardSetting),
                   @(GameSettingTypeDealCard),
                   @(GameSettingTypeNumberOfCard),
-                  @(GameSettingTypeSpeakType),
+                  @(GameSettingTypeSpeechType),
                   @(GameSettingTypeCameraSelect)] mutableCopy];
     }
     
@@ -402,7 +405,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
     [button setTintColor:[UIColor whiteColor]];
     button.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:button];
-    button.frame = CGRectMake(0, CGRectGetMaxY(rect), CGRectGetWidth(rect), 44);
+    button.frame = CGRectMake(6, CGRectGetMaxY(rect) + 6, CGRectGetWidth(rect) - 12, 44);
     [button addTarget:self action:@selector(updateGameSetting) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -445,7 +448,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
             break;
         case GameSettingTypeBeatColor:
             left = @"打色设置";
-            right = _setting.beatColorRule;
+            right = _setting.beatColorRule.desc;
             break;
         case GameSettingTypeCardSetting:
             left = @"色点设置";
@@ -455,14 +458,14 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
             left = @"发牌设置";
             right = _setting.dealCardRule.title;
             break;
-        case GameSettingTypeSpeakType:
+        case GameSettingTypeSpeechType:
         {
             left = @"报法";
-            switch (self.setting.speakTypeIndex) {
-                case EZTServerSpeakTypeSingal:
+            switch (self.setting.speechIndex) {
+                case EZTServerSpeechTypeSingal:
                     right = @"单报";
                     break;
-                case EZTServerSpeakTypeSerivel:
+                case EZTServerSpeechTypeSerivel:
                     right = @"连报";
                     break;
                 default:
@@ -583,12 +586,13 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
             break;
         case GameSettingTypeBeatColor:
         {
+            EZTBeatColorRule *rule = _setting.beatColorRule;
             PlaySettingViewController *controller = [[PlaySettingViewController alloc] init];
-                controller.selectedIndex = (_setting.howToPlayCardIndex - 1);
+                controller.selectedIndex = rule.index;
             controller.source = _setting.beatColorRules;
-            controller.selectHandler = ^(NSInteger index) {
-                unsafeSelf.setting.howToPlayCardIndex = index;
-                [unsafeSelf reloadData];
+            controller.selectHandler = ^(EZTBeatColorRule *rule) {
+                unsafeSelf.setting.howToPlayCardIndex = rule.ruleId;
+           //     [unsafeSelf reloadData];
             };
             [self.navigationController pushViewController:controller animated:true];
         }
@@ -607,15 +611,15 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
             [self.navigationController pushViewController:controller animated:true];
         }
             break;
-        case GameSettingTypeSpeakType:
+        case GameSettingTypeSpeechType:
         {
             AlertSelectionViewController *controller = [[AlertSelectionViewController alloc] init];
             AlertSelectHandler handler = ^(NSInteger index) {
-                unsafeSelf.setting.speakTypeIndex = index == 0 ? EZTServerSpeakTypeSingal : EZTServerSpeakTypeSerivel;
+                unsafeSelf.setting.speechIndex = index == 0 ? EZTServerSpeechTypeSingal : EZTServerSpeechTypeSerivel;
                 [unsafeSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             };
             [controller alertWithSource:@[@"单报", @"连报"]
-                               selected:_setting.speakTypeIndex == EZTServerSpeakTypeSingal ? 0 : 1
+                               selected:_setting.speechIndex == EZTServerSpeechTypeSingal ? 0 : 1
                          viewController:self
                                 handler:handler];
         }

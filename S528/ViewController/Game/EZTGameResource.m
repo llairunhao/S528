@@ -16,10 +16,6 @@
         self.name = json[@"res_name"];
         self.gameId = json[@"play_id"];
         self.buyed = [json[@"buyed"] integerValue] == 1;
-        
-        if ([self.gameId isEqualToString:@"1000"]) {
-            NSLog(@"------>%@<-------",self.name);
-        }
     }
     return self;
 }

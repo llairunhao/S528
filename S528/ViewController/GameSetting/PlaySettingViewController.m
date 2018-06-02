@@ -8,12 +8,12 @@
 
 #import "PlaySettingViewController.h"
 #import "PlayRuleCell.h"
-#import <FMDB/FMDB.h>
+#import "EZTBeatColorDB.h"
+#import "EZTBeatColorRule.h"
 
 @interface PlaySettingViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) FMDatabase *db;
-@property (nonatomic, strong) NSMutableArray *results;
+@property (nonatomic, strong) NSArray<EZTBeatColorRule *> *rules;
 @property (nonatomic, strong) UITextField *textField;
 @end
 
@@ -32,9 +32,6 @@
 
 - (void)dealloc
 {
-    if (self.db) {
-        [self.db close];
-    }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -74,7 +71,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _results.count;
+    return _rules.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -82,7 +79,7 @@
     if (!cell) {
         cell = [[PlayRuleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.titleLabel.text = _results[indexPath.row][@"desc"];
+    cell.titleLabel.text = _rules[indexPath.row].desc;
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
     return cell;
@@ -90,8 +87,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.selectHandler) {
-        NSLog(@"%@",_results[indexPath.row]);
-        self.selectHandler([_results[indexPath.row][@"id"] integerValue]);
+        self.selectHandler(_rules[indexPath.row]);
     }
     [self.navigationController popViewControllerAnimated:true];
 }
@@ -102,38 +98,17 @@
 
 - (void)setSource:(NSArray<NSString *> *)source {
     
-    _results = [NSMutableArray arrayWithCapacity:source.count];
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:source.count];
     
-    NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-    NSString *sqlFilePath = [path stringByAppendingPathComponent:@"DaSe.sqlite"];
-    self.db = [FMDatabase databaseWithPath:sqlFilePath];
-    if ([self.db open]) {
-        NSLog(@"打开成功");
-        BOOL success = [self.db executeUpdate:@"DROP TABLE t_dase"];
-        if (success) {
-            NSLog(@"清空表成功");
-        }
-        success = [self.db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_dase (id INTEGER PRIMARY KEY AUTOINCREMENT, desc TEXT NOT NULL)"];
-        if (success) {
-            NSLog(@"创建表成功");
-        } else {
-            NSLog(@"创建表失败");
-        }
-    } else {
-        NSLog(@"打开失败");
-    }
-    
-    [self.db beginTransaction];
+  
     for (NSInteger i = 0; i < source.count; i++) {
-        BOOL success = [self.db executeUpdate:@"INSERT INTO t_dase (desc) VALUES (? );", source[i]];
-        if (!success) {
-            NSLog(@"插入失败");
-            break;
-        }
-        [_results addObject:@{@"id": @(i + 1), @"desc" : source[i]}];
+        EZTBeatColorRule *rule = [[EZTBeatColorRule alloc] init];
+        rule.index = i;
+        rule.ruleId = [[source[i] componentsSeparatedByString:@" "][0] integerValue];
+        rule.desc = source[i];
+        [array addObject:rule];
     }
-    NSLog(@"插入完成");
-    [self.db commit];
+    _rules = [array copy];
     
     [self.tableView reloadData];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -155,13 +130,7 @@
         //没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if (!position) {
             NSString *text = textField.text;
-            NSString *sqlString = [NSString stringWithFormat:@"SELECT id, desc FROM t_dase WHERE desc LIKE \"%%%@%%\"", text];
-            FMResultSet *result = [self.db executeQuery:sqlString];
-            self.results = [NSMutableArray array];
-            
-            while ([result next]) {
-                [self.results addObject:@{@"id": @([result intForColumn:@"id"]), @"desc" : [result stringForColumn:@"desc"]}];
-            }
+            self.rules = [[EZTBeatColorDB shareInstance] listOfBeatColorRulesByKey:text];
             self.tableView.contentOffset = CGPointZero;
             [self.tableView reloadData];
         }

@@ -65,7 +65,6 @@
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
-    NSLog(@"==========>%@", @(selectedIndex));
     _button1.selected = selectedIndex == 0;
     _button2.selected = selectedIndex == 1;
 }

@@ -14,6 +14,9 @@
 @property (nonatomic, strong) NSData *payload;
 
 
+@property (nonatomic, readonly) NSUInteger poi;
+@property (nonatomic, readonly) NSUInteger len;
+
 - (nonnull instancetype)initWithData: (nonnull NSData *)data;
 
 - (NSInteger)readIntValue: (NSError * *)error;

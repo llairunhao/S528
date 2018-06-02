@@ -8,7 +8,7 @@
 
 #import "GammingViewController.h"
 #import "EZTGameSetting.h"
-
+#import "EZTBeatColorRule.h"
 #import "UIViewController+Alert.h"
 
 #import "EZTTcpPacket.h"
@@ -67,9 +67,8 @@
                 if (!isSuccess) {
                     [self alertWithTitle:@"观看视频失败" message:[packet readStringValue:nil]];
                 } else {
-                    if (self.videoBtn.isSelected) {
-                        self.imageView.image = nil;
-                    }
+                    self.imageView.hidden = self.videoBtn.isSelected;
+
                     if (self.shouldBack) {
                         [self.navigationController popViewControllerAnimated:true];
                     }
@@ -173,14 +172,13 @@
     _tableView.rowHeight = UITableViewAutomaticDimension;
     _tableView.estimatedRowHeight = 50;
     
-    
     _videoBtn = [self lightGrayButtonWithTitle:@"关闭视频"];
     [_videoBtn setTitle:@"打开视频" forState:UIControlStateSelected];
     [_videoBtn addTarget:self action:@selector(videoControl:) forControlEvents:UIControlEventTouchUpInside];
     CGFloat btnW = 100;
     CGFloat btnH = 44;
     _videoBtn.frame = CGRectMake((CGRectGetWidth(rect) - btnW) / 2,
-                                 (_tableView.rowHeight - btnH) / 2,
+                                 (48 - btnH) / 2,
                                  btnW,
                                  btnH);
     
@@ -195,7 +193,7 @@
     NSString *identifier = indexPath.row == 0 ? @"video" : @"text";
     GammingCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[GammingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[GammingCell alloc] initWithReuseIdentifier:identifier];
         if (indexPath.row == 0) {
             [cell.contentView addSubview:_videoBtn];
         }
@@ -211,7 +209,7 @@
             break;
         case 2:
             cell.leftLabel.text = @"打骰：";
-            cell.rightLabel.text = _setting.beatColorRule;
+            cell.rightLabel.text = _setting.beatColorRule.desc;
             break;
         case 3:
             cell.leftLabel.text = @"人数：";

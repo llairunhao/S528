@@ -11,7 +11,7 @@
 #import "EZTDealCardRule.h"
 #import "EZTHuaSeSetting.h"
 
-@class EZTTcpPacket;
+@class EZTTcpPacket, EZTBeatColorRule;
 
 @interface EZTGameSetting : NSObject
 
@@ -48,7 +48,7 @@
 @property (nonatomic, readonly) NSString *playDescription;
 
 @property (nonatomic, copy) NSArray<NSString *>* beatColorRules;            //打色详情
-@property (nonatomic, readonly) NSString *beatColorRule;
+@property (nonatomic, readonly) EZTBeatColorRule *beatColorRule;
 
 @property (nonatomic, strong) NSMutableArray<EZTCardSetting *>* cardSettings;
 @property (nonatomic, assign) NSUInteger cardSettingIndex;

@@ -11,9 +11,6 @@
 @interface EZTTcpPacket ()
 
 @property (nonatomic, assign) NSInteger payloadPoi;
-
-
-
 @property (nonatomic, strong) NSMutableData *encodeData;
 
 @end
@@ -84,7 +81,7 @@
                      @(_payloadPoi),
                      @(_payloadPoi + offset),
                      @(_payload.length)];
-    NSLog(@"%@",msg);
+   // NSLog(@"%@",msg);
     return [NSError errorWithDomain:EZTPacketErrorDomain
                                code:EZTCodePacketDecodeOutOfRange
                            userInfo:@{NSLocalizedFailureReasonErrorKey : msg,
@@ -148,5 +145,13 @@
     return [data copy];
 }
 
+
+- (NSUInteger)poi {
+    return self.payloadPoi;
+}
+
+- (NSUInteger)len{
+    return self.payload.length;
+}
 
 @end

@@ -8,7 +8,9 @@
 
 #import "EZTBaseViewController.h"
 
-typedef void(^PlaySettingHandler)(NSInteger index);
+@class EZTBeatColorRule;
+
+typedef void(^PlaySettingHandler)(EZTBeatColorRule *rule);
 
 @interface PlaySettingViewController : EZTBaseViewController
 

@@ -31,9 +31,9 @@ typedef NS_ENUM(NSUInteger, EZTServerCameraSelect) {
     EZTServerCameraInternal             //内置摄像头
 };
 
-typedef NS_ENUM(NSUInteger, EZTServerSpeakType) {
-    EZTServerSpeakTypeSingal        =   0,                //单报
-    EZTServerSpeakTypeSerivel       =   1,               //连报
+typedef NS_ENUM(NSUInteger, EZTServerSpeechType) {
+    EZTServerSpeechTypeSingal        =   0,               //单报
+    EZTServerSpeechTypeSerivel       =   1,               //连报
     
 };
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3808191920C239F50091E8E5 /* EZTBeatColorDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 3808191820C239F50091E8E5 /* EZTBeatColorDB.m */; };
+		3808191C20C23D4B0091E8E5 /* EZTBeatColorRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3808191B20C23D4B0091E8E5 /* EZTBeatColorRule.m */; };
 		38A42D1D20A6A4510063F745 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A42D1C20A6A4510063F745 /* LoginViewController.m */; };
 		38A42D2620A6BA7E0063F745 /* EZTNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A42D2520A6BA7E0063F745 /* EZTNavigationViewController.m */; };
 		38A42D2A20A86D790063F745 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A42D2920A86D790063F745 /* SettingViewController.m */; };
@@ -21,7 +23,6 @@
 		38B51508209DD08200CB329A /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B51507209DD08200CB329A /* Config.m */; };
 		38B5150B209DD1B900CB329A /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B5150A209DD1B900CB329A /* Global.m */; };
 		38B5150F209DD87600CB329A /* UIViewController+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B5150E209DD87600CB329A /* UIViewController+Alert.m */; };
-		38B51512209DEA3700CB329A /* EZTTcpProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B51511209DEA3700CB329A /* EZTTcpProcessor.m */; };
 		38B51515209DF7A400CB329A /* EZTTcpPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B51514209DF7A400CB329A /* EZTTcpPacket.m */; };
 		38B5151F209EA86800CB329A /* HomepageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B5151D209EA86800CB329A /* HomepageViewController.m */; };
 		38B51522209EA87D00CB329A /* HomepageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B51521209EA87D00CB329A /* HomepageCell.m */; };
@@ -64,6 +65,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3808191720C239F50091E8E5 /* EZTBeatColorDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTBeatColorDB.h; sourceTree = "<group>"; };
+		3808191820C239F50091E8E5 /* EZTBeatColorDB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTBeatColorDB.m; sourceTree = "<group>"; };
+		3808191A20C23D4B0091E8E5 /* EZTBeatColorRule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTBeatColorRule.h; sourceTree = "<group>"; };
+		3808191B20C23D4B0091E8E5 /* EZTBeatColorRule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTBeatColorRule.m; sourceTree = "<group>"; };
 		38A42D1B20A6A4510063F745 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		38A42D1C20A6A4510063F745 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		38A42D2420A6BA7E0063F745 /* EZTNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTNavigationViewController.h; sourceTree = "<group>"; };
@@ -92,8 +97,6 @@
 		38B5150A209DD1B900CB329A /* Global.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Global.m; sourceTree = "<group>"; };
 		38B5150D209DD87600CB329A /* UIViewController+Alert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alert.h"; sourceTree = "<group>"; };
 		38B5150E209DD87600CB329A /* UIViewController+Alert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alert.m"; sourceTree = "<group>"; };
-		38B51510209DEA3700CB329A /* EZTTcpProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTTcpProcessor.h; sourceTree = "<group>"; };
-		38B51511209DEA3700CB329A /* EZTTcpProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTTcpProcessor.m; sourceTree = "<group>"; };
 		38B51513209DF7A400CB329A /* EZTTcpPacket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTTcpPacket.h; sourceTree = "<group>"; };
 		38B51514209DF7A400CB329A /* EZTTcpPacket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTTcpPacket.m; sourceTree = "<group>"; };
 		38B5151D209EA86800CB329A /* HomepageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageViewController.m; sourceTree = "<group>"; };
@@ -278,12 +281,12 @@
 			children = (
 				38B514FB209DC50300CB329A /* EZTTcpService.h */,
 				38B514FC209DC50300CB329A /* EZTTcpService.m */,
-				38B51510209DEA3700CB329A /* EZTTcpProcessor.h */,
-				38B51511209DEA3700CB329A /* EZTTcpProcessor.m */,
 				38B51513209DF7A400CB329A /* EZTTcpPacket.h */,
 				38B51514209DF7A400CB329A /* EZTTcpPacket.m */,
 				38B514FE209DCA1C00CB329A /* EZTNetService.h */,
 				38B514FF209DCA1C00CB329A /* EZTNetService.m */,
+				3808191720C239F50091E8E5 /* EZTBeatColorDB.h */,
+				3808191820C239F50091E8E5 /* EZTBeatColorDB.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -398,6 +401,8 @@
 				A501F5EC20A2A429000FC563 /* EZTHuaSeDetail.m */,
 				A501F5EE20A2A47F000FC563 /* EZTHuaSeSetting.h */,
 				A501F5EF20A2A47F000FC563 /* EZTHuaSeSetting.m */,
+				3808191A20C23D4B0091E8E5 /* EZTBeatColorRule.h */,
+				3808191B20C23D4B0091E8E5 /* EZTBeatColorRule.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -544,14 +549,15 @@
 				38B514FD209DC50300CB329A /* EZTTcpService.m in Sources */,
 				38B5150F209DD87600CB329A /* UIViewController+Alert.m in Sources */,
 				38D8B431209F2F2200F6AF2C /* GameSettingViewController.m in Sources */,
-				38B51512209DEA3700CB329A /* EZTTcpProcessor.m in Sources */,
 				38A42D2620A6BA7E0063F745 /* EZTNavigationViewController.m in Sources */,
 				38D8B41B209ED65500F6AF2C /* GameListViewController.m in Sources */,
 				A501F5E720A2A148000FC563 /* EZTDealCardRuleDetail.m in Sources */,
+				3808191920C239F50091E8E5 /* EZTBeatColorDB.m in Sources */,
 				38D8B421209EDAC400F6AF2C /* GameCategoryView.m in Sources */,
 				A501F62120A3271A000FC563 /* DealCardRuleHeaderView.m in Sources */,
 				38D8B427209EDBB500F6AF2C /* EZTGameCategory.m in Sources */,
 				38B5150B209DD1B900CB329A /* Global.m in Sources */,
+				3808191C20C23D4B0091E8E5 /* EZTBeatColorRule.m in Sources */,
 				A501F61B20A320D6000FC563 /* GameAlertTextController.m in Sources */,
 				38B514F9209DC2CD00CB329A /* EZTRootContainer.m in Sources */,
 				A501F60020A2D3E9000FC563 /* PlayRuleCell.m in Sources */,

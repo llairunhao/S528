@@ -19,6 +19,9 @@
 
 @interface EZTRootContainer ()
 @property (nonatomic, strong)  UITextView *logView;
+@property (nonatomic, strong) UIView *bgView;
+
+
 @end
 
 @implementation EZTRootContainer
@@ -43,13 +46,25 @@
     [self.view addSubview:nav.view];
     [nav didMoveToParentViewController:self];
     
+    
+    _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, AppStatusBarHeight, CGRectGetWidth(self.view.bounds), 200)];
+    _bgView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:_bgView];
+    _bgView.alpha = 0.5;
+    _bgView.userInteractionEnabled = false;
+    
     _logView = [[UITextView alloc] initWithFrame:CGRectMake(0, AppStatusBarHeight, CGRectGetWidth(self.view.bounds), 200)];
-    _logView.backgroundColor = [UIColor whiteColor];
-    _logView.textColor = [UIColor blackColor];
+    _logView.textColor = [UIColor whiteColor];
     _logView.font = [UIFont systemFontOfSize:14];
+    _logView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_logView];
-    _logView.alpha = 0.3;
     _logView.userInteractionEnabled = false;
+    _logView.alpha = 0.8;
+//    NSMutableString *str = [NSMutableString string];
+//    for (NSInteger i = 0 ; i < 100; i++) {
+//        [str appendFormat:@"%@\n",@"测试测试测试"];
+//    }
+//    _logView.text = str;
     [self addNotificationObserver];
 }
 
@@ -71,15 +86,26 @@
         NSString *log = noti.object;
         NSString *text = [NSString stringWithFormat:@"%@%@\n", self.logView.text,log];
         self.logView.text = text;
+        CGFloat pointY = self.logView.contentSize.height - 208;
+        pointY = MAX(pointY, 0);
+        self.logView.contentOffset = CGPointMake(0, pointY);
     });
 }
 
 - (void)didGetPacket: (NSNotification *)noti {
+    EZTTcpPacket *packet = noti.object;
+    if (packet.cmd == EZTAPIResponseCommandGetImage) {
+        return;
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
-        EZTTcpPacket *packet = noti.object;
-        NSString *log = [NSString stringWithFormat:@"收到一个完整数据包[len:%@, cmd:%@]", @(packet.payload.length + EZTTcpPacketHeaderLength + EZTTcpPacketTailLength), @(packet.cmd)];
-        NSString *text = [NSString stringWithFormat:@"%@%@\n", self.logView.text,log];
-        self.logView.text = text;
+        if (packet.cmd != EZTAPIResponseCommandGetImage) {
+            NSString *log = [NSString stringWithFormat:@"收到一个完整数据包[len:%@, cmd:%@]", @(packet.payload.length + EZTTcpPacketHeaderLength + EZTTcpPacketTailLength), @(packet.cmd)];
+            NSString *text = [NSString stringWithFormat:@"%@%@\n", self.logView.text,log];
+            self.logView.text = text;
+            CGFloat pointY = self.logView.contentSize.height - 208;
+            pointY = MAX(pointY, 0);
+            self.logView.contentOffset = CGPointMake(0, pointY);
+        }
     });
 }
 
@@ -87,6 +113,9 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *text = [NSString stringWithFormat:@"%@恢复连接\n", self.logView.text];
         self.logView.text = text;
+        CGFloat pointY = self.logView.contentSize.height - 208;
+        pointY = MAX(pointY, 0);
+        self.logView.contentOffset = CGPointMake(0, pointY);
     });
 }
 
@@ -94,6 +123,9 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *text = [NSString stringWithFormat:@"%@断开连接\n", self.logView.text];
         self.logView.text = text;
+        CGFloat pointY = self.logView.contentSize.height - 208;
+        pointY = MAX(pointY, 0);
+        self.logView.contentOffset = CGPointMake(0, pointY);
     });
 }
 

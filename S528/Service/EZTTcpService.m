@@ -129,7 +129,7 @@
     _remainLength = 0;
    
     EZTTcpPacket *packet = [[EZTTcpPacket alloc] initWithData:payload];
-    NSLog(@"收到一个完整的数据包[len:%@]-[cmd:%@]", @(payload.length), @(packet.cmd));
+  //  NSLog(@"收到一个完整的数据包[len:%@]-[cmd:%@]", @(payload.length), @(packet.cmd));
     [[NSNotificationCenter defaultCenter] postNotificationName:EZTGetPacketFromServer object:packet];
 }
 

@@ -72,7 +72,6 @@
         self.cameraSelect = [packet readIntValue:nil];
         self.rfSelect = [packet readIntValue:nil];
         
-        NSLog(@"%@--%@", @(packet.poi), @(packet.len));
 #pragma mark- 色点
         NSMutableArray *cardSettingTitles = [cardSetting[@"play_card_settings"] mutableCopy];
         self.systemCardSettingCount = cardSettingTitles.count;

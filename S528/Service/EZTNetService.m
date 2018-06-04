@@ -40,7 +40,6 @@ NSString * const EZTIPAddressNotFound = @"com.easiest.ipNotFound";
     }
     // Free memory
     freeifaddrs(interfaces);
-    IPAddress = address;
     return address;
 }
 
@@ -60,6 +59,24 @@ NSString * const EZTIPAddressNotFound = @"com.easiest.ipNotFound";
     return macIp;
 }
 
++ (NSString *)getWifiSSID {
+    NSString *ssid = @"Not Found";
+    NSString *macIp = @"Not Found";
+    
+    CFArrayRef myArray =CNCopySupportedInterfaces();
+    if (myArray != nil) {
+        CFDictionaryRef myDict =CNCopyCurrentNetworkInfo(CFArrayGetValueAtIndex(myArray,0));
+        if (myDict != nil) {
+            NSDictionary *dict = (NSDictionary*)CFBridgingRelease(myDict);
+            ssid = [dict valueForKey:@"SSID"];           //WiFi名称
+            macIp = [dict valueForKey:@"BSSID"];     //Mac地址
+        }
+    }
+    return ssid;
+}
+
+
+
 static NSString *IPAddress = EZTIPAddressNotFound;
 static void onNotifyCallback(CFNotificationCenterRef center,
                              void *observer,
@@ -73,8 +90,10 @@ static void onNotifyCallback(CFNotificationCenterRef center,
             if (![IPAddress isEqualToString:EZTIPAddressNotFound]) {
                 [[EZTTcpService shareInstance] connectIfNeed];
             }
-            NSLog(@"Wifi Change:%@", newIPAddress);
+            NSString *text = [NSString stringWithFormat:@"Wi-Fi网络变化：%@", [EZTNetService getWifiSSID]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:EZTDidSendPacketToServer object:text];
         }
+   
     }
 }
 

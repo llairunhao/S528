@@ -81,7 +81,7 @@
                      @(_payloadPoi),
                      @(_payloadPoi + offset),
                      @(_payload.length)];
-   // NSLog(@"%@",msg);
+    NSLog(@"%@",msg);
     return [NSError errorWithDomain:EZTPacketErrorDomain
                                code:EZTCodePacketDecodeOutOfRange
                            userInfo:@{NSLocalizedFailureReasonErrorKey : msg,

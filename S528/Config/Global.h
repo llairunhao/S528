@@ -11,6 +11,7 @@
 extern NSString * const EZTConnectToServer;
 extern NSString * const EZTDisconnectFromServer;
 extern NSString * const EZTGetPacketFromServer;
+extern NSString * const EZTDidSendPacketToServer;
 
 extern NSString * const EZTTcpErrorDomain;
 extern NSString * const EZTPacketErrorDomain;

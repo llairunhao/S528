@@ -11,6 +11,7 @@
 NSString * const EZTConnectToServer = @"com.easiest.connectToServer";
 NSString * const EZTDisconnectFromServer = @"com.easiest.disconnectFromServer";
 NSString * const EZTGetPacketFromServer = @"com.easiest.getPacket";
+NSString * const EZTDidSendPacketToServer = @"com.easiest.sendPacket";
 
 NSString * const EZTTcpErrorDomain = @"com.easiest.tcpError";
 NSString * const EZTPacketErrorDomain = @"com.easiest.packetError";

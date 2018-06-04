@@ -19,7 +19,8 @@
 @property (nonnull, nonatomic, strong) NSMutableData *recvData;
 @property (nonatomic, assign) NSUInteger remainLength;
 
-//@property (nonnull, nonatomic, strong) EZTTcpProcessor *processor;
+@property (nonatomic, strong) NSMutableDictionary<NSNumber *, NSString *> *logs;
+@property (nonatomic, assign) NSInteger tag;
 @end
 
 @implementation EZTTcpService
@@ -38,7 +39,7 @@
     if (self) {
         dispatch_queue_t queue = dispatch_queue_create("com.easiest.recvQueue", DISPATCH_QUEUE_SERIAL);
         self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:queue];
-        //self.processor = [[EZTTcpProcessor alloc] init];
+        self.logs = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -89,10 +90,16 @@
 }
 
 - (BOOL)sendData: (NSData *)data {
+    NSInteger cmd = [EZTTcpPacket dataToUInt:[data subdataWithRange:NSMakeRange(4, 4)]];
+    NSString *logString = [NSString stringWithFormat:@"发送一个完整的数据包[len:%@]-[cmd:%@]", @(data.length), @(cmd)];
+    self.logs[@(self.tag)] = logString;
+    self.tag += 1;
+   
     if (self.socket.isDisconnected) {
+        NSLog(@"未连接服务端");
         return false;
     }
-    [self.socket writeData:data withTimeout:-1 tag:0];
+    [self.socket writeData:data withTimeout:-1 tag:self.tag];
     return true;
 }
 
@@ -106,9 +113,6 @@
             return;
         }
         _remainLength = [EZTTcpPacket dataToUInt:self.recvData];
-     //   NSLog(@"完整的包长度：%@", @(_remainLength));
-    //    NSString *msg = [NSString stringWithFormat:@"错误的包长度%@", @(_remainLength)];
-   //     NSAssert(_remainLength > EZTTcpPacketHeaderLength + EZTTcpPacketTailLength, msg);
     }
     if (_remainLength > _recvData.length) {
         return;
@@ -118,20 +122,24 @@
         payload = [_recvData subdataWithRange:NSMakeRange(0, _remainLength)];
         NSData *remain = [_recvData subdataWithRange:NSMakeRange(_remainLength, _recvData.length - _remainLength)];
         _recvData = [remain mutableCopy];
-      //  NSLog(@"剩余包长度：%@", @(remain.length));
     }else {
         payload = [_recvData copy];
         _recvData = [NSMutableData data];
     }
     _remainLength = 0;
-   // NSLog(@"收到一个完整的数据包:%@", @(payload.length));
+   
     EZTTcpPacket *packet = [[EZTTcpPacket alloc] initWithData:payload];
+    NSLog(@"收到一个完整的数据包[len:%@]-[cmd:%@]", @(payload.length), @(packet.cmd));
     [[NSNotificationCenter defaultCenter] postNotificationName:EZTGetPacketFromServer object:packet];
 }
 
-//- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-//    NSLog(@"didWriteDataWithTag");
-//}
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:EZTDidSendPacketToServer object:self.logs[@(tag)]];
+        NSLog(@"%@", self.logs[@(tag)]);
+        self.logs[@(tag)] = nil;
+    });
+}
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     
@@ -141,7 +149,7 @@
 
         [sock readDataWithTimeout:-1 tag:0];
         [[NSNotificationCenter defaultCenter] postNotificationName:EZTConnectToServer object:nil];
-        
+        NSLog(@"连接到服务端");
     }else {
         NSLog(@"连接到错误的服务端了");
         [sock disconnect];
@@ -150,6 +158,7 @@
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+    NSLog(@"从服务端断开");
     _remainLength = 0;
     _recvData = [NSMutableData data];
     [[NSNotificationCenter defaultCenter] postNotificationName:EZTDisconnectFromServer object:nil];

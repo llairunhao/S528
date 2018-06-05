@@ -126,7 +126,7 @@ typedef NS_ENUM(NSUInteger, SettingType) {
     NSData *data = [_setting encode:account];
     if (![[EZTTcpService shareInstance] sendData:data]) {
         [self hideHUD];
-        [self toast:@"请先连接服务端"];
+        [self.navigationController popViewControllerAnimated:true];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
     }
 }

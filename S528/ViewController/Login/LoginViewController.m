@@ -165,6 +165,7 @@
             }else {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [[NSUserDefaults standardUserDefaults] setObject:self.accountTF.text forKey:@"account"];
+                    [[NSUserDefaults standardUserDefaults] setObject:self.passwordTF.text forKey:@"password"];
                     [self loginSuccess];
                 });
             }

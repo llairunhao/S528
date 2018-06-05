@@ -24,7 +24,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSString *result;
 @property (nonatomic, strong) UIButton *videoBtn;
-
+@property (nonatomic, assign) BOOL playing;
 
 @property (nonatomic, assign) BOOL shouldBack;
 @end
@@ -39,6 +39,7 @@
                                              selector:@selector(didGetPacket:)
                                                  name:EZTGetPacketFromServer
                                                object:nil];
+    self.playing = true;
     [self refreshData];
 }
 
@@ -51,7 +52,8 @@
             [self toast:@"请先连接服务端"];
         }
     }else {
-        [self startOrStopRecving:false];
+    
+        [self startOrStopRecving:!self.playing];
     }
     
 }
@@ -67,8 +69,9 @@
                 if (!isSuccess) {
                     [self alertWithTitle:@"观看视频失败" message:[packet readStringValue:nil]];
                 } else {
-                    self.imageView.hidden = self.videoBtn.isSelected;
-
+                    self.videoBtn.selected = !self.playing;
+                    self.imageView.hidden = !self.playing;
+                    
                     if (self.shouldBack) {
                         [self.navigationController popViewControllerAnimated:true];
                     }
@@ -118,6 +121,11 @@
             });
         }
             break;
+        case EZTAPIResponseCommandLogin:
+        {
+            [self startOrStopRecving:false];
+        }
+            break;
         default:
             break;
     }
@@ -146,6 +154,10 @@
 }
 
 - (void)backToPrevController {
+    if (![EZTTcpService shareInstance].isConnected) {
+        [super backToPrevController];
+        return;
+    }
     self.shouldBack = true;
     [self startOrStopRecving:true];
 }
@@ -174,6 +186,7 @@
     
     _videoBtn = [self lightGrayButtonWithTitle:@"关闭视频"];
     [_videoBtn setTitle:@"打开视频" forState:UIControlStateSelected];
+    _videoBtn.selected = true;
     [_videoBtn addTarget:self action:@selector(videoControl:) forControlEvents:UIControlEventTouchUpInside];
     CGFloat btnW = 100;
     CGFloat btnH = 44;
@@ -234,18 +247,20 @@
 
 
 - (void)videoControl: (UIButton *)button {
-    button.selected = !button.selected;
+    self.playing = button.selected;
     
     [self showLoadingHUD];
     EZTTcpPacket *packet = [[EZTTcpPacket alloc] init];
     [packet writeIntValue:EZTAPIRequestCommandRequestToGetVideo];
     [packet writeStringValue:[[NSUserDefaults standardUserDefaults] stringForKey:@"account"]];
-    [packet writeIntValue:button.isSelected ? 1 : 0];
+    [packet writeIntValue:!self.playing ? 1 : 0];
     if (![[EZTTcpService shareInstance] sendData:[packet encode]]){
         [self hideHUD];
         [self toast:@"请先连接服务端"];
     }
 }
+
+
 
 
 @end

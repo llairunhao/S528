@@ -91,15 +91,15 @@
 
 - (BOOL)sendData: (NSData *)data {
     NSInteger cmd = [EZTTcpPacket dataToUInt:[data subdataWithRange:NSMakeRange(4, 4)]];
-    NSString *logString = [NSString stringWithFormat:@"发送一个完整的数据包[len:%@]-[cmd:%@]", @(data.length), @(cmd)];
+    NSString *logString = [NSString stringWithFormat:@"发送一个完整的数据包[len:%@, cmd:%@]", @(data.length), @(cmd)];
     self.logs[@(self.tag)] = logString;
-    self.tag += 1;
-   
+
     if (self.socket.isDisconnected) {
         NSLog(@"未连接服务端");
         return false;
     }
     [self.socket writeData:data withTimeout:-1 tag:self.tag];
+    self.tag += 1;
     return true;
 }
 
@@ -136,7 +136,7 @@
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:EZTDidSendPacketToServer object:self.logs[@(tag)]];
-        NSLog(@"%@", self.logs[@(tag)]);
+   //     NSLog(@"%@", self.logs[@(tag)]);
         self.logs[@(tag)] = nil;
     });
 }
@@ -167,5 +167,6 @@
 - (BOOL)isConnected {
     return self.socket.isConnected;
 }
+
 
 @end

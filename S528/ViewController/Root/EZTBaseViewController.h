@@ -14,4 +14,7 @@
 
 - (UILabel *)labelWithText: (NSString *)text;
 - (UIButton *)lightGrayButtonWithTitle: (NSString *)title;
+
+- (void)connectToServer: (NSNotification *)noti;
+- (void)disconnectFromServer: (NSNotification *)noti;
 @end

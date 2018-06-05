@@ -13,6 +13,8 @@
 #import "EZTTcpService.h"
 
 NSString * const EZTIPAddressNotFound = @"com.easiest.ipNotFound";
+NSString * const EZTMacAddressNotFound = @"com.easiest.macNotFound";
+
 
 @implementation EZTNetService
 
@@ -45,7 +47,7 @@ NSString * const EZTIPAddressNotFound = @"com.easiest.ipNotFound";
 
 + (NSString *)getMacAddress {
     NSString *ssid = @"Not Found";
-    NSString *macIp = @"Not Found";
+    NSString *macIp = EZTMacAddressNotFound;
     
     CFArrayRef myArray =CNCopySupportedInterfaces();
     if (myArray != nil) {
@@ -77,17 +79,17 @@ NSString * const EZTIPAddressNotFound = @"com.easiest.ipNotFound";
 
 
 
-static NSString *IPAddress = EZTIPAddressNotFound;
+static NSString *MacAddress = EZTMacAddressNotFound;
 static void onNotifyCallback(CFNotificationCenterRef center,
                              void *observer,
                              CFStringRef name,
                              const void *object,
                              CFDictionaryRef userInfo) {
     if (CFStringCompare(name, CFSTR("com.apple.system.config.network_change"), kCFCompareCaseInsensitive) == kCFCompareEqualTo) {
-        NSString *newIPAddress = [EZTNetService getIPAddress];
-        if (![newIPAddress isEqualToString:IPAddress]) {
-            IPAddress = newIPAddress;
-            if (![IPAddress isEqualToString:EZTIPAddressNotFound]) {
+        NSString *newMacAddress = [EZTNetService getMacAddress];
+        if (![newMacAddress isEqualToString:MacAddress]) {
+            MacAddress = newMacAddress;
+            if (![MacAddress isEqualToString:EZTMacAddressNotFound]) {
                 [[EZTTcpService shareInstance] connectIfNeed];
             }
             NSString *text = [NSString stringWithFormat:@"Wi-Fi网络变化：%@", [EZTNetService getWifiSSID]];

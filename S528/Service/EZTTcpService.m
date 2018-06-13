@@ -47,6 +47,7 @@
 - (NSError *)connectIfNeed {
     NSString *ip = [EZTNetService getIPAddress];
     if ([ip isEqualToString:EZTIPAddressNotFound]) {
+        NSLog(@"ip 地址为空");
         return nil;
     }
     ip = [self localServerHost:ip];
@@ -91,12 +92,14 @@
 
 - (BOOL)sendData: (NSData *)data {
     NSInteger cmd = [EZTTcpPacket dataToUInt:[data subdataWithRange:NSMakeRange(4, 4)]];
-    NSString *logString = [NSString stringWithFormat:@"发送一个完整的数据包[len:%@, cmd:%@]", @(data.length), @(cmd)];
+    NSString *logString = [NSString stringWithFormat:@"发送数据包[len:%@, cmd:%@]", @(data.length), @(cmd)];
     self.logs[@(self.tag)] = logString;
 
     if (self.socket.isDisconnected) {
         NSLog(@"未连接服务端");
-        return false;
+        if (![self connectIfNeed]) {
+            return false;
+        }
     }
     [self.socket writeData:data withTimeout:-1 tag:self.tag];
     self.tag += 1;
@@ -107,12 +110,22 @@
    
     [self.recvData appendData:data];
     [sock readDataWithTimeout:-1 tag:0];
-   
+    [self handleData];
+  
+}
+
+- (void)handleData {
     if (_remainLength == 0) {
-        if (self.recvData.length < 4) {
+        if (self.recvData.length < 8) {
             return;
         }
         _remainLength = [EZTTcpPacket dataToUInt:self.recvData];
+//        NSInteger cmd = [EZTTcpPacket dataToUInt:[self.recvData subdataWithRange:NSMakeRange(4, 4)]];
+//        if (cmd != EZTAPIResponseCommandGetImageResult && cmd != EZTAPIResponseCommandGetImage) {
+//            NSString *log = [NSString stringWithFormat:@"准备数据包[len: %@, cmd: %@]", @(_remainLength), @(cmd)];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:EZTDidSendPacketToServer object:log];
+//        }
+        
     }
     if (_remainLength > _recvData.length) {
         return;
@@ -122,20 +135,25 @@
         payload = [_recvData subdataWithRange:NSMakeRange(0, _remainLength)];
         NSData *remain = [_recvData subdataWithRange:NSMakeRange(_remainLength, _recvData.length - _remainLength)];
         _recvData = [remain mutableCopy];
+        
     }else {
         payload = [_recvData copy];
         _recvData = [NSMutableData data];
     }
     _remainLength = 0;
-   
+    
     EZTTcpPacket *packet = [[EZTTcpPacket alloc] initWithData:payload];
-  //  NSLog(@"收到一个完整的数据包[len:%@]-[cmd:%@]", @(payload.length), @(packet.cmd));
+    //  NSLog(@"收到一个完整的数据包[len:%@]-[cmd:%@]", @(payload.length), @(packet.cmd));
     [[NSNotificationCenter defaultCenter] postNotificationName:EZTGetPacketFromServer object:packet];
+    
+    if (_recvData.length > 0) {
+        [self handleData];
+    }
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:EZTDidSendPacketToServer object:self.logs[@(tag)]];
+     //   [[NSNotificationCenter defaultCenter] postNotificationName:EZTDidSendPacketToServer object:self.logs[@(tag)]];
    //     NSLog(@"%@", self.logs[@(tag)]);
         self.logs[@(tag)] = nil;
     });

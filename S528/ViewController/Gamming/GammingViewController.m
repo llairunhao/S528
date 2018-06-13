@@ -52,7 +52,6 @@
             [self toast:@"请先连接服务端"];
         }
     }else {
-    
         [self startOrStopRecving:!self.playing];
     }
     
@@ -90,7 +89,7 @@
             break;
         case EZTAPIResponseCommandRetry:
         {
-            [self startOrStopRecving:false];
+            [self startOrStopRecving:!self.playing];
         }
             break;
         case EZTAPIResponseCommandGetImageResult:
@@ -103,7 +102,7 @@
             break;
         case EZTAPIResponseCommandTryTimeout:
         {
-            [self startOrStopRecving:true];
+            //[self startOrStopRecving:true];
             dispatch_async(dispatch_get_main_queue(), ^{
                 AlertTextViewController *controller = [[AlertTextViewController alloc] init];
                 [controller alertWithTitle:@"试机时间结束"
@@ -154,12 +153,8 @@
 }
 
 - (void)backToPrevController {
-    if (![EZTTcpService shareInstance].isConnected) {
-        [super backToPrevController];
-        return;
-    }
-    self.shouldBack = true;
     [self startOrStopRecving:true];
+    [super backToPrevController];
 }
 
 - (void)setupSubviews {

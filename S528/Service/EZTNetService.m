@@ -87,13 +87,13 @@ static void onNotifyCallback(CFNotificationCenterRef center,
                              CFDictionaryRef userInfo) {
     if (CFStringCompare(name, CFSTR("com.apple.system.config.network_change"), kCFCompareCaseInsensitive) == kCFCompareEqualTo) {
         NSString *newMacAddress = [EZTNetService getMacAddress];
-        if (![newMacAddress isEqualToString:MacAddress]) {
+        if (![newMacAddress isEqualToString:MacAddress] && ![[EZTNetService getIPAddress] isEqualToString:EZTIPAddressNotFound]) {
             MacAddress = newMacAddress;
-            if (![MacAddress isEqualToString:EZTMacAddressNotFound]) {
+            if (![newMacAddress isEqualToString:EZTMacAddressNotFound]) {
                 [[EZTTcpService shareInstance] connectIfNeed];
             }
-            NSString *text = [NSString stringWithFormat:@"Wi-Fi网络变化：%@", [EZTNetService getWifiSSID]];
-            [[NSNotificationCenter defaultCenter] postNotificationName:EZTDidSendPacketToServer object:text];
+//            NSString *text = [NSString stringWithFormat:@"Wi-Fi网络变化：%@\nMAC：%@", [EZTNetService getWifiSSID], MacAddress];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:EZTDidSendPacketToServer object:text];
         }
    
     }

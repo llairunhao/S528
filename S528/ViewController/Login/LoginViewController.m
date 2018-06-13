@@ -197,6 +197,8 @@
 }
 
 - (void)loginSuccess {
+    [[NSNotificationCenter defaultCenter] postNotificationName:EZTUserDidLogin object:nil];
+    
     [self.alertController hide];
     __unsafe_unretained typeof(self) unsafeSelf = self;
     AlertHandler confrim = ^{

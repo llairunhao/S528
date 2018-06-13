@@ -11,7 +11,7 @@
 const uint16_t EZTServerPort = 3358;
 
 const NSInteger EZTTcpPacketHeaderLength = 8;
-const NSInteger EZTTcpPacketTailLength = 200;
+const NSInteger EZTTcpPacketTailLength = 240;
 
 const NSUInteger EZTMinNumberOfPlyaers = 2;
 const NSUInteger EZTMaxNumberOfPlyaers = 26;

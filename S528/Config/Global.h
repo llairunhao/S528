@@ -16,6 +16,8 @@ extern NSString * const EZTDidSendPacketToServer;
 extern NSString * const EZTTcpErrorDomain;
 extern NSString * const EZTPacketErrorDomain;
 
+extern NSString * const EZTUserDidLogin;
+
 
 typedef NS_ENUM(NSUInteger, EZTServerSoundMode) {
     EZTServerSoundModeSpeaker,      //外放

@@ -202,7 +202,7 @@
     }
     GameSettingViewController *controller = [[GameSettingViewController alloc] init];
     controller.playId = [resource.gameId integerValue];
-    controller.retry = false;
+    controller.retry = true;
     [self.navigationController pushViewController:controller animated:true];
 }
 

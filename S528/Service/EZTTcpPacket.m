@@ -7,6 +7,7 @@
 //
 
 #import "EZTTcpPacket.h"
+#import "Config.h"
 
 @interface EZTTcpPacket ()
 
@@ -22,7 +23,7 @@
     if (self) {
         NSData *cmdData = [data subdataWithRange:NSMakeRange(4, 8)];
         self.cmd = [EZTTcpPacket dataToUInt:cmdData];
-        self.payload = [data subdataWithRange:NSMakeRange(8, data.length - 248)];
+        self.payload = [data subdataWithRange:NSMakeRange(EZTTcpPacketHeaderLength, data.length - EZTTcpPacketTailLength - EZTTcpPacketHeaderLength)];
     }
     return self;
 }

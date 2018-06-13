@@ -16,5 +16,5 @@ NSString * const EZTDidSendPacketToServer = @"com.easiest.sendPacket";
 NSString * const EZTTcpErrorDomain = @"com.easiest.tcpError";
 NSString * const EZTPacketErrorDomain = @"com.easiest.packetError";
 
-
+NSString * const EZTUserDidLogin = @"com.easiest.userDidLogin";
 

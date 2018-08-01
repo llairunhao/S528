@@ -96,14 +96,14 @@
 
 - (void)connectToServer: (NSNotification *)noti {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self toast:@"恢复连接"];
+        [self toast:NSLocalizedString(@"ReconnectToService", @"恢复连接")];
     });
 }
 
 - (void)disconnectFromServer: (NSNotification *)noti {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self hideHUD];
-        [self toast:@"断开连接"];
+        [self toast:NSLocalizedString(@"DisconnectFromService", @"与服务连接已断开")];
     });
 }
 

@@ -43,21 +43,6 @@
     nav.view.frame = self.view.bounds;
     [self.view addSubview:nav.view];
     [nav didMoveToParentViewController:self];
-    
-//    
-//    _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, AppStatusBarHeight, CGRectGetWidth(self.view.bounds), 200)];
-//    _bgView.backgroundColor = [UIColor blackColor];
-//    [self.view addSubview:_bgView];
-//    _bgView.alpha = 0.5;
-//    _bgView.userInteractionEnabled = false;
-//
-//    _logView = [[UITextView alloc] initWithFrame:CGRectMake(0, AppStatusBarHeight, CGRectGetWidth(self.view.bounds), 200)];
-//    _logView.textColor = [UIColor whiteColor];
-//    _logView.font = [UIFont systemFontOfSize:14];
-//    _logView.backgroundColor = [UIColor clearColor];
-//    [self.view addSubview:_logView];
-//    _logView.userInteractionEnabled = false;
-//    _logView.alpha = 0.8;
 
     [self addNotificationObserver];
 }
@@ -69,23 +54,12 @@
 
 - (void)addNotificationObserver  {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectToServer:) name:EZTConnectToServer object:nil];
- //   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disconnectFromServer:) name:EZTDisconnectFromServer object:nil];
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSendPacket:) name:EZTDidSendPacketToServer object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetPacket:) name:EZTGetPacketFromServer object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogin:) name:EZTUserDidLogin object:nil];
 }
 
 
-//- (void)didSendPacket: (NSNotification *)noti {
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        NSString *log = noti.object;
-//        NSString *text = [NSString stringWithFormat:@"%@%@\n", self.logView.text,log];
-//        self.logView.text = text;
-//        CGFloat pointY = self.logView.contentSize.height - 208;
-//        pointY = MAX(pointY, 0);
-//        self.logView.contentOffset = CGPointMake(0, pointY);
-//    });
-//}
+
 
 - (void)didGetPacket: (NSNotification *)noti {
     EZTTcpPacket *packet = noti.object;
@@ -99,16 +73,6 @@
         [packet writeStringValue:[[NSUserDefaults standardUserDefaults] stringForKey:@"password"]];
         [[EZTTcpService shareInstance] sendData:[packet encode]];
     }
-
-    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        NSString *log = [NSString stringWithFormat:@"收到数据包[len:%@, cmd:%@]", @(packet.payload.length + EZTTcpPacketHeaderLength + EZTTcpPacketTailLength), @(packet.cmd)];
-//        NSString *text = [NSString stringWithFormat:@"%@%@\n", self.logView.text,log];
-//        self.logView.text = text;
-//        CGFloat pointY = self.logView.contentSize.height - 208;
-//        pointY = MAX(pointY, 0);
-//        self.logView.contentOffset = CGPointMake(0, pointY);
-//    });
 }
 
 - (void)connectToServer: (NSNotification *)noti {
@@ -118,25 +82,8 @@
         [packet writeStringValue:[[NSUserDefaults standardUserDefaults] stringForKey:@"account"]];
         [[EZTTcpService shareInstance] sendData:[packet encode]];
     }
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        NSString *text = [NSString stringWithFormat:@"%@恢复连接\n", self.logView.text];
-//        self.logView.text = text;
-//        CGFloat pointY = self.logView.contentSize.height - 208;
-//        pointY = MAX(pointY, 0);
-//        self.logView.contentOffset = CGPointMake(0, pointY);
-//
-//    });
 }
 
-//- (void)disconnectFromServer: (NSNotification *)noti {
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        NSString *text = [NSString stringWithFormat:@"%@断开连接\n", self.logView.text];
-//        self.logView.text = text;
-//        CGFloat pointY = self.logView.contentSize.height - 208;
-//        pointY = MAX(pointY, 0);
-//        self.logView.contentOffset = CGPointMake(0, pointY);
-//    });
-//}
 
 - (void)userDidLogin: (NSNotificationCenter *)noti {
     self.login = true;

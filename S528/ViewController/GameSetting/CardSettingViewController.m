@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"骰子设置";
+    self.title = NSLocalizedString(@"Setting", @"设置");
     
     _cardSetting = [_setting.cardSetting copy];
     _huaSeSetting = [_setting.huaSeSetting copy];
@@ -38,7 +38,8 @@
     CGFloat width = CGRectGetWidth(self.view.bounds);
     CGFloat height = CGRectGetHeight(self.view.bounds);
     
-    UILabel *label = label = [self labelWithText:@"[选择类型]"];
+    UILabel *label = label = [self labelWithText:[NSString stringWithFormat:@"[%@]",
+                                                  NSLocalizedString(@"SelectType", @"选择类型")]];
     [label sizeToFit];
     CGRect labelRect = label.frame;
     labelRect.origin.x = 6;
@@ -46,7 +47,7 @@
     label.frame = labelRect;
     [self.view addSubview:label];
 
-    _seDianBtn = [self radioButtonWithTitle:@"色点设置" selected:true];
+    _seDianBtn = [self radioButtonWithTitle:NSLocalizedString(@"CardSetting", @"色点设置") selected:true];
     [_seDianBtn sizeToFit];
     CGRect btnRect = _seDianBtn.frame;
     btnRect.origin.x = CGRectGetMaxX(labelRect);
@@ -55,13 +56,17 @@
     _seDianBtn.frame = btnRect;
     [self.view addSubview:_seDianBtn];
     
-    _huaSeBtn = [self radioButtonWithTitle:@"花色设置" selected:false];
+    _huaSeBtn = [self radioButtonWithTitle:NSLocalizedString(@"HuaSeSetting", @"花色设置") selected:false];
     btnRect.origin.x = CGRectGetMaxX(btnRect) + 6;
     _huaSeBtn.frame = btnRect;
     [self.view addSubview:_huaSeBtn];
     
-    label = [self labelWithText:@"[自动选择]"];
+    label = [self labelWithText:[NSString stringWithFormat:@"[%@]",
+                                 NSLocalizedString(@"AutoSelect", @"自动选择")]];
+    label.numberOfLines = 0;
     labelRect.origin.y = CGRectGetMaxY(labelRect) + 6;
+  //  CGSize size = [label sizeThatFits:CGSizeZero];
+//  labelRect.size.width = size.width;
     labelRect.size.height = 44;
     label.frame = labelRect;
     [self.view addSubview:label];
@@ -75,11 +80,11 @@
     CGFloat btnH = 44.f;
     btnRect = CGRectMake(6, height - AppBottomPad - btnH, btnW, btnH);
 
-    _deleteBtn = [self lightGrayButtonWithTitle:@"删除"];
+    _deleteBtn = [self lightGrayButtonWithTitle:NSLocalizedString(@"Remove", @"删除")];
     _deleteBtn.frame = btnRect;
     [self.view addSubview:_deleteBtn];
     
-    _backBtn = [self lightGrayButtonWithTitle:@"返回"];
+    _backBtn = [self lightGrayButtonWithTitle:NSLocalizedString(@"Back", @"返回")];
     btnRect.origin.x = width - 6 - btnW;
     _backBtn.frame = btnRect;
     [self.view addSubview:_backBtn];

@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"打色选择";
+    self.title = NSLocalizedString(@"BeatColorSelect", @"打色选择");
     [self setupSubviews];
 }
 

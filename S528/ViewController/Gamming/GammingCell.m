@@ -42,7 +42,7 @@
         
         NSMutableArray *constraints = [NSMutableArray arrayWithCapacity:20];
     
-        NSArray *formats = @[@"H:|-6-[leftLabel(width)]-2-[rightLabel]-8-|",
+        NSArray *formats = @[@"H:|-6-[leftLabel]-2-[rightLabel]-8-|",
                              @"V:|-12-[leftLabel(24)]"];
         for (NSString *format in formats) {
             NSArray *array = [NSLayoutConstraint constraintsWithVisualFormat:format options:NSLayoutFormatDirectionLeftToRight metrics:metrics views:views];

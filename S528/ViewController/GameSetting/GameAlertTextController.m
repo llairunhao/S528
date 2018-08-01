@@ -28,14 +28,14 @@
     }];
     
     __unsafe_unretained typeof(self) unsafeSelf = self;
-    _defaultAction = [UIAlertAction actionWithTitle:@"确定"
+    _defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", @"确定")
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
                                                 [unsafeSelf confirmInputText:unsafeSelf.alertInputText];
                                             }];
     _defaultAction.enabled = false;
     
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消"
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"取消")
                                                            style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction * action) {
                                                               [unsafeSelf cancelInput];

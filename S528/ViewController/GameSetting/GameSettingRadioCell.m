@@ -22,11 +22,12 @@
         _leftLabel = [[UILabel alloc] init];
         _leftLabel.textColor = [UIColor whiteColor];
         _leftLabel.textAlignment = NSTextAlignmentCenter;
-        _leftLabel.text = @"[牌副数]";
+        _leftLabel.numberOfLines = 0;
+        _leftLabel.text = [NSString stringWithFormat:@"[%@]", NSLocalizedString(@"NumberOfCard", @"牌副数")];
         [self.contentView addSubview:_leftLabel];
         
         _button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_button1 setTitle:@"一副" forState:UIControlStateNormal];
+        [_button1 setTitle:NSLocalizedString(@"ADeckOfCards", @"一副") forState:UIControlStateNormal];
         [_button1 setImage:[UIImage imageNamed:@"radiobox_no"] forState:UIControlStateNormal];
         [_button1 setImage:[UIImage imageNamed:@"radiobox_yes"] forState:UIControlStateSelected];
         [_button1 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -34,7 +35,7 @@
         
         _button2 = [UIButton buttonWithType:UIButtonTypeCustom];
         _button2.tag = 1;
-        [_button2 setTitle:@"二副" forState:UIControlStateNormal];
+        [_button2 setTitle:NSLocalizedString(@"TwoDeckOfCards", @"二副") forState:UIControlStateNormal];
         [_button2 setImage:[UIImage imageNamed:@"radiobox_no"] forState:UIControlStateNormal];
         [_button2 setImage:[UIImage imageNamed:@"radiobox_yes"] forState:UIControlStateSelected];
         [_button2 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "EZTRootContainer.h"
 #import "EZTTcpService.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()
 
@@ -24,7 +25,17 @@
     self.window.rootViewController = rootContainer;
     [self.window makeKeyAndVisible];
    // [self redirectNSLogToDocumentFolder];
+    
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setActive:YES error:nil];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    NSError *error;
+    [[AVAudioSession sharedInstance] setActive:YES error:&error];
+    //注，ios9上不加这一句会无效
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+
     [NSThread sleepForTimeInterval:2];
+    
     return YES;
 }
 

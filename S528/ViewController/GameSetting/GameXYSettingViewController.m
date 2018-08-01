@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"XY设置";
+    self.title = NSLocalizedString(@"XYSetting", @"XY设置");
     [self setupSubviews];
 }
 
@@ -33,7 +33,7 @@
     [tapView addGestureRecognizer:ges];
     
     UILabel *xLabel = [[UILabel alloc] init];
-    xLabel.text = @"X的值:";
+    xLabel.text = [NSString stringWithFormat:@"%@：", NSLocalizedString(@"XValue", @"X的值")];
     xLabel.textColor = [UIColor whiteColor];
     CGSize size = [xLabel sizeThatFits:CGSizeZero];
     xLabel.frame = CGRectMake(6, AppTopPad + 6, size.width, 44);
@@ -49,7 +49,7 @@
     _xTextField = xTextField;
     
     UILabel *yLabel = [[UILabel alloc] init];
-    yLabel.text = @"Y的值:";
+    yLabel.text = [NSString stringWithFormat:@"%@：", NSLocalizedString(@"YValue", @"Y的值")];
     yLabel.frame = CGRectMake(CGRectGetMinX(xLabel.frame), CGRectGetMaxY(xLabel.frame) + 12, size.width, CGRectGetHeight(xLabel.frame));
     yLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:yLabel];
@@ -63,8 +63,8 @@
     _yTextField = yTextField;
     
     
-    UIButton *confirmButton = [self lightGrayButtonWithTitle:@"确定"];
-    UIButton *backButton = [self lightGrayButtonWithTitle:@"返回"];
+    UIButton *confirmButton = [self lightGrayButtonWithTitle:NSLocalizedString(@"Confirm", @"确定")];
+    UIButton *backButton = [self lightGrayButtonWithTitle:NSLocalizedString(@"Back", @"返回")];
     
     [backButton addTarget:self action:@selector(backToPrevController) forControlEvents:UIControlEventTouchUpInside];
     [confirmButton addTarget:self action:@selector(confirmButtonClick:) forControlEvents:UIControlEventTouchUpInside];

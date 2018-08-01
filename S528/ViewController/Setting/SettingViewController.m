@@ -8,7 +8,9 @@
 
 #import "SettingViewController.h"
 #import "GameSettingCell.h"
+#import "SettingControlPairCell.h"
 
+#import "UIViewController+Alert.h"
 #import "UIViewController+Alert.h"
 
 #import "EZTSetting.h"
@@ -23,6 +25,7 @@ typedef NS_ENUM(NSUInteger, SettingType) {
     SettingTypeSoundMode,
     SettingTypeVolume,
     SettingTypeSpeed,
+    SettingTypeControlPair,
 };
 
 
@@ -40,7 +43,8 @@ typedef NS_ENUM(NSUInteger, SettingType) {
     [super viewDidLoad];
     [self setupSubviews];
     [self refreshData];
-    self.title = @"游戏设置";
+    self.title = NSLocalizedString(@"GameSetting", @"游戏设置");
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetPacket:) name:EZTGetPacketFromServer object:nil];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -62,13 +66,12 @@ typedef NS_ENUM(NSUInteger, SettingType) {
 
 - (void)refreshData {
     [self showLoadingHUD];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetPacket:) name:EZTGetPacketFromServer object:nil];
+
     EZTTcpPacket *packet = [[EZTTcpPacket alloc] init];
     [packet writeIntValue:EZTAPIRequestCommandGetDeviceSetting];
     if (![[EZTTcpService shareInstance] sendData:[packet encode]]) {
         [self hideHUD];
-        [self toast:@"请先连接服务端"];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
+        [self toast:NSLocalizedString(@"ConnectWarning", @"请先连接服务端")];
     }
 }
 
@@ -78,56 +81,66 @@ typedef NS_ENUM(NSUInteger, SettingType) {
                    @(SettingTypeRFSelect),
                    @(SettingTypeSoundMode),
                    @(SettingTypeVolume),
-                   @(SettingTypeSpeed)];
+                   @(SettingTypeSpeed),
+                   @(SettingTypeControlPair)];
     }else {
         _types = @[@(SettingTypeCameraSelect),
                    @(SettingTypeSoundMode),
                    @(SettingTypeVolume),
-                   @(SettingTypeSpeed)];
+                   @(SettingTypeSpeed),
+                   @(SettingTypeControlPair)];
     }
     [_tableView reloadData];
 }
 
 - (void)didGetPacket: (NSNotification *)noti {
     EZTTcpPacket *packet = noti.object;
-    if (packet.cmd != EZTAPIResponseCommandGetDeviceSetting &&
-        packet.cmd != EZTAPIResponseCommandUpdateDeviceSetting) {
-        return;
-    }
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    if (packet.cmd == EZTAPIResponseCommandGetDeviceSetting) {
-        _setting = [[EZTSetting alloc] initWithPacket:packet];
+    
+    switch (packet.cmd) {
+        case EZTAPIResponseCommandGetDeviceSetting:
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!self.setting.isSuccess) {
+                    [self toast: self.setting.message];
+                }
+                [self reloadData];
+            });
+        }
+            break;
+        case EZTAPIResponseCommandUpdateDeviceSetting:
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                BOOL isSuccess = [packet readIntValue:nil] == 0;
+                if (!isSuccess) {
+                    [self toast:[packet readStringValue:nil]];
+                }else {
+                    [self.navigationController popViewControllerAnimated:true];
+                }
+            });
+        }
+            break;
+        case EZTAPIResponseCommandReceiveRemoteControlCode:
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.setting.remotePairCode = [packet readStringValue:nil];
+                [self.tableView reloadData];
+            });
+        }
+            break;
+        default:
+            break;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self hideHUD];
-        if (packet.cmd == EZTAPIResponseCommandGetDeviceSetting) {
-            if (!self.setting.isSuccess) {
-                [self alertWithTitle:@"获取设置信息失败" message:self.setting.message];
-            }
-            [self reloadData];
-        }else {
-            BOOL isSuccess = [packet readIntValue:nil] == 0;
-            if (!isSuccess) {
-                [self alertWithTitle:@"获取设置信息失败" message:[packet readStringValue:nil]];
-            }else {
-                [self.navigationController popViewControllerAnimated:true];
-            }
-        }
-        
-    });
 }
 
 - (void)backToPrevController {
     [self showLoadingHUD];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetPacket:) name:EZTGetPacketFromServer object:nil];
     NSString *account = [[NSUserDefaults standardUserDefaults] stringForKey:@"account"];
     NSAssert(account.length > 0, @"用户名为空");
     NSData *data = [_setting encode:account];
     if (![[EZTTcpService shareInstance] sendData:data]) {
         [self hideHUD];
         [self.navigationController popViewControllerAnimated:true];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
     }
 }
 
@@ -142,23 +155,52 @@ typedef NS_ENUM(NSUInteger, SettingType) {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    SettingType type = [_types[indexPath.row] unsignedIntegerValue];
+    if (type == SettingTypeControlPair) {
+        SettingControlPairCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pair"];
+        if (!cell) {
+            cell = [[SettingControlPairCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"pair"];
+            cell.topLabel.text = [NSString stringWithFormat:@"[%@]", NSLocalizedString(@"ControlPair", @"遥控控制")];
+            __unsafe_unretained typeof(self) unsafeSelf = self;
+            cell.changeHandler = ^(BOOL on) {
+                unsafeSelf.setting.remoteControlPair = on ? 0 : 1;
+                [unsafeSelf.tableView reloadData];
+            };
+        }
+        if (self.setting.remoteControlPair == 0) {
+            if (self.setting.remotePairCode.length > 0) {
+                cell.bottomLabel.text = [NSString stringWithFormat:@"%@：%@",
+                                         NSLocalizedString(@"ControlWasPaired", @"已配对"),
+                                         self.setting.remotePairCode];
+            }else {
+               cell.bottomLabel.text = NSLocalizedString(@"ControlNotPaired", @"未配对");
+            }
+            
+            cell.uiswitch.on = true;
+        }else {
+            cell.bottomLabel.text = NSLocalizedString(@"Close", @"关闭");
+            cell.uiswitch.on = false;
+        }
+        return cell;
+    }
+    
     GameSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell = [[GameSettingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    SettingType type = [_types[indexPath.row] unsignedIntegerValue];
+
     NSString *right= @"";
     NSString *left = @"";
     switch (type) {
         case SettingTypeCameraSelect:
         {
-            left = @"镜头选择";
+            left = NSLocalizedString(@"CameraSelect", @"镜头选择");
             switch (self.setting.cameraSelect) {
                 case EZTServerCameraExternal:
-                    right = @"外置摄像头";
+                    right = NSLocalizedString(@"ExternalCamera", @"外置摄像头");
                     break;
                 case EZTServerCameraInternal:
-                    right = @"内置摄像头";
+                    right = NSLocalizedString(@"InternalCamera", @"内置摄像头");
                     break;
                 default:
                     right = @"未知";
@@ -168,13 +210,13 @@ typedef NS_ENUM(NSUInteger, SettingType) {
             break;
         case SettingTypeRFSelect:
         {
-            left = @"频点设置";
+            left = NSLocalizedString(@"RFSetting", @"频点设置");
             switch (self.setting.rfSelect) {
                 case EZTServerRFType2370:
-                    right = @"AKK频点(2370)";
+                    right = NSLocalizedString(@"RFType2370", @"AKK频点(2370)");
                     break;
                 case EZTServerRFType2570:
-                    right = @"K10频点(2570)";
+                    right = NSLocalizedString(@"RFType2570", @"K10频点(2570)");
                     break;
                 default:
                     right = @"未知";
@@ -184,13 +226,13 @@ typedef NS_ENUM(NSUInteger, SettingType) {
             break;
         case SettingTypeSoundMode:
         {
-            left = @"声音模式";
+            left = NSLocalizedString(@"SoundMode", @"声音模式");
             switch (self.setting.serverSoundMode) {
                 case EZTServerSoundModeSpeaker:
-                    right = @"喇叭模式";
+                    right = NSLocalizedString(@"SoundModeSpeaker", @"喇叭模式");
                     break;
                 case EZTServerSoundModeEarPhone:
-                    right = @"耳机模式";
+                    right = NSLocalizedString(@"SoundModeEarPhone", @"耳机模式");
                     break;
                 default:
                     right = @"未知";
@@ -200,13 +242,13 @@ typedef NS_ENUM(NSUInteger, SettingType) {
             break;
         case SettingTypeVolume:
         {
-            left = @"音量大小";
+            left = NSLocalizedString(@"VolumeValue", @"音量大小");
             right = [NSString stringWithFormat:@"%@", @(self.setting.serverVolume)];
         }
             break;
         case SettingTypeSpeed:
         {
-            left = @"语速大小";
+            left = NSLocalizedString(@"SpeakSpeed", @"语速大小");
             right = [NSString stringWithFormat:@"%@", @(self.setting.speed)];
         }
             break;
@@ -238,7 +280,8 @@ typedef NS_ENUM(NSUInteger, SettingType) {
                 unsafeSelf.setting.cameraSelect = index == 0 ? EZTServerCameraInternal : EZTServerCameraExternal;
                 [unsafeSelf reloadData];
             };
-            [controller alertWithSource:@[@"内置摄像头", @"外置摄像头"]
+            [controller alertWithSource:@[NSLocalizedString(@"InternalCamera", @"内置摄像头"),
+                                          NSLocalizedString(@"ExternalCamera", @"外置摄像头")]
                                selected:_setting.cameraSelect == EZTServerCameraInternal ? 0 : 1
                          viewController:self
                                 handler:handler];
@@ -252,7 +295,8 @@ typedef NS_ENUM(NSUInteger, SettingType) {
                 unsafeSelf.setting.rfSelect = index == 0 ? EZTServerRFType2370 : EZTServerRFType2570;
                 [unsafeSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             };
-            [controller alertWithSource:@[@"AKK频点(2370)", @"K10频点(2570)"]
+            [controller alertWithSource:@[NSLocalizedString(@"RFType2370", @"AKK频点(2370)"),
+                                          NSLocalizedString(@"RFType2570", @"K10频点(2570)")]
                                selected:_setting.rfSelect == EZTServerRFType2370 ? 0 : 1
                          viewController:self
                                 handler:handler];
@@ -265,7 +309,8 @@ typedef NS_ENUM(NSUInteger, SettingType) {
                 unsafeSelf.setting.serverSoundMode = index;
                 [unsafeSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             };
-            [controller alertWithSource:@[@"喇叭模式", @"耳机模式"]
+            [controller alertWithSource:@[NSLocalizedString(@"SoundModeSpeaker", @"喇叭模式"),
+                                          NSLocalizedString(@"SoundModeEarPhone", @"耳机模式")]
                                selected:_setting.serverSoundMode
                          viewController:self
                                 handler:handler];

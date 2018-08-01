@@ -37,7 +37,8 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
     GameSettingTypeSoundMode,
     GameSettingTypeGameRule,
     GameSettingTypeXY,
-    GameSettingTypeNumberOfCard
+    GameSettingTypeNumberOfCard,
+    GameSettingTypeSpeakHuaSe
 };
 
 @interface GameSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -51,7 +52,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"游戏设置";
+    self.title = NSLocalizedString(@"GameSetting", @"游戏设置");
     self.view.backgroundColor = [UIColor blackColor];
     [self setupSubviews];
 
@@ -82,7 +83,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
     [packet writeIntValue:self.playId];
     if (![[EZTTcpService shareInstance] sendData:[packet encode]]){
         [self hideHUD];
-        [self toast:@"请先连接服务端"];
+        [self toast:NSLocalizedString(@"ConnectWarning", @"请先连接服务端")];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
     }
     
@@ -147,7 +148,8 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
         [array addObject:@(GameSettingTypeRFSelect)];
     }
     [array addObjectsFromArray:@[@(GameSettingTypeSoundMode),
-                                 @(GameSettingTypeGameRule)]];
+                                 @(GameSettingTypeGameRule),
+                                 @(GameSettingTypeSpeakHuaSe)]];
     _types = [array copy];
     [_tableView reloadData];
 }
@@ -157,7 +159,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetPacket:) name:EZTGetPacketFromServer object:nil];
     if (![[EZTTcpService shareInstance] sendData:[_setting encode]]){
         [self hideHUD];
-        [self toast:@"请先连接服务端"];
+        [self toast:NSLocalizedString(@"ConnectWarning", @"请先连接服务端")];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
     }
 }
@@ -401,7 +403,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.backgroundColor = [UIColor lightGrayColor];
-    [button setTitle:@"开始游戏" forState:UIControlStateNormal];
+    [button setTitle:NSLocalizedString(@"StartGame", @"开始游戏") forState:UIControlStateNormal];
     [button setTintColor:[UIColor whiteColor]];
     button.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:button];
@@ -443,30 +445,30 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
     NSString *left = @"";
     switch (type) {
         case GameSettingTypePlayerCount:
-            left = @"人数设置";
+            left = NSLocalizedString(@"NumberOfPlayerSetting", @"人数设置");
             right = [NSString stringWithFormat:@"%@",@(self.setting.numberOfPalyer + EZTMinNumberOfPlyaers)];
             break;
         case GameSettingTypeBeatColor:
-            left = @"打色设置";
+            left = NSLocalizedString(@"BeatColorSetting", @"打色设置");
             right = _setting.beatColorRule.desc;
             break;
         case GameSettingTypeCardSetting:
-            left = @"色点设置";
+            left = NSLocalizedString(@"CardSetting", @"色点设置");
             right = _setting.cardSetting.title;
             break;
         case GameSettingTypeDealCard:
-            left = @"发牌设置";
+            left = NSLocalizedString(@"DealCardSetting", @"发牌设置");
             right = _setting.dealCardRule.title;
             break;
         case GameSettingTypeSpeechType:
         {
-            left = @"报法";
+            left = NSLocalizedString(@"SpeechType", @"报法");
             switch (self.setting.speechIndex) {
                 case EZTServerSpeechTypeSingal:
-                    right = @"单报";
+                    right = NSLocalizedString(@"SingalSpeech", @"单报");
                     break;
                 case EZTServerSpeechTypeSerivel:
-                    right = @"连报";
+                    right = NSLocalizedString(@"SerivelSpeech", @"连报");
                     break;
                 default:
                     right = @"未知";
@@ -476,13 +478,13 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
             break;
         case GameSettingTypeCameraSelect:
         {
-            left = @"镜头设置";
+            left = NSLocalizedString(@"CameraSetting", @"镜头设置");
             switch (self.setting.cameraSelect) {
                 case EZTServerCameraExternal:
-                    right = @"外置摄像头";
+                    right = NSLocalizedString(@"ExternalCamera", @"外置摄像头");
                     break;
                 case EZTServerCameraInternal:
-                    right = @"内置摄像头";
+                    right = NSLocalizedString(@"InternalCamera", @"内置摄像头");
                     break;
                 default:
                     right = @"未知";
@@ -492,13 +494,13 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
             break;
         case GameSettingTypeRFSelect:
         {
-            left = @"频点设置";
+            left = NSLocalizedString(@"RFSetting", @"频点设置");
             switch (self.setting.rfSelect) {
                 case EZTServerRFType2370:
-                    right = @"AKK频点(2370)";
+                    right = NSLocalizedString(@"RFType2370", @"AKK频点(2370)");
                     break;
                 case EZTServerRFType2570:
-                    right = @"K10频点(2570)";
+                    right = NSLocalizedString(@"RFType2570", @"K10频点(2570)");
                     break;
                 default:
                     right = @"未知";
@@ -508,13 +510,13 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
             break;
         case GameSettingTypeSoundMode:
         {
-            left = @"声音模式";
+            left = NSLocalizedString(@"SoundMode", @"声音模式");
             switch (self.setting.serverSoundMode) {
                 case EZTServerSoundModeSpeaker:
-                    right = @"喇叭模式";
+                    right = NSLocalizedString(@"SoundModeSpeaker", @"喇叭模式");
                     break;
                 case EZTServerSoundModeEarPhone:
-                    right = @"耳机模式";
+                    right = NSLocalizedString(@"SoundModeEarPhone", @"耳机模式");
                     break;
                 default:
                     right = @"未知";
@@ -524,17 +526,23 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
             break;
         case GameSettingTypeGameRule:
         {
-            left = @"游戏规则";
-            right = @"游戏规则说明";
+            left = NSLocalizedString(@"GameRule", @"游戏规则");
+            right = NSLocalizedString(@"GameRuleContent", @"游戏规则说明");
         }
             break;
         case GameSettingTypeXY:
         {
-            left = @"XY设置";
+            left = NSLocalizedString(@"XYSetting", @"XY设置");
             right = [NSString stringWithFormat:@"X=%@ Y=%@", @(_setting.xValue), @(_setting.yValue)];
         }
             break;
-        default:
+        case GameSettingTypeSpeakHuaSe:
+        {
+            left = NSLocalizedString(@"SpeakHuaSe", @"报花色");
+            right = self.setting.speakHuaSe == 1 ? NSLocalizedString(@"SpeakHuaSeYes", @"是") :  NSLocalizedString(@"SpeakHuaSeNo", @"否");
+        }
+            break;
+        case GameSettingTypeNumberOfCard:
             break;
     }
     cell.leftLabel.text = [NSString stringWithFormat:@"[%@]",left];
@@ -618,7 +626,8 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
                 unsafeSelf.setting.speechIndex = index == 0 ? EZTServerSpeechTypeSingal : EZTServerSpeechTypeSerivel;
                 [unsafeSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             };
-            [controller alertWithSource:@[@"单报", @"连报"]
+            [controller alertWithSource:@[NSLocalizedString(@"SingalSpeech", @"单报"),
+                                          NSLocalizedString(@"SerivelSpeech", @"连报")]
                                selected:_setting.speechIndex == EZTServerSpeechTypeSingal ? 0 : 1
                          viewController:self
                                 handler:handler];
@@ -631,7 +640,8 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
                 unsafeSelf.setting.cameraSelect = index == 0 ? EZTServerCameraInternal : EZTServerCameraExternal;
                 [unsafeSelf reloadData];
             };
-            [controller alertWithSource:@[@"内置摄像头", @"外置摄像头"]
+            [controller alertWithSource:@[NSLocalizedString(@"InternalCamera", @"内置摄像头"),
+                                          NSLocalizedString(@"ExternalCamera", @"外置摄像头")]
                                selected:_setting.cameraSelect == EZTServerCameraInternal ? 0 : 1
                          viewController:self
                                 handler:handler];
@@ -645,7 +655,8 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
                 unsafeSelf.setting.rfSelect = index == 0 ? EZTServerRFType2370 : EZTServerRFType2570;
                 [unsafeSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             };
-            [controller alertWithSource:@[@"AKK频点(2370)", @"K10频点(2570)"]
+            [controller alertWithSource:@[NSLocalizedString(@"RFType2370", @"AKK频点(2370)"),
+                                          NSLocalizedString(@"RFType2570", @"K10频点(2570)")]
                                selected:_setting.rfSelect == EZTServerRFType2370 ? 0 : 1
                          viewController:self
                                 handler:handler];
@@ -658,7 +669,8 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
                 unsafeSelf.setting.serverSoundMode = index;
                 [unsafeSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             };
-            [controller alertWithSource:@[@"喇叭模式", @"耳机模式"]
+            [controller alertWithSource:@[NSLocalizedString(@"SoundModeSpeaker", @"喇叭模式"),
+                                          NSLocalizedString(@"SoundModeEarPhone", @"耳机模式")]
                                selected:_setting.serverSoundMode
                          viewController:self
                                 handler:handler];
@@ -666,7 +678,7 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
             break;
         case GameSettingTypeGameRule:
         {
-            [self alertWithTitle:@"游戏规则说明" message:self.setting.gameSetting];
+            [self alertWithTitle:NSLocalizedString(@"GameRuleContent", @"游戏规则说明") message:self.setting.gameSetting];
         }
             break;
         case GameSettingTypeXY:
@@ -674,6 +686,20 @@ typedef NS_ENUM(NSUInteger, GameSettingType) {
             GameXYSettingViewController *controller = [[GameXYSettingViewController alloc] init];
             controller.gameSetting = _setting;
             [self.navigationController pushViewController:controller animated:true];
+        }
+            break;
+        case GameSettingTypeSpeakHuaSe:
+        {
+            AlertSelectionViewController *controller = [[AlertSelectionViewController alloc] init];
+            AlertSelectHandler handler = ^(NSInteger index) {
+                unsafeSelf.setting.speakHuaSe = index == 0 ? 1 : 0;
+                [unsafeSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [controller alertWithSource:@[NSLocalizedString(@"SpeakHuaSeYes", @"是"),
+                                          NSLocalizedString(@"SpeakHuaSeNo", @"否")]
+                               selected:_setting.speakHuaSe == 1 ? 0 : 1
+                         viewController:self
+                                handler:handler];
         }
             break;
         default:

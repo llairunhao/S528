@@ -22,12 +22,12 @@
         self.contentView.backgroundColor = [UIColor blackColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        _button1 = [self buttonWithTitle:@"试机"];
+        _button1 = [self buttonWithTitle:NSLocalizedString(@"TestGame", @"试机")];
         _button1.tag = 0;
         [self.contentView addSubview:_button1];
         [_button1 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         
-        _button2 = [self buttonWithTitle:@"购买"];
+        _button2 = [self buttonWithTitle:NSLocalizedString(@"BuyGame", @"购买")];
         _button2.tag = 1;
         [self.contentView addSubview:_button2];
         [_button2 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -48,7 +48,10 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat buttonWidth = 50;
+    CGSize size1 = [_button1 sizeThatFits:CGSizeZero];
+    CGSize size2 = [_button2 sizeThatFits:CGSizeZero];
+    
+    CGFloat buttonWidth = MAX(size1.width, size2.width) + 12;
     CGFloat buttonHeight = 30;
     _button2.frame = CGRectMake(CGRectGetWidth(self.bounds) - 12 - buttonWidth, (CGRectGetHeight(self.bounds) - buttonHeight) / 2, buttonWidth, buttonHeight);
     
@@ -65,11 +68,11 @@
     if (resource.isBuyed) {
         _button1.hidden = true;
         _button2.tag = 2;
-        [_button2 setTitle:@"启动" forState:UIControlStateNormal];
+        [_button2 setTitle:NSLocalizedString(@"Active", @"启动") forState:UIControlStateNormal];
     }else {
         _button1.hidden = false;
         _button2.tag = 1;
-        [_button2 setTitle:@"购买" forState:UIControlStateNormal];
+        [_button2 setTitle:NSLocalizedString(@"BuyGame", @"购买") forState:UIControlStateNormal];
     }
 }
 

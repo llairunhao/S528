@@ -19,6 +19,7 @@
         _textLabel = [[UILabel alloc] init];
         _textLabel.textAlignment = NSTextAlignmentCenter;
         _textLabel.textColor = [UIColor whiteColor];
+        _textLabel.numberOfLines = 0;
         [self.contentView addSubview:_textLabel];
     }
     return self;
@@ -29,7 +30,8 @@
     [super layoutSubviews];
     CGFloat width = CGRectGetWidth(self.bounds);
     _imageView.frame = CGRectMake(0, 0,width, width);
-    _textLabel.frame = CGRectMake(0, CGRectGetMaxY(_imageView.frame) + 4, width, 21);
+    CGSize size = [_textLabel sizeThatFits:CGSizeMake(width, CGFLOAT_MIN)];
+    _textLabel.frame = CGRectMake(0, CGRectGetMaxY(_imageView.frame) + 4, width, size.height);
 }
 
 @end

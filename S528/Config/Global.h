@@ -66,6 +66,7 @@ typedef NS_ENUM(NSInteger, EZTAPIRequestCommand) {
     EZTAPIRequestCommandGetGameSetting                     =   18,
     EZTAPIRequestCommandUpdateControlState                 =   19,
     EZTAPIRequestCommandUpdateShockState                   =   21,
+    EZTAPIRequestCommandChangePlayerCount                  =   23,
     EZTAPIRequestCommandBuyGame                            =   25,
     EZTAPIRequestCommandGetAllGames                        =   27,
     EZTAPIRequestCommandGetGamesThatBuyed                  =   28,
@@ -109,6 +110,8 @@ typedef NS_ENUM(NSInteger, EZTAPIResponseCommand) {
     
     EZTAPIResponseCommandTryTimeout                         =   1031,
     EZTAPIResponseCommandRetry                              =   1032,
+    
+    EZTAPIResponseCommandPlayerCountChange                  =   1033,
 };
 
 

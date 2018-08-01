@@ -14,7 +14,7 @@
 - (void)alertWithTitle: (nullable NSString *)title
                message: (nullable NSString *)message {
     
-    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", @"确定") style:UIAlertActionStyleCancel handler:nil];
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [controller addAction:alertAction];
     [self presentViewController:controller animated:true completion:nil];
@@ -28,7 +28,7 @@
         HUD.contentColor = [UIColor whiteColor];
         HUD.backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;
     }
-    HUD.label.text = @"请稍等...";
+    HUD.label.text = NSLocalizedString(@"Waiting", @"请稍等...");
 }
 
 - (void)hideHUD {

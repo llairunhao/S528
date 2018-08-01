@@ -1,0 +1,133 @@
+/* 
+  Localizable.strings
+  S528
+
+  Created by 菲凡数据科技-iOS开发 on 2018/7/30.
+  Copyright © 2018年 RunHao. All rights reserved.
+*/
+
+"ExternalCamera" = "thiết lập ống kính ngoài";
+"InternalCamera" = "thiết lập ống kính trong";
+
+"RFType2370" = "AKK ĐIỂM TẦN SỐ(2370)";
+"RFType2570" = "K10 ĐIỂM TẦN SỐ(2570)";
+
+"SoundModeSpeaker" = "CHẾ ĐỘ LOA";
+"SoundModeEarPhone" = "CHẾ ĐỘ TAI NGHE";
+
+"SingalSpeech" = "báo đơn";
+"SerivelSpeech" = "Ngay cả báo";
+
+"ADeckOfCards" = "1 lá";
+"TwoDeckOfCards" = "2 lá";
+
+"Confirm" = "xác nhận";
+"Cancel" = "Hủy bỏ";
+
+"Login" = "đăng nhập";
+"Exit" = "thoát";
+
+"InputPassword" = "Hãy nhập mật mã";
+"InputAccount" = "Hãy nhập vào tài khoản gốc";
+"Account" = "tài khoản";
+"Password" = "mật mã";
+
+"Disclaimer" = "miễn truy trách nhiệm";
+"Warning" = "sản phẩm này chỉ biểu diễn thủ thuật bịp nhằm mục tiêu giải trí, ngăn cấm sử dụng với mục đích cờ bạc";
+"DisconnectFromService" = "Với dịch vụ đã bị ngắt kết nối";
+"ReconnectToService" = "Khôi phục kết nối";
+"Agree" = "đồng ý";
+"Disagree" = "không đồng ý";
+
+"EnterGame" = "bắt đầu chơi";
+"SystemSetting" = "cài đặt";
+"ActiveGame" = "kích hoạt trò chơi";
+"ModifyPassword" = "thay đổi mật khẩu";
+"ModifyAccount" = "đổi tên người dùng";
+"ActiveWarning" = "Xin hãy xác nhận đã kích hoạt thiết bị kết nối, sau khi không trả lại, cám ơn";
+"ConnectWarning" = "Vui lòng kết nối máy chủ";
+
+"GameSetting" = "thiết lập trò trơi";
+"CameraSelect" = "lựa chọn ống kính";
+"SoundMode" = "định dạng âm thanh";
+"VolumeValue" = "âm lượng";
+"SpeakSpeed" = "tốc độ nói";
+"ControlPair" = "Điều khiển từ xa điều khiển";
+"ControlWasPaired" = "Đã kết hợp";
+"ControlNotPaired" = "Không cân bằng";
+
+"OldPassword" = "Mật mã cũ";
+"NewPassword" = "Mật mã mới";
+"InputOldPassword" = "Hãy nhập mật khẩu cũ";
+"InputNewPassword" = "Hãy nhập mật khẩu mới";
+"ConfirmNewPassword" = "xác nhận mật mã mới";
+"OldAccount" = "tài khoản";
+"NewAccount" = "tài khoản";
+"InputNewAccount" = "Hãy nhập vào một tài khoản mới";
+"InputOldAccount" = "Hãy nhập vào tài khoản gốc";
+"ModifySuccess" = "Sửa đổi thành công";
+"OldAccountIncorrect" = "Gốc số tài khoản. Không";
+
+"Active" = "bắt đầu";
+"TestGame" = "Thử máy";
+"TestGameTimeOut" = "Thời gian test máy đã đến";
+"TestGameTimeOutWarning" = "Thời gian test máy đã đến, vui lòng mua hoặc chơi lại từ đầu";
+"BuyGame" = "Mua";
+"ConfirmToBuyGame" = "Xác nhận mua？";
+"ConfirmToBuyGameAgain" = "Xác nhận mua lần nữa？";
+
+"NumberOfPlayerSetting" = "thiết lập số lượng";
+"BeatColorSetting" = "thiết lập màu sắc";
+"CardSetting" = "thiết lập điểm màu";
+"DealCardSetting" = "thiết lập phát bài";
+"NumberOfCard" = "số lá bài phụ";
+"CameraSetting" = "lựa chọn ống kính";
+"RFSetting" = "thiết lặp điểm lặp lại";
+"GameRule" = "quy tắc chơi";
+"GameRuleContent" = "nói rõ cách chơi";
+"SpeakHuaSe" = "Báo sắc bài";
+"SpeakHuaSeYes" = "Có";
+"SpeakHuaSeNo" = "Không";
+"XYSetting" = "Cài đặt X";
+"XValue" = "Giá trị X";
+"YValue" = "Giá trị Y";
+"SpeechType" = "cách báo bài";
+
+"BeatColorSelect" = "Chọn xúc sắc";
+"HuaSeSetting" = "Sắc bài";
+"Setting" = "Thiết lập";
+"SelectType" = "Loại hình";
+"AutoSelect" = "Cài đặt tự động";
+"Remove" = "Xóa";
+"Back" = "Quay trở lại";
+"SelectSetting" = "Chọn thiết lập";
+
+"DealCardWay" = "Phương thức phát bài";
+"CardSettingPaiShu" = "Số bài";
+"CardSettingPaiPai" = "Bài cử";
+"CardSettingGongPai" = "Bài tây";
+"CardSettingQuPai" = "Bài bỏ";
+"CardSettingZengJiaFaPai" = "Phát bài thêm";
+"CardSettingShanChuFaPai" = "Hủy phát bài";
+"CardSettingLun" = "Lượt";
+"MaxDealCardLun" = "Ít nhất có 10 lượt phát bài";
+"MinDealCardLun" = "Ít nhất có 1 lượt phát bài";
+"CanNotRemoveSystemSetting" = "Không thể  xóa cài đặt hệ thống";
+"Save" = "xác nhận";
+"CustomName" = "phong tục";
+
+"StartGame" = "bắt đầu chơi";
+"Close" = "Đóng cửa";
+
+"Video" = "Video";
+"OpenVideo" = "Mở Video";
+"CloseVideo" = "Đóng video";
+"BeatColor" = "Đánh";
+"NumberOfPlayer" = "Số lượng";
+"Result" = "Kết quả";
+"Play" = "Rồi đấy";
+
+"MoreThanTheUpperLimit" = "Đã hơn để mua số";
+"CanNotTestWarning" = "Game đã mua đủ, không được test máy";
+
+"Waiting" = "";

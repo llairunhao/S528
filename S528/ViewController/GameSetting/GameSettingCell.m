@@ -25,6 +25,7 @@
         _leftLabel.textColor = [UIColor whiteColor];
         _leftLabel.textAlignment = NSTextAlignmentCenter;
         _leftLabel.translatesAutoresizingMaskIntoConstraints = false;
+        _leftLabel.numberOfLines = 0;
         [self.contentView addSubview:_leftLabel];
         
         _rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -92,7 +93,7 @@
                                                    |NSStringDrawingTruncatesLastVisibleLine
                                                    |NSStringDrawingUsesLineFragmentOrigin)
                                        attributes:attribute context:nil].size;
-    return size.width;
+    return size.width + 12;
 }
 
 @end

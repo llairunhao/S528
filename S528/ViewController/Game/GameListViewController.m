@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"游戏设置";
+    self.title = NSLocalizedString(@"GameSetting", @"游戏设置");
     self.view.backgroundColor = [UIColor blackColor];
     
     [self setupSubview];
@@ -50,7 +50,7 @@
     [packet writeIntValue:EZTAPIRequestCommandGetAllGames];
     NSData *data = [packet encode];
     if (![[EZTTcpService shareInstance] sendData:data]) {
-         [self toast:@"请先连接服务端"];
+         [self toast:NSLocalizedString(@"ConnectWarning", @"请先连接服务端")];
     }else {
         [self showLoadingHUD];
     }
@@ -102,7 +102,7 @@
                         break;
                     case 2:
                     {
-                        [self alertWithTitle:@"购买失败" message:@"超过购买数量"];
+                        [self toast:NSLocalizedString(@"MoreThanTheUpperLimit", @"超过购买数量")];
                     }
                         break;
                     case 3:
@@ -197,7 +197,7 @@
 
 - (void)tryoutGameResource:(EZTGameResource *)resource {
     if (self.buyCount == 5) {
-        [self toast:@"游戏已买满，不能试机"];
+        [self toast:NSLocalizedString(@"CanNotTestWarning", @"游戏已买满，不能试机")];
         return;
     }
     GameSettingViewController *controller = [[GameSettingViewController alloc] init];
@@ -218,25 +218,27 @@
     [packet writeIntValue:[resource.gameId integerValue]];
     if (![[EZTTcpService shareInstance] sendData:[packet encode]]) {
         [self hideHUD];
-        [self toast:@"请先连接服务端"];
+        [self toast:NSLocalizedString(@"ConnectWarning", @"请先连接服务端")];
     }
 }
 
 - (void)showBuyAlert: (NSInteger)tag resource:(EZTGameResource *)resource  {
     
     __unsafe_unretained typeof(self) unsafeSelf = self;
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", @"确定")
+                                                      style:UIAlertActionStyleDestructive
+                                                    handler:^(UIAlertAction * _Nonnull action) {
         if (tag == 0) {
             [unsafeSelf showBuyAlert:1 resource:resource];
         }else {
             [unsafeSelf confirmToBuyGameResource:resource];
         }
     }];
-    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"取消") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     
-    UIAlertController *controller = [UIAlertController alertControllerWithTitle:resource.name message:tag == 0 ? @"确认购买？" : @"再次确认购买？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:resource.name message:tag == 0 ? NSLocalizedString(@"ConfirmToBuyGame", @"确认购买？") : NSLocalizedString(@"ConfirmToBuyGameAgain", @"再次确认购买？") preferredStyle:UIAlertControllerStyleAlert];
     [controller addAction:action2];
     [controller addAction:action1];
     [self presentViewController:controller animated:true completion:nil];

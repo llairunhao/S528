@@ -48,6 +48,7 @@
     _labelWidths = [NSMutableArray arrayWithCapacity:_textFields.count];
 
     
+    CGFloat maxWidth = 0;
     for (NSInteger i = 0; i < _textFields.count; i++) {
         UITextField *textField = _textFields[i];
         textField.translatesAutoresizingMaskIntoConstraints = false;
@@ -62,7 +63,10 @@
         [_titleLabels addObject:titleLabel];
         
         CGSize size = [titleLabel sizeThatFits:CGSizeZero];
-        [_labelWidths addObject: @(size.width)];
+        if (size.width > maxWidth) {
+            maxWidth = size.width;
+        }
+
         
         UIImageView *border = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dialog_edit_bg"]];
         border.translatesAutoresizingMaskIntoConstraints = false;
@@ -83,6 +87,10 @@
                                                  selector:@selector(textFiledValueDidChange:)
                                                      name:UITextFieldTextDidChangeNotification
                                                    object:textField];
+    }
+    
+    for (NSInteger i = 0; i < _textFields.count; i++) {
+        [_labelWidths addObject: @(maxWidth)];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self

@@ -45,8 +45,8 @@
 - (void)setupSubviews {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    CGFloat itemWH = (CGRectGetWidth(self.view.bounds) - 40) / 3;
-    flowLayout.itemSize = CGSizeMake(itemWH, itemWH + 21 + 4);
+    CGFloat itemWH = (CGRectGetWidth(self.view.bounds) - 40) / 3.5;
+    flowLayout.itemSize = CGSizeMake(itemWH, itemWH + 40);
     flowLayout.minimumLineSpacing = 10;
     flowLayout.minimumInteritemSpacing = 10;
     flowLayout.sectionInset = UIEdgeInsetsMake(AppTopPad, 10, 0, 10);
@@ -72,7 +72,11 @@
     
     static NSArray *titles, *imageNames;
     if (!titles) {
-        titles = @[@"进入游戏", @"系统设置", @"激活游戏", @"修改密码", @"修改用户名"];
+        titles = @[NSLocalizedString(@"EnterGame", @"进入游戏"),
+                   NSLocalizedString(@"SystemSetting", @"系统设置"),
+                   NSLocalizedString(@"ActiveGame", @"激活游戏"),
+                   NSLocalizedString(@"ModifyPassword", @"修改密码"),
+                   NSLocalizedString(@"ModifyAccount", @"修改用户名")];
         imageNames = @[@"main_1", @"main_3", @"main_4", @"main_5", @"main_6"];
     }
     
@@ -87,9 +91,9 @@
     __unsafe_unretained typeof(self) unsafeSelf = self;
     if (indexPath.item == 2) {
         AlertTextViewController *controller = [[AlertTextViewController alloc] init];
-        [controller alertWithTitle:@"激活游戏"
-                           message:@"请确认设备已经连接，激活后以后概不退货，谢谢"
-                      confrimTitle:@"确认"
+        [controller alertWithTitle:NSLocalizedString(@"ActiveGame", @"激活游戏")
+                           message:NSLocalizedString(@"ActiveWarning", @"请确认设备已经连接，激活后以后概不退货，谢谢")
+                      confrimTitle:NSLocalizedString(@"Confirm", @"确定")
                        cancelTitle:nil
                     viewController:self];
         controller.closeHandler = ^{};
@@ -100,37 +104,39 @@
         AlertInputViewController *controller = [[AlertInputViewController alloc] init];
         self.alertController = controller;
         UITextField *textField = [[UITextField alloc] init];
-        textField.placeholder = @"请输入旧密码";
+        textField.placeholder = NSLocalizedString(@"InputOldPassword", @"请输入旧密码");
         textField.keyboardType = UIKeyboardTypeAlphabet;
         textField.secureTextEntry = true;
         textField.delegate = self;
-        [controller addInputTitle:@"旧密码" textField:textField];
+        [controller addInputTitle:NSLocalizedString(@"OldPassword", @"旧密码") textField:textField];
         __unsafe_unretained typeof(textField) unsafeOld = textField;
         
         textField = [[UITextField alloc] init];
-        textField.placeholder = @"请输入新密码";
+        textField.placeholder = NSLocalizedString(@"InputNewPassword", @"请输入新密码");
         textField.keyboardType = UIKeyboardTypeAlphabet;
         textField.secureTextEntry = true;
         textField.delegate = self;
-        [controller addInputTitle:@"新密码" textField:textField];
+        [controller addInputTitle:NSLocalizedString(@"NewPassword", @"新密码") textField:textField];
         __unsafe_unretained typeof(textField) unsafeNew = textField;
         
         textField = [[UITextField alloc] init];
-        textField.placeholder = @"请再次输入新密码";
+        textField.placeholder = NSLocalizedString(@"ConfirmNewPassword", @"请确认新密码");
         textField.keyboardType = UIKeyboardTypeAlphabet;
         textField.secureTextEntry = true;
         textField.delegate = self;
-        [controller addInputTitle:@"新密码" textField:textField];
+        [controller addInputTitle:NSLocalizedString(@"NewPassword", @"新密码") textField:textField];
         __unsafe_unretained typeof(textField) unsafeNew1 = textField;
         
         controller.remainAfterAction = true;
         
-        [controller alertWithTitle:@"修改密码"
-                      confrimTitle:@"确认"
+        [controller alertWithTitle:NSLocalizedString(@"ModifyPassword", @"修改密码")
+                      confrimTitle:NSLocalizedString(@"Confirm", @"确定")
                        cancelTitle:nil
                            animate:true
                     viewController:self];
-        controller.closeHandler = ^{};
+        controller.closeHandler = ^{
+            [unsafeSelf.alertController hide];
+        };
         controller.validAction = ^BOOL(NSArray<UITextField *> *textFields) {
             BOOL enabled = true;
             for (UITextField *textField in textFields) {
@@ -157,23 +163,23 @@
     if (indexPath.row == 4) {
         AlertInputViewController *controller = [[AlertInputViewController alloc] init];
         UITextField *textField = [[UITextField alloc] init];
-        textField.placeholder = @"请输入原账号";
-        [controller addInputTitle:@"原账号" textField:textField];
+        textField.placeholder = NSLocalizedString(@"InputOldAccount", @"请输入原账号");
+        [controller addInputTitle:NSLocalizedString(@"OldAccount", @"原账号") textField:textField];
         textField.keyboardType = UIKeyboardTypeAlphabet;
         textField.tag = 22;
         textField.delegate = self;
          __unsafe_unretained typeof(textField) unsafeView1 = textField;
         
         textField = [[UITextField alloc] init];
-        textField.placeholder = @"请输入新账号";
+        textField.placeholder = NSLocalizedString(@"InputNewAccount", @"请输入新账号");
          textField.keyboardType = UIKeyboardTypeAlphabet;
-        [controller addInputTitle:@"新账号" textField:textField];
+        [controller addInputTitle:NSLocalizedString(@"NewAccount", @"新账号") textField:textField];
         textField.tag = 22;
         textField.delegate = self;
         __unsafe_unretained typeof(textField) unsafeView2 = textField;
         __unsafe_unretained typeof(controller) unsafeController = controller;
-        [controller alertWithTitle:@"修改用户名"
-                      confrimTitle:@"确认"
+        [controller alertWithTitle:NSLocalizedString(@"ModifyAccount", @"修改用户名")
+                      confrimTitle:NSLocalizedString(@"Confirm", @"确定")
                        cancelTitle:nil
                            animate:true
                     viewController:self];
@@ -188,10 +194,10 @@
             NSString *oldAccount = [[NSUserDefaults standardUserDefaults] stringForKey:@"account"];
             if ([oldAccount isEqualToString:unsafeView1.text]) {
                 [[NSUserDefaults standardUserDefaults] setObject:unsafeView2.text forKey:@"account"];
-                [unsafeSelf toast:@"修改成功"];
+                [unsafeSelf toast:NSLocalizedString(@"ModifySuccess", @"修改成功")];
                 [unsafeController hide];
             }else {
-                [unsafeSelf toast:@"原账号错误"];
+                [unsafeSelf toast:NSLocalizedString(@"OldAccountIncorrect", @"原账号不对")];
             }
         };
         return;
@@ -222,7 +228,7 @@
     [packet writeStringValue:newPassword];
     if (![[EZTTcpService shareInstance] sendData:[packet encode]]) {
         [self hideHUD];
-        [self toast:@"请先连接服务端"];
+        [self toast:NSLocalizedString(@"ConnectWarning", @"请先连接服务端")];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
     }
  

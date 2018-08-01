@@ -28,7 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"发牌方式";
+    self.title = NSLocalizedString(@"DealCardWay", @"发牌方式");
     
     _dealCardRule = [_setting.dealCardRule copy];
     [self setupSubviews];
@@ -38,7 +38,8 @@
     CGFloat width = CGRectGetWidth(self.view.bounds);
     CGFloat height = CGRectGetHeight(self.view.bounds);
     
-    UILabel *label = [self labelWithText:@"[选择设置]"];
+    UILabel *label = [self labelWithText:[NSString stringWithFormat:@"[%@]",
+                                          NSLocalizedString(@"SelectSetting", @"选择设置")]];
     [label sizeToFit];
     CGRect labelRect = label.frame;
     labelRect.origin.y = AppTopPad + 6;
@@ -53,9 +54,9 @@
     
     CGFloat btnW = (width - 12 * 4) / 3;
     CGFloat btnH = 40;
-    _addCardBtn = [self lightGrayButtonWithTitle:@"增加发牌"];
-    _deleteCardBtn = [self lightGrayButtonWithTitle:@"删除发牌"];
-    _deleteBtn = [self lightGrayButtonWithTitle:@"删除"];
+    _addCardBtn = [self lightGrayButtonWithTitle:NSLocalizedString(@"CardSettingZengJiaFaPai", @"增加发牌")];
+    _deleteCardBtn = [self lightGrayButtonWithTitle:NSLocalizedString(@"CardSettingShanChuFaPai", @"删除发牌")];
+    _deleteBtn = [self lightGrayButtonWithTitle:NSLocalizedString(@"Remove", @"删除")];
     
     CGRect btnRect = CGRectMake(12, height - AppBottomPad - btnH, btnW, btnH);
     _addCardBtn.frame = btnRect;
@@ -118,7 +119,7 @@
 
 - (void)addDealCardRuleDetail {
     if (_dealCardRule.details.count == 10) {
-        [self toast:@"最多十轮发牌"];
+        [self toast:NSLocalizedString(@"MaxDealCardLun", @"最多十轮发牌")];
     }else {
         EZTDealCardRuleDetail *detail = [EZTDealCardRuleDetail detailWithType:DealCardTypePaiPai numberOfCard:1];
         [_dealCardRule.details addObject:detail];
@@ -128,7 +129,7 @@
 
 - (void)removeLastDealCardRuleDeatil {
     if (_dealCardRule.details.count == 1) {
-        [self toast:@"至少有一轮发牌"];
+        [self toast:NSLocalizedString(@"MinDealCardLun", @"至少有一轮发牌")];
     }else {
         [_dealCardRule.details removeLastObject];
         [_tableView reloadData];
@@ -141,13 +142,14 @@
         _dealCardRule = [self.setting.dealCardRule copy];
         [self reloadData];
     }else {
-        [self toast:@"不能删除系统设置"];
+        [self toast:NSLocalizedString(@"CanNotRemoveSystemSetting", @"不能删除系统设置")];
     }
 }
 
 - (void)backToPrevController {
     if (![_dealCardRule isEqual:self.setting.dealCardRule]) {
-        [self showInputAlertWithTitle:@"保存" placeholder:@"自定义名称"];
+        [self showInputAlertWithTitle:NSLocalizedString(@"Save", @"保存")
+                          placeholder:NSLocalizedString(@"CustomName", @"自定义名称")];
     }else {
         [super backToPrevController];
     }

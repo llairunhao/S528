@@ -1,0 +1,261 @@
+/* 
+  Localizable.strings
+  S528
+
+  Created by 菲凡数据科技-iOS开发 on 2018/7/30.
+  Copyright © 2018年 RunHao. All rights reserved.
+*/
+
+//"ExternalCamera" = "外置摄像头";
+//"InternalCamera" = "内置摄像头";
+//
+//"RFType2370" = "AKK频点(2370)";
+//"RFType2570" = "K10频点(2570)";
+//
+//"SoundModeSpeaker" = "喇叭模式";
+//"SoundModeEarPhone" = "耳机模式";
+//
+//"SingalSpeech" = "单报";
+//"SerivelSpeech" = "连报";
+//
+//"ADeckOfCards" = "一副";
+//"TwoDeckOfCards" = "两副";
+//
+//"Confirm" = "确定";
+//"Cancel" = "取消";
+//
+//"Login" = "登录";
+//"Exit" = "退出";
+//
+//"InputPassword" = "请输入密码";
+//"InputAccount" = "请输入账号";
+//"Account" = "账号";
+//"Password" = "密码";
+//
+//"Disclaimer" = "免责声明";
+//"Warning" = "本产品仅供魔术表演、娱乐等场合，禁止用于赌博！";
+//"DisconnectFromService" = "与服务连接已断开";
+//"ReconnectToService" = "恢复连接";
+//"Agree" = "同意";
+//"Disagree" = "不同意";
+//
+//"EnterGame" = "进入游戏";
+//"SystemSetting" = "系统设置";
+//"ActiveGame" = "激活游戏";
+//"ModifyPassword" = "修改密码";
+//"ModifyAccount" = "修改用户名";
+//"ActiveWarning" = "请确认设备已经连接，激活后以后概不退货，谢谢";
+//"ConnectWarning" = "请先连接服务端";
+//
+//"GameSetting" = "游戏设置";
+//"CameraSelect" = "镜头选择";
+//"SoundMode" = "声音模式";
+//"VolumeValue" = "音量大小";
+//"SpeakSpeed" = "语速大小";
+//"ControlPair" = "遥控控制";
+//"ControlWasPaired" = "已配对";
+//"ControlNotPaired" = "未配对";
+//
+//"OldPassword" = "旧密码";
+//"NewPassword" = "新密码";
+//"InputOldPassword" = "请输入旧密码";
+//"InputNewPassword" = "请输入新密码";
+//"ConfirmNewPassword" = "请确认新密码";
+//"OldAccount" = "原账号";
+//"NewAccount" = "新账号";
+//"InputNewAccount" = "请输入新账号";
+//"InputOldAccount" = "请输入原账号";
+//"ModifySuccess" = "修改成功";
+//"OldAccountIncorrect" = "原账号不对";
+//
+//"Active" = "启动";
+//"TestGame" = "试机";
+//"TestGameTimeOut" = "试机时间结束";
+//"TestGameTimeOutWarning" = "试机时间到,请购买或重新开始游戏";
+//"BuyGame" = "购买";
+//"ConfirmToBuyGame" = "确认购买？";
+//"ConfirmToBuyGameAgain" = "再次确认购买？";
+//
+//"NumberOfPlayerSetting" = "人数设置";
+//"BeatColorSetting" = "打色设置";
+//"CardSetting" = "色点设置";
+//"DealCardSetting" = "发牌设置";
+//"NumberOfCard" = "牌副数";
+//"CameraSetting" = "镜头设置";
+//"RFSetting" = "频点设置";
+//"GameRule" = "游戏规则";
+//"GameRuleContent" = "游戏规则说明";
+//"SpeakHuaSe" = "报花色";
+//"SpeakHuaSeYes" = "是";
+//"SpeakHuaSeNo" = "否";
+//"XYSetting" = "XY设置";
+//"XValue" = "X的值";
+//"YValue" = "Y的值";
+//"SpeechType" = "报法";
+//
+//"BeatColorSelect" = "打色选择";
+//"HuaSeSetting" = "花色设置";
+//"Setting" = "设置";
+//"SelectType" = "选择类型";
+//"AutoSelect" = "自动选择";
+//"Remove" = "删除";
+//"Back" = "返回";
+//"SelectSetting" = "选择设置";
+//
+//"DealCardWay" = "发牌方式";
+//"CardSettingPaiShu" = "牌数";
+//"CardSettingPaiPai" = "派牌";
+//"CardSettingGongPai" = "公牌";
+//"CardSettingQuPai" = "去牌";
+//"CardSettingZengJiaFaPai" = "增加发牌";
+//"CardSettingShanChuFaPai" = "删除发牌";
+//"CardSettingLun" = "轮";
+//
+//
+//"StartGame" = "开始游戏";
+//"Close" = "关闭";
+//
+//"Video" = "视频";
+//"OpenVideo" = "打开视频";
+//"CloseVideo" = "关闭视频";
+//"BeatColor" = "打骰";
+//"NumberOfPlayer" = "人数";
+//"Result" = "结果";
+//"Play" = "玩法";
+//
+//"MaxDealCardLun" = "最多十轮发牌";
+//"MinDealCardLun" = "至少有一轮发牌";
+//"CanNotRemoveSystemSetting" = "不能删除系统设置";
+//"Save" = "保存";
+//"CustomName" = "自定义名称";
+//
+//"MoreThanTheUpperLimit" = "超过购买数量";
+//"CanNotTestWarning" = "游戏已买满，不能试机";
+//
+//"Waiting" = "请稍等...";
+
+"ExternalCamera" = "thiết lập ống kính ngoài";
+"InternalCamera" = "thiết lập ống kính trong";
+
+"RFType2370" = "AKK ĐIỂM TẦN SỐ(2370)";
+"RFType2570" = "K10 ĐIỂM TẦN SỐ(2570)";
+
+"SoundModeSpeaker" = "CHẾ ĐỘ LOA";
+"SoundModeEarPhone" = "CHẾ ĐỘ TAI NGHE";
+
+"SingalSpeech" = "báo đơn";
+"SerivelSpeech" = "Ngay cả báo";
+
+"ADeckOfCards" = "1 lá";
+"TwoDeckOfCards" = "2 lá";
+
+"Confirm" = "xác nhận";
+"Cancel" = "Hủy bỏ";
+
+"Login" = "đăng nhập";
+"Exit" = "thoát";
+
+"InputPassword" = "Hãy nhập mật mã";
+"InputAccount" = "Hãy nhập vào tài khoản gốc";
+"Account" = "tài khoản";
+"Password" = "mật mã";
+
+"Disclaimer" = "miễn truy trách nhiệm";
+"Warning" = "sản phẩm này chỉ biểu diễn thủ thuật bịp nhằm mục tiêu giải trí, ngăn cấm sử dụng với mục đích cờ bạc";
+"DisconnectFromService" = "Với dịch vụ đã bị ngắt kết nối";
+"ReconnectToService" = "Khôi phục kết nối";
+"Agree" = "đồng ý";
+"Disagree" = "không đồng ý";
+
+"EnterGame" = "bắt đầu chơi";
+"SystemSetting" = "cài đặt";
+"ActiveGame" = "kích hoạt trò chơi";
+"ModifyPassword" = "thay đổi mật khẩu";
+"ModifyAccount" = "đổi tên người dùng";
+"ActiveWarning" = "Xin hãy xác nhận đã kích hoạt thiết bị kết nối, sau khi không trả lại, cám ơn";
+"ConnectWarning" = "Vui lòng kết nối máy chủ";
+
+"GameSetting" = "thiết lập trò trơi";
+"CameraSelect" = "lựa chọn ống kính";
+"SoundMode" = "định dạng âm thanh";
+"VolumeValue" = "âm lượng";
+"SpeakSpeed" = "tốc độ nói";
+"ControlPair" = "Điều khiển từ xa điều khiển";
+"ControlWasPaired" = "Đã kết hợp";
+"ControlNotPaired" = "Không cân bằng";
+
+"OldPassword" = "Mật mã cũ";
+"NewPassword" = "Mật mã mới";
+"InputOldPassword" = "Hãy nhập mật khẩu cũ";
+"InputNewPassword" = "Hãy nhập mật khẩu mới";
+"ConfirmNewPassword" = "xác nhận mật mã mới";
+"OldAccount" = "tài khoản";
+"NewAccount" = "tài khoản";
+"InputNewAccount" = "Hãy nhập vào một tài khoản mới";
+"InputOldAccount" = "Hãy nhập vào tài khoản gốc";
+"ModifySuccess" = "Sửa đổi thành công";
+"OldAccountIncorrect" = "Gốc số tài khoản. Không";
+
+"Active" = "bắt đầu";
+"TestGame" = "Thử máy";
+"TestGameTimeOut" = "Thời gian test máy đã đến";
+"TestGameTimeOutWarning" = "Thời gian test máy đã đến, vui lòng mua hoặc chơi lại từ đầu";
+"BuyGame" = "Mua";
+"ConfirmToBuyGame" = "Xác nhận mua？";
+"ConfirmToBuyGameAgain" = "Xác nhận mua lần nữa？";
+
+"NumberOfPlayerSetting" = "thiết lập số lượng";
+"BeatColorSetting" = "thiết lập màu sắc";
+"CardSetting" = "thiết lập điểm màu";
+"DealCardSetting" = "thiết lập phát bài";
+"NumberOfCard" = "số lá bài phụ";
+"CameraSetting" = "lựa chọn ống kính";
+"RFSetting" = "thiết lặp điểm lặp lại";
+"GameRule" = "quy tắc chơi";
+"GameRuleContent" = "nói rõ cách chơi";
+"SpeakHuaSe" = "Báo sắc bài";
+"SpeakHuaSeYes" = "Có";
+"SpeakHuaSeNo" = "Không";
+"XYSetting" = "Cài đặt X";
+"XValue" = "Giá trị X";
+"YValue" = "Giá trị Y";
+"SpeechType" = "cách báo bài";
+
+"BeatColorSelect" = "Chọn xúc sắc";
+"HuaSeSetting" = "Sắc bài";
+"Setting" = "Thiết lập";
+"SelectType" = "Loại hình";
+"AutoSelect" = "Cài đặt tự động";
+"Remove" = "Xóa";
+"Back" = "Quay trở lại";
+"SelectSetting" = "Chọn thiết lập";
+
+"DealCardWay" = "Phương thức phát bài";
+"CardSettingPaiShu" = "Số bài";
+"CardSettingPaiPai" = "Bài cử";
+"CardSettingGongPai" = "Bài tây";
+"CardSettingQuPai" = "Bài bỏ";
+"CardSettingZengJiaFaPai" = "Phát bài thêm";
+"CardSettingShanChuFaPai" = "Hủy phát bài";
+"CardSettingLun" = "Lượt";
+"MaxDealCardLun" = "Ít nhất có 10 lượt phát bài";
+"MinDealCardLun" = "Ít nhất có 1 lượt phát bài";
+"CanNotRemoveSystemSetting" = "Không thể  xóa cài đặt hệ thống";
+"Save" = "xác nhận";
+"CustomName" = "phong tục";
+
+"StartGame" = "bắt đầu chơi";
+"Close" = "Đóng cửa";
+
+"Video" = "Video";
+"OpenVideo" = "Mở Video";
+"CloseVideo" = "Đóng video";
+"BeatColor" = "Đánh";
+"NumberOfPlayer" = "Số lượng";
+"Result" = "Kết quả";
+"Play" = "Rồi đấy";
+
+"MoreThanTheUpperLimit" = "Đã hơn để mua số";
+"CanNotTestWarning" = "Game đã mua đủ, không được test máy";
+
+"Waiting" = "";

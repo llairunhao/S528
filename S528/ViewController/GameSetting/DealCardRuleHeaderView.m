@@ -20,7 +20,11 @@
         self.contentView.backgroundColor = [UIColor blackColor];
         
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:4];
-        NSArray *titles = @[@"轮", @"牌数", @"派牌", @"公牌", @"去牌"];
+        NSArray *titles = @[NSLocalizedString(@"CardSettingLun", @"轮"),
+                            NSLocalizedString(@"CardSettingPaiShu", @"牌数"),
+                            NSLocalizedString(@"CardSettingPaiPai", @"派牌"),
+                            NSLocalizedString(@"CardSettingGongPai", @"公牌"),
+                            NSLocalizedString(@"CardSettingQuPai", @"去牌")];
         for (NSString *title in titles) {
             UILabel *label = [[UILabel alloc] init];
             label.textAlignment = NSTextAlignmentCenter;

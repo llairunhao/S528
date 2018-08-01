@@ -56,16 +56,16 @@
     controller.horizontalPadding = 6;
     UITextField *accountTF = [[UITextField alloc] init];
     accountTF.font = [UIFont systemFontOfSize:20];
-    accountTF.placeholder = @"请输入账号";
-    [controller addInputTitle:@"账号" textField:accountTF];
+    accountTF.placeholder = NSLocalizedString(@"InputAccount", @"请输入账号");
+    [controller addInputTitle:NSLocalizedString(@"Account", @"账号") textField:accountTF];
     accountTF.keyboardType = UIKeyboardTypeAlphabet;
     self.accountTF = accountTF;
     accountTF.delegate = self;
     
     UITextField *passwordTF = [[UITextField alloc] init];
     passwordTF.font = [UIFont systemFontOfSize:20];
-    passwordTF.placeholder = @"请输入密码";
-    [controller addInputTitle:@"密码" textField:passwordTF];
+    passwordTF.placeholder = NSLocalizedString(@"InputPassword", @"请输入密码");
+    [controller addInputTitle:NSLocalizedString(@"Password", @"密码") textField:passwordTF];
     passwordTF.delegate = self;
     passwordTF.keyboardType = UIKeyboardTypeAlphabet;
     passwordTF.secureTextEntry = true;
@@ -95,7 +95,11 @@
         return enabled;
     };
     controller.remainAfterAction = true;
-    [controller alertWithTitle:@"登录" confrimTitle:@"确定" cancelTitle:@"退出" animate:false viewController:self];
+    [controller alertWithTitle:NSLocalizedString(@"Login", @"登录")
+                  confrimTitle:NSLocalizedString(@"Confirm", @"确定")
+                   cancelTitle:NSLocalizedString(@"Exit", @"退出")
+                       animate:false
+                viewController:self];
     controller.tapView.userInteractionEnabled = false;
     self.alertController = controller;
 }
@@ -117,7 +121,7 @@
     [_accountTF resignFirstResponder];
     [_passwordTF resignFirstResponder];
     if (![EZTTcpService shareInstance].isConnected) {
-        [self toast:@"请先连接Wifi"];
+        [self toast:NSLocalizedString(@"ConnectWarning", @"请先连接服务端")];
         return;
     }
 
@@ -130,7 +134,7 @@
     [packet writeStringValue:_accountTF.text];
     if (![[EZTTcpService shareInstance] sendData:[packet encode]]){
         [self hideHUD];
-        [self toast:@"请先连接服务端"];
+        [self toast:NSLocalizedString(@"ConnectWarning", @"请先连接服务端")];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
     }
 }
@@ -148,7 +152,7 @@
                 [packet writeStringValue:self.passwordTF.text];
                 if (![[EZTTcpService shareInstance] sendData:[packet encode]]){
                     [self hideHUD];
-                    [self toast:@"请先连接服务端"];
+                    [self toast:NSLocalizedString(@"ConnectWarning", @"请先连接服务端")];
                     [[NSNotificationCenter defaultCenter] removeObserver:self name:EZTGetPacketFromServer object:nil];
                 }
             });
@@ -213,10 +217,10 @@
     controller.cancelHandler = cancel;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [controller alertWithTitle:@"免责声明"
-                           message:@"本产品仅供魔术表演、娱乐等场合，禁止用于赌博！"
-                      confrimTitle:@"同意"
-                       cancelTitle:@"不同意"
+        [controller alertWithTitle:NSLocalizedString(@"Disclaimer", @"免责声明")
+                           message:NSLocalizedString(@"Warning", @"本产品仅供魔术表演、娱乐等场合，禁止用于赌博！")
+                      confrimTitle:NSLocalizedString(@"Agree", @"同意")
+                       cancelTitle:NSLocalizedString(@"Disagree", @"不同意")
                     viewController:self];
     });
 

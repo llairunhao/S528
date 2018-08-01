@@ -105,7 +105,9 @@
                            [_closeButton atTheTopOfView:_alertView],
                            [_cancelButton centerYWith:_confirmButton],
                            [_cancelButton fixedHeight:40],
-                           [_confirmButton fixedHeight:40]];
+                           [_confirmButton fixedHeight:40],
+                           [_cancelButton fixedWidth: 130],
+                           [_confirmButton fixedWidth: 130]];
         [constraints addObjectsFromArray:array];
         [NSLayoutConstraint activateConstraints:constraints];
     }

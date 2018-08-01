@@ -62,6 +62,9 @@
 		A501F70E20A98383000FC563 /* GameXYSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A501F70D20A98383000FC563 /* GameXYSettingViewController.m */; };
 		A50E7C5520C14097008C5E18 /* GameSettingRadioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A50E7C5420C14097008C5E18 /* GameSettingRadioCell.m */; };
 		A50E7C9320C15B79008C5E18 /* GammingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A50E7C9220C15B79008C5E18 /* GammingCell.m */; };
+		A5F3C7CA210F14BA00B98E9D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5F3C7CC210F14BA00B98E9D /* InfoPlist.strings */; };
+		A5F3C7D1210F151800B98E9D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5F3C7D3210F151800B98E9D /* Localizable.strings */; };
+		A5F3C7DD21118B9F00B98E9D /* SettingControlPairCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F3C7DC21118B9F00B98E9D /* SettingControlPairCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -175,6 +178,16 @@
 		A50E7C5420C14097008C5E18 /* GameSettingRadioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSettingRadioCell.m; sourceTree = "<group>"; };
 		A50E7C9120C15B79008C5E18 /* GammingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GammingCell.h; sourceTree = "<group>"; };
 		A50E7C9220C15B79008C5E18 /* GammingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GammingCell.m; sourceTree = "<group>"; };
+		A5F3C79D210F07D200B98E9D /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		A5F3C79E210F07FF00B98E9D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		A5F3C7CB210F14BA00B98E9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5F3C7CD210F14BC00B98E9D /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5F3C7CE210F14BE00B98E9D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		A5F3C7D2210F151800B98E9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A5F3C7D4210F151A00B98E9D /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A5F3C7D5210F151B00B98E9D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A5F3C7DB21118B9F00B98E9D /* SettingControlPairCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingControlPairCell.h; sourceTree = "<group>"; };
+		A5F3C7DC21118B9F00B98E9D /* SettingControlPairCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingControlPairCell.m; sourceTree = "<group>"; };
 		BB7C84009C99CD557133315F /* Pods-S528.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S528.release.xcconfig"; path = "Pods/Target Support Files/Pods-S528/Pods-S528.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,6 +219,8 @@
 				38A42D2920A86D790063F745 /* SettingViewController.m */,
 				38A42D2B20A86FBA0063F745 /* EZTSetting.h */,
 				38A42D2C20A86FBA0063F745 /* EZTSetting.m */,
+				A5F3C7DB21118B9F00B98E9D /* SettingControlPairCell.h */,
+				A5F3C7DC21118B9F00B98E9D /* SettingControlPairCell.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -231,6 +246,7 @@
 		38B514D6209DBFF100CB329A /* S528 */ = {
 			isa = PBXGroup;
 			children = (
+				A5F3C7B3210F13CE00B98E9D /* Source */,
 				38B5150C209DD84100CB329A /* Extension */,
 				38B51505209DD07500CB329A /* Config */,
 				38B514FA209DC4B100CB329A /* Service */,
@@ -435,6 +451,15 @@
 			path = Gamming;
 			sourceTree = "<group>";
 		};
+		A5F3C7B3210F13CE00B98E9D /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A5F3C7CC210F14BA00B98E9D /* InfoPlist.strings */,
+				A5F3C7D3210F151800B98E9D /* Localizable.strings */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		DA5879412D52E88F5A1A6A89 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,6 +510,8 @@
 			knownRegions = (
 				en,
 				Base,
+				vi,
+				"zh-Hans",
 			);
 			mainGroup = 38B514CB209DBFF100CB329A;
 			productRefGroup = 38B514D5209DBFF100CB329A /* Products */;
@@ -502,6 +529,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				38B514E4209DBFF400CB329A /* LaunchScreen.storyboard in Resources */,
+				A5F3C7D1210F151800B98E9D /* Localizable.strings in Resources */,
+				A5F3C7CA210F14BA00B98E9D /* InfoPlist.strings in Resources */,
 				38B514E1209DBFF400CB329A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,6 +591,7 @@
 				38B514F9209DC2CD00CB329A /* EZTRootContainer.m in Sources */,
 				A501F60020A2D3E9000FC563 /* PlayRuleCell.m in Sources */,
 				38D8B434209F2F5800F6AF2C /* GameSettingCell.m in Sources */,
+				A5F3C7DD21118B9F00B98E9D /* SettingControlPairCell.m in Sources */,
 				38D8B42A209EDC4D00F6AF2C /* EZTGameResource.m in Sources */,
 				A501F5FD20A2D35E000FC563 /* PlaySettingViewController.m in Sources */,
 				38D8B417209ED5CD00F6AF2C /* EZTBaseViewController.m in Sources */,
@@ -596,8 +626,30 @@
 			isa = PBXVariantGroup;
 			children = (
 				38B514E3209DBFF400CB329A /* Base */,
+				A5F3C79D210F07D200B98E9D /* vi */,
+				A5F3C79E210F07FF00B98E9D /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A5F3C7CC210F14BA00B98E9D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5F3C7CB210F14BA00B98E9D /* en */,
+				A5F3C7CD210F14BC00B98E9D /* vi */,
+				A5F3C7CE210F14BE00B98E9D /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A5F3C7D3210F151800B98E9D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5F3C7D2210F151800B98E9D /* en */,
+				A5F3C7D4210F151A00B98E9D /* vi */,
+				A5F3C7D5210F151B00B98E9D /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -607,6 +659,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -667,6 +720,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

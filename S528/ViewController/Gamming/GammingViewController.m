@@ -45,7 +45,9 @@
                                                object:nil];
     
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onVolumeChanged:) name:@"AVSystemController_SystemVolumeDidChangeNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onVolumeChanged:) name:@"AVSystemController_SystemVolumeDidChangeNotification"
+                                               object:nil];
     self.playing = true;
     [self refreshData];
     

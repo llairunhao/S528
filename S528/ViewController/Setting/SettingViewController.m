@@ -42,9 +42,10 @@ typedef NS_ENUM(NSUInteger, SettingType) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupSubviews];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetPacket:) name:EZTGetPacketFromServer object:nil];
     [self refreshData];
     self.title = NSLocalizedString(@"GameSetting", @"游戏设置");
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetPacket:) name:EZTGetPacketFromServer object:nil];
+   
 }
 
 - (void)viewDidLayoutSubviews {
@@ -100,6 +101,8 @@ typedef NS_ENUM(NSUInteger, SettingType) {
         case EZTAPIResponseCommandGetDeviceSetting:
         {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideHUD];
+                self.setting = [[EZTSetting alloc] initWithPacket:packet];
                 if (!self.setting.isSuccess) {
                     [self toast: self.setting.message];
                 }
@@ -110,6 +113,7 @@ typedef NS_ENUM(NSUInteger, SettingType) {
         case EZTAPIResponseCommandUpdateDeviceSetting:
         {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideHUD];
                 BOOL isSuccess = [packet readIntValue:nil] == 0;
                 if (!isSuccess) {
                     [self toast:[packet readStringValue:nil]];
